@@ -1,3 +1,4 @@
+
 function getActiveMachines() {
     $servers = "Station01","Station02","Station03","Station04","Station05","Station06", "Station07","Station08","Station09",
                 "Station10","Station11","Station12","Station13","Station14","Station15","Station16","Station17","Station18",
@@ -17,20 +18,9 @@ function setComputerProperties ($station) {
     Write-Host -foregroundcolor green "$s is Responding";
 
     #Getting Memory Usage
-    $rawData = Get-WmiObject Win32_PerfRawData_PerfOS_Memory -computername $station
-    $computerSystem = Get-WmiObject Win32_ComputerSystem -ComputerName $station
-    $totalMemory = 0
-    $available = 0
-    
-    Foreach($obj in $computerSystem){
-        $totalMemory = $obj.TotalPhysicalMemory
-    }
-
-    Foreach($obj in $rawData){
-        $available = $obj.AvailableBytes
-    }
-
-    $percent = ([Math]::Round((($available / $totalMemory) * 100)))
+    $totalMemory = Get-WmiObject Win32_ComputerSystem -ComputerName $station | Select-Object TotalPhysicalMemory
+    $available = Get-WmiObject Win32_PerfRawData_PerfOS_Memory -computername $station | Select-Object AvailableBytes
+    $percent = ([Math]::Round((($available.AvailableBytes / $totalMemory.TotalPhysicalMemory) * 100)))
     
     Write-Host "$percent% available physical memory"
 
