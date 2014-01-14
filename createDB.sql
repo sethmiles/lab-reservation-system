@@ -6,7 +6,8 @@ CREATE TABLE IF NOT EXISTS lab_user(
   netId varchar(8),
   name varchar(70),
   email varchar(255),
-  major varchar(70)
+  major varchar(70),
+  role varchar(30)
 );
 
 -- Computer
