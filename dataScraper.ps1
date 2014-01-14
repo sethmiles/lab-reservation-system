@@ -20,9 +20,9 @@ function setComputerProperties ($station) {
     #Getting Memory Usage
     $totalMemory = Get-WmiObject Win32_ComputerSystem -ComputerName $station | Select-Object TotalPhysicalMemory
     $available = Get-WmiObject Win32_PerfRawData_PerfOS_Memory -computername $station | Select-Object AvailableBytes
-    $percent = ([Math]::Round((($available.AvailableBytes / $totalMemory.TotalPhysicalMemory) * 100)))
+    $percent = (100 - ([Math]::Round((($available.AvailableBytes / $totalMemory.TotalPhysicalMemory) * 100))))
     
-    Write-Host "$percent% available physical memory"
+    Write-Host "$percent% os physical memory is in use"
 
     #Check if user is logged in
     $userString = (Get-WmiObject Win32_ComputerSystem -ComputerName $station | Select-Object username).username
@@ -31,9 +31,7 @@ function setComputerProperties ($station) {
     } else {
         $userString = "No one"
     }
-    Write-Host "$userString is currently logged on."
-
-
+    Write-Host "$userString is currently logged on"
 }
 
 function setComputerNotPowered ($station) {
