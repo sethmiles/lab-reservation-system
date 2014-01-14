@@ -25,7 +25,13 @@ function setComputerProperties ($station) {
     Write-Host "$percent% available physical memory"
 
     #Check if user is logged in
-
+    $userString = (Get-WmiObject Win32_ComputerSystem -ComputerName $station | Select-Object username).username
+    if($userString){
+        $userString = $userString.split("\\")[1]
+    } else {
+        $userString = "No one"
+    }
+    Write-Host "$userString is currently logged on."
 
 
 }
