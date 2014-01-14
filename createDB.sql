@@ -1,7 +1,7 @@
 -- Lab Reservation Database Creation Script
 
--- Lab user 
-CREATE TABLE IF NOT EXISTS lab_user(
+-- User 
+CREATE TABLE IF NOT EXISTS users(
   id serial PRIMARY KEY,
   netId varchar(8),
   name varchar(70),
@@ -11,35 +11,36 @@ CREATE TABLE IF NOT EXISTS lab_user(
 );
 
 -- Computer
-CREATE TABLE IF NOT EXISTS computer(
+CREATE TABLE IF NOT EXISTS computers(
 id serial PRIMARY KEY,
 name varchar(255),
 isPowered boolean,
 isLoggedIn boolean,
+memoryUsage integer,
 remoteConnectionCount integer,
-lab_user_id integer REFERENCES lab_user
+users_class_section_id integer REFERENCES users_class_sections
 );
 
 -- Series
 CREATE TABLE IF NOT EXISTS series(
 id serial PRIMARY KEY,
 name varchar(255),
-lab_user_id integer REFERENCES lab_user
+user_id integer REFERENCES users
 );
 
 -- Registration
-CREATE TABLE IF NOT EXISTS registration(
+CREATE TABLE IF NOT EXISTS registrations(
 id serial PRIMARY KEY,
 start_time timestamp,
 end_time timestamp,
 note varchar(500),
-lab_user_id integer REFERENCES lab_user,
-computer_id integer REFERENCES computer,
+user_id integer REFERENCES users,
+computer_id integer REFERENCES computers,
 series_id integer REFERENCES series
 );
 
 -- Class Section
-CREATE TABLE IF NOT EXISTS class_section(
+CREATE TABLE IF NOT EXISTS class_sections(
   id serial PRIMARY KEY,
   section_num integer,
   title varchar(30),
@@ -52,12 +53,12 @@ CREATE TABLE IF NOT EXISTS class_section(
   thursday boolean,
   friday boolean,
   saturday boolean,
-  teacher_id integer REFERENCES lab_user
+  teacher_id integer REFERENCES users
 );
 
 -- Lab User and Class Section
-CREATE TABLE IF NOT EXISTS lab_user_class_section(
-  lab_user_id integer REFERENCES lab_user,
-  class_section_id integer REFERENCES class_section,
-  PRIMARY KEY(lab_user_id, class_section_id)
+CREATE TABLE IF NOT EXISTS user_class_sections(
+  user_id integer REFERENCES users,
+  class_section_id integer REFERENCES class_sections,
+  PRIMARY KEY(user_id, class_section_id)
 );
