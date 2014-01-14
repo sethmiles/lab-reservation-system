@@ -28,8 +28,8 @@ name varchar(255),
 user_id integer REFERENCES users
 );
 
--- Registration
-CREATE TABLE IF NOT EXISTS registrations(
+-- Reservations
+CREATE TABLE IF NOT EXISTS reservations(
 id serial PRIMARY KEY,
 start_time timestamp,
 end_time timestamp,

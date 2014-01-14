@@ -1,9 +1,10 @@
 var express = require('express'),
-  routes  = require('./routes'),
-  user    = require('./routes/user'),
-  http    = require('http'),
-  path    = require('path'),
-  db      = require('./models');
+  routes = require('./routes'),
+  user = require('./routes/user'),
+  computer = require('./routes/computer')
+  http = require('http'),
+  path = require('path'),
+  db = require('./models');
  
 var app = express()
  
@@ -27,13 +28,19 @@ if ('development' === app.get('env')) {
 app.get('/', routes.index)
 
 // User API
-app.get('/users/:user_id', user.find)
-app.get('/users/', user.findAll)
-app.post('/users/create', user.create)
+app.get('/users/:id', user.findUser)
+app.get('/users', user.findAllUsers)
+app.post('/users', user.createUser)
+app.put('/users/:id', user.updateUser)
+app.delete('/users/:id', user.deleteUser)
  
+// Computer API
+app.post('/computers', computer.createComputer)
+
+
 db
   .sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .complete(function(err) {
     if (err) {
       throw err
