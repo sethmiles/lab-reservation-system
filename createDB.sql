@@ -44,6 +44,14 @@ CREATE TABLE IF NOT EXISTS class_section(
   section_num integer,
   title varchar(30),
   class_num integer,
+  timeslot time,
+  sunday boolean,
+  moday boolean,
+  tuesday boolean,
+  wednesday boolean,
+  thursday boolean,
+  friday boolean,
+  saturday boolean,
   teacher_id integer REFERENCES lab_user
 );
 
