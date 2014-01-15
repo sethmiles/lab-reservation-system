@@ -1,10 +1,10 @@
 var express = require('express'),
-  routes = require('./routes'),
-  user = require('./routes/user'),
-  computer = require('./routes/computer')
+  controllers = require('./app/controllers'),
+  user = require('./app/controllers/user'),
+  computer = require('./app/controllers/computer')
   http = require('http'),
   path = require('path'),
-  db = require('./models');
+  db = require('./app/models');
  
 var app = express()
  
@@ -25,17 +25,17 @@ if ('development' === app.get('env')) {
   app.use(express.errorHandler())
 }
  
-app.get('/', routes.index)
+app.get('/', controllers.index)
 
 // User API
-app.get('/users/:id', user.findUser)
-app.get('/users', user.findAllUsers)
-app.post('/users', user.createUser)
-app.put('/users/:id', user.updateUser)
-app.delete('/users/:id', user.deleteUser)
+app.get('/users/:id', user.user)
+app.get('/users', user.all)
+app.post('/users', user.create)
+app.put('/users/:id', user.update)
+app.delete('/users/:id', user.destroy)
  
 // Computer API
-app.post('/computers', computer.createComputer)
+app.post('/computers', computer.create)
 
 
 db
