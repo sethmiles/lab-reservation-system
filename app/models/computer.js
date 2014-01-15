@@ -5,7 +5,11 @@ module.exports = function(sequelize, DataTypes) {
     isLoggedIn: DataTypes.BOOLEAN,
     memoryUsage: DataTypes.INTEGER,
     remoteConnectionCount: DataTypes.INTEGER
-    //users_class_section_id integer REFERENCES users_class_sections
+  }, {
+    associate: function(models) {
+      Computer.hasMany(models.Reservation);
+      Computer.hasMany(models.UserClassSection);
+    }
   });
  
   return Computer;
