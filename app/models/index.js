@@ -2,7 +2,7 @@ var fs        = require('fs'),
     path      = require('path'),
     Sequelize = require('sequelize'),
     lodash    = require('lodash'),
-    sequelize = new Sequelize('lab_reservation', 'root', null),
+    sequelize = new Sequelize('lab_reservation', 'root', 'password1'),
     db        = {};
  
 fs
