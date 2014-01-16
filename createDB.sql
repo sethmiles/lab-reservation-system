@@ -2,12 +2,12 @@
 
 -- User 
 CREATE TABLE IF NOT EXISTS users(
-  id serial PRIMARY KEY,
-  netId varchar(8),
-  name varchar(70),
-  email varchar(255),
-  major varchar(70),
-  role varchar(30)
+id serial PRIMARY KEY,
+netId varchar(8),
+name varchar(70),
+email varchar(255),
+major varchar(70),
+role varchar(30)
 );
 
 -- Computer
@@ -42,25 +42,25 @@ series_id integer REFERENCES series
 
 -- Class Section
 CREATE TABLE IF NOT EXISTS class_sections(
-  id serial PRIMARY KEY,
-  section_num integer,
-  title varchar(30),
-  class_num integer,
-  timeslot time,
-  sunday boolean,
-  moday boolean,
-  tuesday boolean,
-  wednesday boolean,
-  thursday boolean,
-  friday boolean,
-  saturday boolean,
-  teacher_id integer REFERENCES users
+id serial PRIMARY KEY,
+section_num integer,
+title varchar(30),
+class_num integer,
+timeslot time,
+sunday boolean,
+moday boolean,
+tuesday boolean,
+wednesday boolean,
+thursday boolean,
+friday boolean,
+saturday boolean,
+teacher_id integer REFERENCES users
 );
 
 -- Lab User and Class Section
 CREATE TABLE IF NOT EXISTS user_class_sections(
-  computer_id integer REFERENCES computer
-  user_id integer REFERENCES users,
-  class_section_id integer REFERENCES class_sections,
-  PRIMARY KEY(user_id, class_section_id)
+computer_id integer REFERENCES computer
+user_id integer REFERENCES users,
+class_section_id integer REFERENCES class_sections,
+PRIMARY KEY(user_id, class_section_id)
 );

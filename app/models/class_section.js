@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     associate: function(models) {
       ClassSection.hasOne(models.User, { as: "professor" });
-      ClassSection.hasMany(models.UserClassSection);
+      ClassSection.hasMany(models.User);
     }
   });
  

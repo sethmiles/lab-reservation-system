@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     associate: function(models) {
       Computer.hasMany(models.Reservation);
-      Computer.hasMany(models.UserClassSection);
+      Computer.hasOne(models.Computer, {through: 'classsectionsusers'})
     }
   });
  
