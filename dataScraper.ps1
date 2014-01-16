@@ -71,6 +71,7 @@ function setComputerProperties ($s) {
     } catch {
         LogWrite "Exception Type: $_.Exception.GetType().FullName"
         LogWrite "Exception Message: $_.Exception.Message"
+        LogWrite $Query
     }
 
 }
@@ -81,7 +82,6 @@ function setComputerNotPowered ($s) {
 
         #Prepare Query and execute
         $Query = "UPDATE computers SET isPowered=false, isLoggedIn=false, memoryUsage=0 WHERE name='$s'"
-        LogWrite $Query
         $Command = New-Object MySql.Data.MySqlClient.MySqlCommand($Query, $Connection)
         $DataAdapter = New-Object MySql.Data.MySqlClient.MySqlDataAdapter($Command)
         $DataSet = New-Object System.Data.DataSet
@@ -90,6 +90,7 @@ function setComputerNotPowered ($s) {
     } catch {
         LogWrite "Exception Type: $_.Exception.GetType().FullName"
         LogWrite "Exception Message: $_.Exception.Message"
+        LogWrite $Query
     }
 }
 
