@@ -13,9 +13,7 @@
     "lodash": "~2.4.1",
     "jade": "~1.1.4",
     "grunt-cli": "~0.1.11",
-    "sequelize-restful": "~0.1.0"
-  },
-  "devDependencies": {
+    "sequelize-restful": "~0.1.0",
     "grunt": "~0.4.2",
     "grunt-contrib-watch": "latest",
     "grunt-contrib-jshint": "~0.6.3",
