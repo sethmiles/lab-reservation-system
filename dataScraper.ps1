@@ -1,64 +1,78 @@
-
 function getActiveMachines() {
-    $servers = "Station01","Station02","Station03","Station04","Station05","Station06", "Station07","Station08","Station09",
-                "Station10","Station11","Station12","Station13","Station14","Station15","Station16","Station17","Station18",
-                "Station19","Station20","Station21","Station22","Station23","Station23","Station25","Station26","Station27",
-                "Station28","Station29","Station30";
-
     #MySql Environment Variables
     $MySQLHost = "172.16.1.78"
     $MySQLAdminUserName = "root"
     $MySQLAdminPassword = "password1"
     $MySQLDatabase = "lab_reservation"
 
+    #Open MySql Connection
     $ConnectionString = "server=" + $MySQLHost + ";port=3306;uid=" + $MySQLAdminUserName + ";pwd=" + $MySQLAdminPassword + ";database="+$MySQLDatabase
-    [void][system.reflection.Assembly]::LoadFrom("C:\Program Files (x86)\MySQL\MySQL Connector Net 6.7.4\Assemblies\v4.5\MySql.Data.dll")
+    [void][system.reflection.Assembly]::LoadFrom("C:\Program Files (x86)\MySQL\MySQL Connector Net 6.8.3\Assemblies\v4.5\MySql.Data.dll")
     $Connection = New-Object MySql.Data.MySqlClient.MySqlConnection
     $Connection.ConnectionString = $ConnectionString
     $Connection.Open()
 
-    Foreach($s in $servers){
+    #Get a list of all Servers
+    $Query = "SELECT name from computers"
+    $Command = New-Object MySql.Data.MySqlClient.MySqlCommand($Query, $Connection)
+    $DataAdapter = New-Object MySql.Data.MySqlClient.MySqlDataAdapter($Command)
+    $DataSet = New-Object System.Data.DataSet
+    $DataAdapter.Fill($DataSet)
+
+    #Iterate through stations and update computer table
+    Foreach($station in $DataSet.Tables[0]){
+        $s = $station.name
         if(Test-Connection -Cn $s -BufferSize 16 -Count 1 -ea 0 -Quiet){
             setComputerProperties($s);
         } else {
             setComputerNotPowered($s);
         }
     }
-
+    
+    #Close MySql Connection
     $Connection.Close()
 
 }
 
-function setComputerProperties ($station) {
+function setComputerProperties ($s) {
     Write-Host -foregroundcolor green "$s is Responding";
 
     #Getting Memory Usage
-    $totalMemory = Get-WmiObject Win32_ComputerSystem -ComputerName $station | Select-Object TotalPhysicalMemory
-    $available = Get-WmiObject Win32_PerfRawData_PerfOS_Memory -computername $station | Select-Object AvailableBytes
+    $totalMemory = Get-WmiObject Win32_ComputerSystem -ComputerName $s | Select-Object TotalPhysicalMemory
+    $available = Get-WmiObject Win32_PerfRawData_PerfOS_Memory -computername $s | Select-Object AvailableBytes
     $percent = (100 - ([Math]::Round((($available.AvailableBytes / $totalMemory.TotalPhysicalMemory) * 100))))
-    
-    Write-Host "$percent% of physical memory is in use"
 
     #Check if user is logged in
-    $userString = (Get-WmiObject Win32_ComputerSystem -ComputerName $station | Select-Object username).username
+    $userString = (Get-WmiObject Win32_ComputerSystem -ComputerName $s | Select-Object username).username
     if($userString){
-        $userString = $userString.split("\\")[1]
+        #$userString = $userString.split("\\")[1]
+        $userString = 'true';
     } else {
-        $userString = "None"
+        $userString = 'false';
+        #$userString = "None"
     }
 
-    $Query = "INSERT INTO computers (isPowered, isLoggedIn, memoryUsage) VALUES(true, true, $percent);"
-    Write-Host $Query
+    #Prepare Query and execute
+    $updatedAt = "{0:yyyy-MM-ddTHH:mm:ss}" -f (get-date)
+    $Query = "UPDATE computers SET isPowered=true, isLoggedIn=$userString, memoryUsage=$percent, updatedAt='$updatedAt' WHERE name='$s'"
     $Command = New-Object MySql.Data.MySqlClient.MySqlCommand($Query, $Connection)
     $DataAdapter = New-Object MySql.Data.MySqlClient.MySqlDataAdapter($Command)
-    Write-Host "$userString is currently logged on"
+    $DataSet = New-Object System.Data.DataSet
+    $DataAdapter.Fill($DataSet) | Out-Null
+    $DataSet.Tables[0]
+
 }
 
-function setComputerNotPowered ($station) {
-    Write-Host -foregroundcolor red "$station is not responding"
-    $Query = "INSERT INTO computers (isPowered, isLoggedIn, memoryUsage) VALUES(false, false, 0);"
+function setComputerNotPowered ($s) {
+    Write-Host -foregroundcolor red "$s is not responding"
+
+    #Prepare Query and execute
+    $Query = "UPDATE computers SET isPowered=false, isLoggedIn=false, memoryUsage=$percent WHERE name='$s'"
     $Command = New-Object MySql.Data.MySqlClient.MySqlCommand($Query, $Connection)
     $DataAdapter = New-Object MySql.Data.MySqlClient.MySqlDataAdapter($Command)
+    $DataSet = New-Object System.Data.DataSet
+    $DataAdapter.Fill($DataSet) | Out-Null
+    $DataSet.Tables[0]
 }
 
 getActiveMachines;
