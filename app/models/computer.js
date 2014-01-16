@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     isPowered: DataTypes.BOOLEAN,
     isLoggedIn: DataTypes.BOOLEAN,
+    isReservable: DataTypes.BOOLEAN,
     memoryUsage: DataTypes.INTEGER,
     remoteConnectionCount: DataTypes.INTEGER
   }, {

@@ -16,6 +16,7 @@ id serial PRIMARY KEY,
 name varchar(255),
 isPowered boolean,
 isLoggedIn boolean,
+isReservable boolean,
 memoryUsage integer,
 remoteConnectionCount integer,
 );
@@ -24,6 +25,7 @@ remoteConnectionCount integer,
 CREATE TABLE IF NOT EXISTS series(
 id serial PRIMARY KEY,
 name varchar(255),
+endsOn timestamp,
 user_id integer REFERENCES users
 );
 

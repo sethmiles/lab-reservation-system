@@ -4,6 +4,7 @@ var express = require('express'),
   computer = require('./app/controllers/computer'),
   http = require('http'),
   path = require('path'),
+  restful   = require('sequelize-restful'),
   db = require('./app/models');
  
 var app = express();
@@ -27,20 +28,9 @@ if ('development' === app.get('env')) {
  
 app.get('/', controllers.index);
 
-// User API
-app.get('/users/:id', user.user);
-app.get('/users', user.all);
-app.post('/users', user.create);
-app.put('/users/:id', user.update);
-app.delete('/users/:id', user.destroy);
- 
-// Computer API
-app.post('/computers', computer.create);
-
-
 db
   .sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .complete(function(err) {
     if (err) {
       throw err;
@@ -50,3 +40,6 @@ db
       });
     }
   });
+
+// REST API
+app.use(restful(db.sequelize, { endpoint: '/api' }));
