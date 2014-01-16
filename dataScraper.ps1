@@ -53,7 +53,8 @@ function setComputerProperties ($s) {
     }
 
     #Prepare Query and execute
-    $Query = "UPDATE computers SET isPowered=true, isLoggedIn=$userString, memoryUsage=$percent WHERE name='$s'"
+    $updatedAt = "{0:yyyy-MM-ddTHH:mm:ss}" -f (get-date)
+    $Query = "UPDATE computers SET isPowered=true, isLoggedIn=$userString, memoryUsage=$percent, updatedAt='$updatedAt' WHERE name='$s'"
     $Command = New-Object MySql.Data.MySqlClient.MySqlCommand($Query, $Connection)
     $DataAdapter = New-Object MySql.Data.MySqlClient.MySqlDataAdapter($Command)
     $DataSet = New-Object System.Data.DataSet
