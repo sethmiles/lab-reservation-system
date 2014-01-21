@@ -7,20 +7,20 @@
     "url": "https://github.com/sethhoward1988/lab-reservation-system.git"
   },
   "dependencies": {
-    "express": "~3.4.7",
-    "sequelize": "~2.0.0-dev1",
-    "mysql": "~2.0.0",
-    "lodash": "~2.4.1",
-    "jade": "~1.1.4",
-    "grunt-cli": "~0.1.11",
-    "sequelize-restful": "~0.1.0"
+    "express": "latest",
+    "sequelize": "latest",
+    "mysql": "latest",
+    "lodash": "latest",
+    "jade": "latest",
+    "grunt-cli": "latest",
+    "sequelize-restful": "latest"
   },
   "devDependencies": {
-    "grunt": "~0.4.2",
+    "grunt": "latest",
     "grunt-contrib-watch": "latest",
-    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-jshint": "latest",
     "grunt-nodemon": "latest",
     "grunt-concurrent": "latest",
-    "jshint": "~2.4.1"
+    "jshint": "latest"
   }
 }
