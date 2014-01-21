@@ -8,9 +8,12 @@
   },
   "dependencies": {
     "express": "latest",
+    "connect-flash": "latest",
     "sequelize": "latest",
     "sequelize-restful": "latest",
-    "mysql": "latest",
+    "sequelize-mysql": "latest",
+    "passport": "latest",
+    "passport-local": "latest",
     "lodash": "latest",
     "jade": "latest"
   },

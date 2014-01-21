@@ -1,45 +1,20 @@
-var express = require('express'),
-  controllers = require('./app/controllers'),
-  user = require('./app/controllers/user'),
-  computer = require('./app/controllers/computer'),
-  http = require('http'),
-  path = require('path'),
-  restful   = require('sequelize-restful'),
-  db = require('./app/models');
- 
+var express  = require('express'),
+    config   = require('./config/config'),
+    db       = require('./config/sequelize'),
+    passport = require('./config/passport');
+
 var app = express();
  
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
- 
-// development only
-if ('development' === app.get('env')) {
-  app.use(express.errorHandler());
-}
- 
-app.get('/', controllers.index);
+//Initialize Express
+require('./config/express')(app, passport);
 
-db
-  .sequelize
-  .sync({ force: false })
-  .complete(function(err) {
-    if (err) {
-      throw err;
-    } else {
-      http.createServer(app).listen(app.get('port'), function(){
-        console.log('Express server listening on port ' + app.get('port'));
-      });
-    }
-  });
+//Initialize Routes
+require('./config/routes').init(app, passport);
 
-// REST API
-app.use(restful(db.sequelize, { endpoint: '/api' }));
+//Start the app
+var port = process.env.PORT || config.port;
+app.listen(port);
+console.log('Express app started on port ' + port);
+
+//expose app
+exports = module.exports = app;

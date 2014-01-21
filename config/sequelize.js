@@ -1,11 +1,11 @@
 var fs        = require('fs'),
     path      = require('path'),
     Sequelize = require('sequelize-mysql').sequelize,
-    lodash    = require('lodash'),
+    _         = require('lodash'),
     config    = require('./config'),
     db        = {};
 
-console.log("Initializing Sequelize");
+console.log("Initializing Sequelize...");
 
 var sequelize = new Sequelize(config.db.name, config.db.username, config.db.password);
 
@@ -26,13 +26,13 @@ Object.keys(db).forEach(function(modelName) {
 });
  
 sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .complete(function(err) {
     if (err) throw err;
     else console.log("Database dropped and synchronized");
   });
 
-module.exports = lodash.extend({
+module.exports = _.extend({
   sequelize: sequelize,
   Sequelize: Sequelize
 }, db);

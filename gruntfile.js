@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     watch: {
       js: {
-        files: ['app.js', 'app/**/*.js'],
+        files: ['app.js', 'app/**/*.js', 'config/**/*.js'],
         tasks: ['jshint'],
         options: {
           livereload: true,
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
           debug: true,
           delayTime: 1,
           env: {
-              PORT: 3000
+            PORT: 3000
           },
           cwd: __dirname
         }
