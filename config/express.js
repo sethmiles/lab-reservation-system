@@ -11,7 +11,6 @@ module.exports = function(app, passport) {
   app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(app.router);
   app.use(express.static(config.root + '/public'));
 
   // development only

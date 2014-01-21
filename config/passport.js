@@ -11,12 +11,12 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-    db.User.find({where: {id: id}}).success(function(user){
-        console.log('Session: { id: ' + user.id + ', username: ' + user.username + ' }');
-        done(null, user);
-    }).error(function(err){
-        done(err, null);
-    });
+  db.User.find({where: {id: id}}).success(function(user){
+    console.log('Session: { id: ' + user.id + ', username: ' + user.username + ' }');
+    done(null, user);
+  }).error(function(err){
+    done(err, null);
+  });
 });
 
 //Use local strategy
@@ -25,6 +25,7 @@ passport.use(new LocalStrategy({
     passwordField: 'password'
   },
   function(netId, password, done) {
+    console.log('passporting');
     db.User.find({ where: { netId: netId }}).success(function(user) {
       if (!user) {
         done(null, false, { message: 'Unknown user' });
