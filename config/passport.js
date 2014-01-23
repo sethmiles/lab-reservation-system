@@ -1,8 +1,6 @@
-var passport      = require('passport'),
-    _             = require('lodash'),
-    LocalStrategy = require('passport-local').Strategy,
+var passport     = require('passport'),
     LdapStrategy = require('passport-ldapauth').Strategy,
-    db            = require('./sequelize');
+    db           = require('./sequelize');
 
 console.log('Initializing Passport...');
 
@@ -13,32 +11,14 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
   db.User.find({where: {id: id}}).success(function(user){
-    console.log('Session: { id: ' + user.id + ', username: ' + user.username + ' }');
+    console.log('Session: { id: ' + user.id + ', netId: ' + user.netId + ' }');
     done(null, user);
   }).error(function(err){
     done(err, null);
   });
 });
 
-//Use local strategy
-passport.use(new LocalStrategy({
-    usernameField: 'netId',
-    passwordField: 'password'
-  },
-  function(netId, password, done) {
-    db.User.find({ where: { netId: netId }}).success(function(user) {
-      if (!user) {
-        done(null, false, { message: 'Unknown user' });
-      } else {
-        console.log('Login (local) : { id: ' + user.id + ', netId: ' + user.netId + ' }');
-        done(null, user);
-      }
-    }).error(function(err){
-      done(err);
-    });
-  }
-));
-
+//LDAP Login
 passport.use(new LdapStrategy({
     server: {
       url: 'ldap://ldap.byu.edu:389',
@@ -50,7 +30,7 @@ passport.use(new LdapStrategy({
     }
   },
   function(user, done) {
-    db.User.find({ where: { netId: user.uid }}).success(function(user) {
+    db.User.findOrCreate({ netId: user.uid }, { name: user.displayName, email: user.mail, role: 'student' }).success(function(user) {
       if (!user) {
         done(null, false, { message: 'Unknown user' });
       } else {

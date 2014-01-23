@@ -26,7 +26,7 @@ Object.keys(db).forEach(function(modelName) {
 });
  
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .complete(function(err) {
     if (err) throw err;
     else console.log("Database dropped and synchronized");
