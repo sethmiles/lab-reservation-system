@@ -3,6 +3,7 @@ var express  = require('express'),
     db       = require('./config/sequelize'),
     passport = require('./config/passport');
 
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var app = express();
  
 //Initialize Express
