@@ -13,10 +13,9 @@
     "sequelize-restful": "latest",
     "sequelize-mysql": "latest",
     "passport": "latest",
-    "passport-local": "latest",
+    "passport-ldapauth": "latest",
     "lodash": "latest",
-    "jade": "latest",
-    "passport-ldapauth": "~0.1.2"
+    "jade": "latest"
   },
   "devDependencies": {
     "grunt": "latest",

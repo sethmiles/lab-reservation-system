@@ -6,7 +6,6 @@ module.exports = function(app, passport) {
   console.log('Initializing Express...');
 
   // all environments
-  app.set('port', process.env.PORT || 3000);
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
@@ -38,5 +37,4 @@ module.exports = function(app, passport) {
 
   //routes should be at the last
   app.use(app.router);
-
 };

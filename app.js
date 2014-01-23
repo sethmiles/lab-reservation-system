@@ -1,6 +1,5 @@
 var express  = require('express'),
     config   = require('./config/config'),
-    db       = require('./config/sequelize'),
     passport = require('./config/passport');
 
 var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
