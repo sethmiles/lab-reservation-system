@@ -1,13 +1,23 @@
 module.exports = function(sequelize, DataTypes) {
   var Reservation = sequelize.define('Reservation', {
-    start_time: DataTypes.DATE,
-    end_time: DataTypes.DATE,
+    start_time: {
+      type: DataTypes.DATE,
+      validate: {
+        isDate: true
+      }
+    },
+    end_time: {
+      type: DataTypes.DATE,
+      validate: {
+        isDate: true
+      }
+    },
     note: DataTypes.TEXT
   }, {
     associate: function(models) {
-      Reservation.hasOne(models.User);
-      Reservation.hasOne(models.Computer);
-      Reservation.hasOne(models.Series);
+      Reservation.belongsTo(models.User);
+      Reservation.belongsTo(models.Computer);
+      Reservation.belongsTo(models.Series);
     }
   });
  
