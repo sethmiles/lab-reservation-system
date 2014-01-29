@@ -35,5 +35,5 @@ nosetests.xml
 .project
 .pydevproject
 
-node_modules
 node_modules/
+bower_components/

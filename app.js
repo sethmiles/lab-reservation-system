@@ -1,8 +1,11 @@
+//Set up the Node environment
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+//Pull in needed modules
 var express  = require('express'),
     config   = require('./config/config'),
     passport = require('./config/passport');
 
-var env = process.env.NODE_ENV || 'development';
 var app = express();
  
 //Initialize Express

@@ -16,11 +16,11 @@ module.exports = function(grunt) {
     nodemon: {
       dev: {
         options: {
-          file: 'app.js',
+          script: 'app.js',
           args: [],
-          ignoredFiles: ['README.md', 'node_modules/**'],
-          watchedExtensions: ['js'],
-          watchedFolders: ['app', 'config', '.'],
+          ignore: ['README.md', 'node_modules/**'],
+          ext: ['js'],
+          watch: ['app', 'config'],
           debug: true,
           delayTime: 1,
           env: {
@@ -44,6 +44,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-concurrent');
 
   //Making grunt default to force in order not to break the project.
-  grunt.option('force', true);
+  //grunt.option('force', true);
   grunt.registerTask('default', ['jshint', 'concurrent']);
 };
