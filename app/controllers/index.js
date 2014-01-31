@@ -1,5 +1,5 @@
 exports.index = function(req, res){
-  res.render('layout', {
+  res.render('index', {
     title: 'Express',
   });
 };

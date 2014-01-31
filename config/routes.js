@@ -11,12 +11,14 @@ exports.init = function(app, passport) {
   app.post('/login', passport.authenticate('ldapauth', { successRedirect: '/', failureRedirect: '/login' }));
 
   // REST API
-/*  app.all('/api/*', function(req, res, next) {
-    if (!req.isAuthenticated()) {
-      return res.send(401, 'User is not authorized');
-    }
-    next();
-  });*/
+  if ('production' === app.get('env')) {
+    app.all('/api/*', function(req, res, next) {
+      if (!req.isAuthenticated()) {
+        return res.send(401, 'User is not authorized');
+      }
+      next();
+    });
+  }
   
   app.use(restful(db.sequelize, { endpoint: '/api' }));
 };
