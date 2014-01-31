@@ -2,7 +2,7 @@ doctype html
 html(ng-app='lrs')
   include ../includes/head
   body
-    include ../includes/header
+    header(data-ng-include="'views/header.html'")
     block body
     include ../includes/footer
     include ../includes/foot
