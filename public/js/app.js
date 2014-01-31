@@ -1,6 +1,6 @@
 angular.module('lrs', ['ngRoute']);
 
-//Setting up route
+/*//Setting up route
 angular.module('lrs').config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider.
@@ -20,5 +20,5 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
     // Get rid of # in URL (doesn't work for IE, but who cares?)
     $locationProvider.html5Mode(true);
   }
-]);
+]);*/
 

@@ -5,7 +5,7 @@ var restful = require('sequelize-restful'),
 exports.init = function(app, passport) {
   console.log('Initializing Routes...');
 
-  app.get('/', index.render);
+  app.get('/', index.index);
   app.post('/login', passport.authenticate('ldapauth', { successRedirect: '/', failureRedirect: '/login' }));
   
   // REST API
