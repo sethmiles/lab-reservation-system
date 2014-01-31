@@ -15,13 +15,11 @@ module.exports = function(grunt) {
     },
     nodemon: {
       dev: {
+        script: 'app.js',
         options: {
-          script: 'app.js',
-          args: [],
-          ignore: ['README.md', 'node_modules/**'],
-          ext: ['js'],
+          ignore: ['README.md', 'node_modules/**', '.DS_Store'],
+          ext: 'js',
           watch: ['app', 'config'],
-          debug: true,
           delayTime: 1,
           env: {
             PORT: 3000
