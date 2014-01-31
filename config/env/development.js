@@ -5,6 +5,6 @@ module.exports = {
         password: "password1",
     },
     app: {
-        name: "M*EAN Stack - Development"
+        name: "Lab Reservation System"
     },
-}
+};

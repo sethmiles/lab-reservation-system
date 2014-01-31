@@ -1,0 +1,1 @@
+angular.module('lab-reservation-system', []);

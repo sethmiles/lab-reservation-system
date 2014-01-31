@@ -3,7 +3,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     watch: {
       js: {
-        files: ['app.js', 'app/**/*.js', 'config/**/*.js'],
+        files: ['app.js', 'app/**/*.js', 'config/**/*.js', 'public/**/*.js'],
         tasks: ['jshint'],
         options: {
           livereload: true,
@@ -11,7 +11,7 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      all: ['gruntfile.js', 'app.js', 'app/**/*.js'],
+      all: ['gruntfile.js', 'app.js', 'app/**/*.js', 'config/**/*.js', 'public/js/*.js'],
     },
     nodemon: {
       dev: {
@@ -42,6 +42,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-concurrent');
 
   //Making grunt default to force in order not to break the project.
-  //grunt.option('force', true);
+  grunt.option('force', true);
   grunt.registerTask('default', ['jshint', 'concurrent']);
 };
