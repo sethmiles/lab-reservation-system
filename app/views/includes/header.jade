@@ -1,1 +1,23 @@
 header
+  nav.navbar.navbar-default(role='navigation')
+    .container-fluid
+      .navbar-header
+        button.navbar-toggle(data-toggle='collapse', data-target='#lab-reservation-navbar')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href="/") BYU IS Lab Computer Reservation System
+
+      #lab-reservation-navbar.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li.active: a(href='/calendar') Lab Calendar
+          li: a(href='/policies') Policies
+          li: a(href='http://msdnaa.byu.edu/') MSDNAA
+          li: a(href='http://ais.byu.edu/') AIS Student Chapter
+
+        form.navbar-form.navbar-right(role='login')
+          .form-group
+            input.form-control(type='text', placeholder='NetId')
+            input.form-control(type='password', placeholder='Password')
+          button.btn.btn-default(type='submit') Login

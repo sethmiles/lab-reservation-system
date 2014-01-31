@@ -1,4 +1,4 @@
-exports.index = function(req, res){
+exports.render = function(req, res){
   res.render('index', {
     title: 'Express',
   });

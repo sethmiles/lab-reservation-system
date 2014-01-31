@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "latest",
-    "bootstrap": "latest"
+    "angular-bootstrap": "latest",
+    "angular-route": "latest",
+    "bootstrap": "latest",
+    "jquery": "latest"
   }
 }
