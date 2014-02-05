@@ -1,23 +1,19 @@
-angular.module('lrs', ['ngRoute']);
+angular.module('lrs', ['ngRoute', 'lrs.system']);
+angular.module('lrs.system', []);
 
 //Setting up route
 angular.module('lrs').config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
-    $routeProvider.
-    when('/', {
-      templateUrl: 'views/index.html'
-    }).
-    when('/calendar', {
-      templateUrl: 'views/calendar.html'
-    }).
-    when('/policies', {
-      templateUrl: 'views/policies.html'
-    }).
-    otherwise({
-      redirectTo: '/'
+    $routeProvider.when('/', {
+      templateUrl: 'views/index.html',
+    });
+    $routeProvider.when('/calendar', {
+      templateUrl: 'views/calendar.html',
+    });
+    $routeProvider.when('/policies', {
+      templateUrl: 'views/policies.html',
     });
 
-    // Get rid of # in URL (doesn't work for IE, but who cares?)
     $locationProvider.html5Mode(true);
   }
 ]);

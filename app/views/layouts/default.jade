@@ -1,8 +1,9 @@
 doctype html
 html(ng-app='lrs')
   include ../includes/head
+  header(ng-include src='"views/header.html"')
   body
-    header(data-ng-include="'views/header.html'")
     block body
-    include ../includes/footer
+    footer
+      h1 Footer
     include ../includes/foot
