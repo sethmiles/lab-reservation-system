@@ -4,7 +4,7 @@ angular.module('lrs.system').controller('UserController', ['$scope', '$http', 'G
   $scope.login = function() {
     $http.post('login', {username: this.username, password: this.password}).
       success(function(data, status, headers, config) {
-        alert('sshs');
+        alert('whoo');
       });
   };
 
