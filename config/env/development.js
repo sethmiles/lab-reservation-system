@@ -2,7 +2,7 @@ module.exports = {
     db: {
         name: "lab_reservation",
         username: "root",
-        password: "password1",
+        password: "welcome08",
     },
     app: {
         name: "Lab Reservation System"

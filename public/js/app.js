@@ -9,6 +9,7 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
     });
     $routeProvider.when('/reserve', {
       templateUrl: 'views/reserve.html',
+      controller: 'reserveController'
     });
     $routeProvider.when('/calendar', {
       templateUrl: 'views/calendar.html',
