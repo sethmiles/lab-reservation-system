@@ -24,5 +24,5 @@ grunt
 
 ## Prerequisites
 - Node.js - Download and Install Node.js.
-- Bower.js - Install with ``` bash npm install -g bower" ``` bash
-- Grunt.js - Install with ``` bash npm install -g grunt" ``` bash
+- Bower.js - Install with ``` npm install -g bower" ```
+- Grunt.js - Install with ``` npm install -g grunt" ```
