@@ -15,6 +15,9 @@ cd lab-reservation-system/
 # Install dependencies with NPM
 npm install
 
+# Install frontend dependencies with Bower
+bower install
+
 # Use grunt task runner to execute the application
 grunt
 ```
