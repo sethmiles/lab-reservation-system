@@ -36,6 +36,3 @@ nosetests.xml
 .pydevproject
 
 node_modules/
-
-bower.json
-.bowerrc
