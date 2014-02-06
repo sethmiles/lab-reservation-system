@@ -8,7 +8,11 @@ exports.init = function(app, passport) {
 
   app.get('/', index.index);
 
-  app.post('/login', passport.authenticate('ldapauth', { successRedirect: '/', failureRedirect: '/', failureFlash: true }));
+  if ('production' === app.get('env')) {
+    app.post('/login', passport.authenticate('ldapauth', { successRedirect: '/', failureRedirect: '/', failureFlash: true }));
+  } else {
+    app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/', failureFlash: true }));
+  }
   app.post('/logout', function(req, res){ req.logOut(); res.send(200); });
   app.get('/loggedin', function(req, res) { res.send(req.isAuthenticated() ? req.user : '0'); });
   
