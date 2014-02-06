@@ -6,13 +6,13 @@ angular.module('lrs.system').controller('UserController', ['$scope', '$http', 'G
       username: this.username, 
       password: this.password
     }).success(function(data, status, headers, config) {
-      alert(data);
+      window.location.reload()
     });
   };
 
   $scope.logout = function() {
     $http.post('logout').success(function(data, status, headers, config) {
-      alert('logged out');
+      window.location.reload()
     });
   };
 }]);

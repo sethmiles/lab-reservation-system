@@ -44,6 +44,7 @@ passport.use(new LdapStrategy({
   }
 ));
 
+//Local login for development NOT SECURE!
 passport.use(new LocalStrategy(
   function(username, password, done) {
     db.User.findOrCreate({ netId: username }, { name: 'Text', email: 'test@test.com', role: 'student' }).success(function(user) {
