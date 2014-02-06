@@ -1,37 +1,22 @@
 angular.module('lrs.system').directive('labcalendar', function () {
 
-    var hash = {
+    var calendarObject = {
 
-        scope: {
-            user: '=?'
-        },
-
-        restrict: 'E',
-
-        // templateUrl
-        // template: '<div></div>'
-
-        link: function (scope, el, attrs) {
-            
+        init: function (scope, el, attrs) {
             this.scope = scope;
             this.el = el;
             this.attrs = attrs;
-            this.init();
-        },
-
-        init: function () {
             this.data = labjson;
-
-            this.width = 500;
-            this.height = 800;
-
-            this.svg = d3.select(el[0]).append('svg');
+            this.width = 300;
+            this.height = 500;
+            this.svg = d3.select(el[0]).append('svg')
+                .attr('width', this.width)
+                .attr('height', this.height);
 
             this.stations = this.svg.append('g').attr('class','stations');
             this.furniture = this.svg.append('g').attr('class','furniture');
             this.borders = this.svg.append('g').attr('class','borders');
-
-
+            this.render();
         },
 
         render: function () {
@@ -48,28 +33,26 @@ angular.module('lrs.system').directive('labcalendar', function () {
         renderPaths: function (d3handle, data) {
             var that = this;
 
-            paths = d3handle.selectAll("path")
+            var paths = d3handle.selectAll("path")
                     .data(data)
                 .enter().append('path')
-                    .style('opacity', 0)
+                    // .style('opacity', 0)
                     .attr('class', function (d) { return (d.class ? d.class : '') })
-                    .attr('d', function (d) { 
-                        return that.lineFn(d.edges);
-                    });
+                    .attr('d', 'M 150 250 150 250 150 250 150 250');
 
             paths.transition().duration(2000)
-                .style('opacity', 1)
-                .attr('class', function (d) { return (d.class ? d.class : '') })
+                // .style('opacity', 1)
                 .attr('d', function (d) { 
-                    return lineFn(d.edges);
+                    return that.lineFn(d.edges);
                 });
 
-            paths.exit().transition()
-                .style('opacity',0)
-                .remove();
+            // paths.exit().transition()
+            //     .style('opacity',0)
+            //     .remove();
         },
 
         setLine: function () {
+            var that = this;
             this.lineFn = d3.svg.line()
                 .x(function (d) { 
                     return that.xScale(d.x) 
@@ -86,15 +69,23 @@ angular.module('lrs.system').directive('labcalendar', function () {
 
             this.yScale = d3.scale.linear()
                 .range([this.height, 0])
-                .domain([29,0])
+                .domain([0,29])
         }
-
     }
 
-    hash.link
+    return {
+        scope: {
+            user: '=?'
+        },
 
+        restrict: 'E',
 
+        // templateUrl
+        // template: '<div></div>'
 
-    return 
+        link: function (scope, el, attrs) {
+            calendarObject.init(scope, el, attrs);
+        }
+    };
 
 });
