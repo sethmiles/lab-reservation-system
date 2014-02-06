@@ -44,10 +44,10 @@ passport.use(new LdapStrategy({
   }
 ));
 
-//Local login for development NOT SECURE!
+//Local login for development: NOT SECURE!
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    db.User.findOrCreate({ netId: username }, { name: 'Text', email: 'test@test.com', role: 'student' }).success(function(user) {
+    db.User.findOrCreate({ netId: username }, { name: 'Tester Test', email: 'test@test.com', role: 'student' }).success(function(user) {
       if (!user) {
         done(null, false, { message: 'Unknown user' });
       } else {

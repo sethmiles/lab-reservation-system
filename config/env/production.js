@@ -2,6 +2,7 @@ module.exports = {
   db: {
     name: "lab_reservation",
     username: "root",
-    password: "password1"
+    password: "password1",
+    force: false
   }
 };
