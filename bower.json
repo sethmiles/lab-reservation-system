@@ -6,6 +6,7 @@
     "angular-bootstrap": "latest",
     "angular-route": "latest",
     "bootstrap": "latest",
-    "jquery": "latest"
+    "jquery": "latest",
+    "d3": "latest"
   }
 }

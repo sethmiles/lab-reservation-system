@@ -6,7 +6,11 @@ var restful = require('sequelize-restful'),
 exports.init = function(app, passport) {
   console.log('Initializing Routes...');
 
+  //Angular Routes
   app.get('/', index.index);
+  app.get('/reserve', index.index);
+  app.get('/calendar', index.index);
+  app.get('/policies', index.index);
 
   if ('production' === app.get('env')) {
     app.post('/login', passport.authenticate('ldapauth', { successRedirect: '/', failureRedirect: '/', failureFlash: true }));
@@ -22,5 +26,4 @@ exports.init = function(app, passport) {
   }
   
   app.use(restful(db.sequelize, { endpoint: '/api' }));
-  app.get('*', index.index);
 };
