@@ -4,6 +4,5 @@ var path     = require('path'),
 module.exports = {
   root: rootPath,
   port: process.env.PORT || 3000,
-  modelsDir : rootPath + '/app/models'
-  // db: process.env.MONGOHQ_URL    
+  modelsDir : rootPath + '/app/models' 
 };
