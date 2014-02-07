@@ -1,5 +1,5 @@
 //Global service for global variables
-angular.module('lrs.system').factory("Global", [
+angular.module('lrs').factory("Global", [
   function() {
     var _this = this;
     _this._data = {

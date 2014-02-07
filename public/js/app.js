@@ -1,5 +1,4 @@
-angular.module('lrs', ['ngRoute', 'lrs.system']);
-angular.module('lrs.system', []);
+angular.module('lrs', ['ngRoute']);
 
 //Setting up route
 angular.module('lrs').config(['$routeProvider', '$locationProvider',
