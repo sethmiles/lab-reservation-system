@@ -70,7 +70,7 @@ angular.module('lrs').directive('calendar', function () {
 
             // Create axis and container, set any needed styles, append to calendar element
             this.axis = $('<div class="axis"></div>');
-            this.container = $('<div class="container"></div>')
+            this.container = $('<div class="calendar-container"></div>')
                 .css({
                     width: this.options.container.width,
                     height: this.options.container.height,

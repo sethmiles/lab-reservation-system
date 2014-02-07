@@ -3,6 +3,6 @@ extends layouts/default
 block body
   if message != ''
     div.alert.alert-danger= message
-  section(data-ng-view)
+  div(data-ng-view)
   script(type="text/javascript").
     window.user = !{user};

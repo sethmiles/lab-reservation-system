@@ -1,20 +1,20 @@
 <div>
-    <labmap class="calendar" data="d3Data" on-click="d3OnClick(item)"></labmap>
-    <div class="reservation-pane" data="stationInFocus">
-        <div class="left">
-            <h1>{{ name }}</h1>
-            <datepicker></datepicker>
-            <div class="controls">
-                <h3>Reservation from {{ startTime }} to {{ endTime }}</h3>
-                <select>
-                    <option>Daily</option>
-                    <option>Weekly</option>
-                </select>
-                <button>Reserve</button>
-            </div>
-        </div>
-        <div class="right">
-            <calendar data="stationInFocus"></calendar>
-        </div>
+  <labmap class="calendar" data="d3Data" on-click="d3OnClick(item)"></labmap>
+  <div class="reservation-pane" data="stationInFocus">
+    <div class="left" ng-model="dt">
+      <h1>{{ name }}</h1>
+      <datepicker show-weeks="showWeeks"></datepicker>
+      <div class="controls">
+        <h3>Reservation from {{ startTime }} to {{ endTime }}</h3>
+        <select>
+          <option>Daily</option>
+          <option>Weekly</option>
+        </select>
+        <button>Reserve</button>
+      </div>
     </div>
+    <div class="right">
+      <calendar data="stationInFocus"></calendar>
+    </div>
+  </div>
 </div>

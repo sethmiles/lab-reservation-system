@@ -2,145 +2,138 @@
 /*Map Styles*/
 
 labmap {
-    margin: 0 auto;
-    display: block;
-    margin-top:50px;
+  margin: 0 auto;
+  display: block;
+  margin-top:50px;
 }
 
 .station {
-    fill: steelblue;
-    stroke: 1px;
-    stroke: #ffffff;
+  fill: steelblue;
+  stroke: 1px;
+  stroke: #ffffff;
 }
 
 .station.free {
-    fill: #7cbb00;
+fill: #7cbb00;
 }
 
 .station.in-use {
-    fill: #ffbb00;
+fill: #ffbb00;
 }
 
 .station.reserved {
-    fill: #f65414;
+fill: #f65414;
 }
 
 .desk, .main-desk, .cabinet, .side-desk {
-    fill: #ccc;
+  fill: #ccc;
 }
-
-
-
 
 /*Calendar Styles*/
 
 .reservation-pane {
-    position: absolute;
-    left: 50%;
-    margin-left: -300px;
-    top:100px;
-    padding: 20px;
-    width: 600px;
-    border: 1px solid steelblue;
-    background-color: white;
-    border-radius: 3px;
+  position: absolute;
+  left: 50%;
+  margin-left: -300px;
+  top:100px;
+  padding: 20px;
+  width: 600px;
+  border: 1px solid steelblue;
+  background-color: white;
+  border-radius: 3px;
 }
 
 .reservation-pane .left, .reservation-pane .right {
-    display: inline-block;
-    vertical-align: top;
+  display: inline-block;
+  vertical-align: top;
 }
 
 calendar {
-    
-    
+  
+  
 }
 
-
-
-
 .calendar {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .axis {
-    vertical-align: top;
-    display: inline-block;
+  vertical-align: top;
+  display: inline-block;
 }
 
 .axis .increment {
-    text-align: right;
-    padding-right: 10px;
+  text-align: right;
+  padding-right: 10px;
 }
 
 .axis .increment .hour span:nth-child(1) {
-    font-weight: bold;
-    font-size: 13px;
-    padding-right: 10px;
+  font-weight: bold;
+  font-size: 13px;
+  padding-right: 10px;
 }
 
 .axis .increment .hour span:nth-child(2), .axis .increment .mid-hour span {
-    font-size: 10px;
-    color: #a8a8a8;
+  font-size: 10px;
+  color: #a8a8a8;
 }
 
-.container {
-    display: inline-block;
-    position: relative;
-    border-left: 1px solid #d8d8d8;
-    background-color: #ececec;
-    margin-top: 11px;
+.calendar-container {
+  display: inline-block;
+  position: relative;
+  border-left: 1px solid #d8d8d8;
+  background-color: #ececec;
+  margin-top: 11px;
 }
 
-.container .paintable {
-    box-shadow:inset 0px 1px 0px 0px #CCC;
+.calendar-container .paintable {
+  box-shadow:inset 0px 1px 0px 0px #CCC;
 }
 
-.container .paintable.ui-selecting { background: steelblue; }
-.container .paintable.ui-selected { background: #055598; color: white; }
-
+.calendar-container .paintable.ui-selecting { background: steelblue; }
+.calendar-container .paintable.ui-selected { background: #055598; color: white; }
 
 
 /* Event Styles */
 /* ------------ */
 
 .event {
-    position: absolute;
+  position: absolute;
 }
 
 .event .relative {
-    position: relative;
+  position: relative;
 }
 
 .event .bar {
-    display: inline-block;
-    background-color: green;
-    height: 100%;
-    width: 4px;
-    border-top: 1px solid #4f6ba8;
-    border-bottom: 1px solid #4f6ba8;
+  display: inline-block;
+  background-color: green;
+  height: 100%;
+  width: 4px;
+  border-top: 1px solid #4f6ba8;
+  border-bottom: 1px solid #4f6ba8;
 }
 
 .event .event-content {
-    vertical-align: top;
-    border: 1px solid #d9d9d9;
-    background-color: #ffffff;
-    border-left: none;
-    display: inline-block;
-    height: 100%;
-    overflow: hidden;
-    width: 175px;
+  vertical-align: top;
+  border: 1px solid #d9d9d9;
+  background-color: #ffffff;
+  border-left: none;
+  display: inline-block;
+  height: 100%;
+  overflow: hidden;
+  width: 175px;
 }
 
 .event .title {
-    padding-left: 5px;
-    padding-top: 5px;
-    color: #5174ae;
-    font-size: 13px;
+  padding-left: 5px;
+  padding-top: 5px;
+  color: #5174ae;
+  font-size: 13px;
 }
 
 .event .description {
-    padding-left: 5px;
-    color: #969696;
-    font-size: 10px;
+  padding-left: 5px;
+  color: #969696;
+  font-size: 10px;
 }
