@@ -1,3 +1,3 @@
-angular.module('lrs.system').controller('IndexController', ['$scope', 'Global', function ($scope, Global) {
+angular.module('lrs').controller('IndexController', ['$scope', 'Global', function ($scope, Global) {
   $scope.global = Global;
 }]);

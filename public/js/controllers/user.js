@@ -1,8 +1,8 @@
-angular.module('lrs.system').controller('UserController', ['$scope', '$http', 'Global', function ($scope, $http, Global) {
+angular.module('lrs').controller('UserController', ['$scope', '$http', 'Global', function ($scope, $http, Global) {
   $scope.global = Global;
 
   $scope.login = function() {
-    $http.post('login', { 
+    $http.post('login', {
       username: this.username, 
       password: this.password
     }).success(function(data, status, headers, config) {
