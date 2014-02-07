@@ -1,7 +1,4 @@
 
-
-
-
 /*Map Styles*/
 
 labmap {
@@ -37,16 +34,26 @@ labmap {
 
 /*Calendar Styles*/
 
-calendar {
+.reservation-pane {
     position: absolute;
     left: 50%;
+    margin-left: -300px;
     top:100px;
-    width: 700px;
     padding: 20px;
-    margin-left:-350px;
-    background-color: white;
-    border-radius: 10px;
+    width: 600px;
     border: 1px solid steelblue;
+    background-color: white;
+    border-radius: 3px;
+}
+
+.reservation-pane .left, .reservation-pane .right {
+    display: inline-block;
+    vertical-align: top;
+}
+
+calendar {
+    
+    
 }
 
 
@@ -59,7 +66,6 @@ calendar {
 .axis {
     vertical-align: top;
     display: inline-block;
-    margin-top: -11px;
 }
 
 .axis .increment {
@@ -83,6 +89,7 @@ calendar {
     position: relative;
     border-left: 1px solid #d8d8d8;
     background-color: #ececec;
+    margin-top: 11px;
 }
 
 .container .paintable {

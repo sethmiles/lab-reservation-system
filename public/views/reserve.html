@@ -1,11 +1,11 @@
 <div>
     <labmap class="calendar" data="d3Data" on-click="d3OnClick(item)"></labmap>\
-    <div class="pane" data="stationInFocus">
+    <div class="reservation-pane" data="stationInFocus">
         <div class="left">
             <h1>{{ name }}</h1>
             <datepicker></datepicker>
             <div class="controls">
-                <h2>Reservation from {{ startTime }} to {{ endTime }}</h2>
+                <h3>Reservation from {{ startTime }} to {{ endTime }}</h3>
                 <select>
                     <option>Daily</option>
                     <option>Weekly</option>
