@@ -2,6 +2,28 @@
 
 labcalendar {
     margin: 0 auto;
-    width: 500px;
     display: block;
+    margin-top:50px;
+}
+
+.station {
+    fill: steelblue;
+    stroke: 1px;
+    stroke: #ffffff;
+}
+
+.station.free {
+    fill: #7cbb00;
+}
+
+.station.in-use {
+    fill: #ffbb00;
+}
+
+.station.reserved {
+    fill: #f65414;
+}
+
+.desk, .main-desk, .cabinet, .side-desk {
+    fill: #ccc;
 }
