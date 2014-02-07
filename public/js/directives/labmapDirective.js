@@ -1,4 +1,4 @@
-angular.module('lrs.system').directive('labmap', function () {
+angular.module('lrs').directive('labmap', function () {
 
     d3.selection.prototype.moveToFront = function() {
       return this.each(function(){

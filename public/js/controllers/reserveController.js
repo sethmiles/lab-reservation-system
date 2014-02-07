@@ -1,4 +1,4 @@
-angular.module('lrs.system').controller('reserveController', ['$scope', 'Global', function ($scope, Global) {
+angular.module('lrs').controller('reserveController', ['$scope', 'Global', function ($scope, Global) {
     $scope.global = Global;
 
     $scope.d3Data = labjson

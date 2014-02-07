@@ -11,6 +11,7 @@
     "connect-flash": "latest",
     "sequelize": "latest",
     "sequelize-restful": "latest",
+
     "sequelize-mysql": "latest",
     "passport": "latest",
     "passport-ldapauth": "latest",

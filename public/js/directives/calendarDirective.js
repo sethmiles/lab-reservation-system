@@ -1,4 +1,4 @@
-angular.module('lrs.system').directive('calendar', function () {
+angular.module('lrs').directive('calendar', function () {
 
     _.templateSettings = {
         interpolate : /\{\{([\s\S]+?)\}\}/g,
