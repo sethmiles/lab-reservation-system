@@ -1,4 +1,4 @@
-angular.module('lrs', ['ngRoute', 'lrs.system']);
+angular.module('lrs', ['ngRoute', 'lrs.system', 'ui.bootstrap']);
 angular.module('lrs.system', []);
 
 //Setting up route

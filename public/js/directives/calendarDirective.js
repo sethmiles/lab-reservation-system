@@ -78,10 +78,37 @@ angular.module('lrs.system').directive('calendar', function () {
                     paddingRight: this.options.container.paddingRight
                 });
 
+            this.renderPaintableElements();
+
             this.renderAxis();
             this.$el.append(this.axis);
             this.$el.append(this.container);
 
+        },
+
+        renderPaintableElements: function () {
+            var segments = [],
+                startTime = this.options.startTime;
+
+            while(startTime < this.options.endTime){
+                // Create objects for each hour on the axis
+                segments.push('<div class="paintable" data-start-time="' + startTime + '"></div>');
+                startTime += 30;
+                segments.push('<div class="paintable" data-start-time="' + startTime + '"></div>');
+                startTime += 70;
+            }
+            
+            this.container.selectable({
+                selected: function () {
+                    console.log(arguments);
+                },
+
+                selecting: function () {
+                    console.log(arguments);
+                }
+            });
+            var paintableSegments = $(segments.join('')).height(this.options.container.height / segments.length);
+            this.container.append(paintableSegments);
         },
 
         renderAxis: function () {
@@ -125,7 +152,7 @@ angular.module('lrs.system').directive('calendar', function () {
                 that = this;
 
             // Clear out existing events from the DOM
-            this.container.empty();
+            this.container.find('.event').remove();
 
             _.each(events, function(event){
                 // Create, add, and position new events

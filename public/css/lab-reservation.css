@@ -85,6 +85,13 @@ calendar {
     background-color: #ececec;
 }
 
+.container .paintable {
+    box-shadow:inset 0px 1px 0px 0px #CCC;
+}
+
+.container .paintable.ui-selecting { background: steelblue; }
+.container .paintable.ui-selected { background: #055598; color: white; }
+
 
 
 /* Event Styles */
