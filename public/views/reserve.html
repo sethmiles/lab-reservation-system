@@ -1,20 +1,37 @@
-<div>
+<div data-ng-show="global.authenticated">
   <labmap class="calendar" data="d3Data" on-click="d3OnClick(item)"></labmap>
   <div class="reservation-pane" data="stationInFocus">
     <div class="left" ng-model="dt">
       <h1>{{ name }}</h1>
-      <datepicker show-weeks="showWeeks"></datepicker>
+      <datepicker></datepicker>
       <div class="controls">
         <h3>Reservation from {{ startTime }} to {{ endTime }}</h3>
-        <select>
+        <select class="form-control">
           <option>Daily</option>
           <option>Weekly</option>
         </select>
-        <button>Reserve</button>
+        <button class="btn btn-primary">Reserve</button>
       </div>
     </div>
     <div class="right">
       <calendar data="stationInFocus"></calendar>
     </div>
+  </div>
+</div>
+
+<div data-ng-hide="global.authenticated" data-ng-controller="UserController">
+  <div class="page-header">
+    <h1>Login</h1>
+  </div>
+  <div class="col-md-4 col-md-offset-4">
+    <form role="login" ng-submit="login()" data-ng-hide="global.authenticated">
+      <div class="form-group">
+        <input type="text" ng-model="username" class="form-control" placeholder="NetId">
+      </div>
+      <div class="form-group">
+        <input type="password" ng-model="password" class="form-control" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-default">Login</button>
+    </form>
   </div>
 </div>

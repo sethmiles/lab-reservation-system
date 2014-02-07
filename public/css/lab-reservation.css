@@ -14,15 +14,15 @@ labmap {
 }
 
 .station.free {
-fill: #7cbb00;
+  fill: #7cbb00;
 }
 
 .station.in-use {
-fill: #ffbb00;
+  fill: #ffbb00;
 }
 
 .station.reserved {
-fill: #f65414;
+  fill: #f65414;
 }
 
 .desk, .main-desk, .cabinet, .side-desk {
@@ -35,7 +35,7 @@ fill: #f65414;
   position: absolute;
   left: 50%;
   margin-left: -300px;
-  top:100px;
+  top: 100px;
   padding: 20px;
   width: 600px;
   border: 1px solid steelblue;
