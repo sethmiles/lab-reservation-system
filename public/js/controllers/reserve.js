@@ -7,6 +7,8 @@ angular.module('lrs').controller('reserveController', ['$scope', 'Global', funct
       
   };
 
+  $scope.today = new Date();
+
   $scope.stationInFocus = [
     {start: 30, end: 200, user: 'lanesawyer'},
     {start: 550, end: 900, user: 'howards4'}

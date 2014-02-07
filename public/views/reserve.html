@@ -3,7 +3,7 @@
   <div class="reservation-pane" data="stationInFocus">
     <div class="left" ng-model="dt">
       <h1>{{ name }}</h1>
-      <datepicker></datepicker>
+      <datepicker min="today" show-weeks="false"></datepicker>
       <div class="controls">
         <h3>Reservation from {{ startTime }} to {{ endTime }}</h3>
         <select class="form-control">
