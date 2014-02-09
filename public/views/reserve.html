@@ -1,8 +1,8 @@
 <div data-ng-show="global.authenticated">
   <labmap class="calendar" data="d3Data" on-click="d3OnClick(item)"></labmap>
-  <div class="reservation-pane" data="stationInFocus">
+  <div class="reservation-pane" ng-show="stationData">
     <div class="left" ng-model="dt">
-      <h1>{{ name }}</h1>
+      <h1>{{ stationData.name || 'Hello' }}</h1>
       <datepicker min="today" show-weeks="false"></datepicker>
       <div class="controls">
         <h3>Reservation from {{ startTime }} to {{ endTime }}</h3>
@@ -11,10 +11,11 @@
           <option>Weekly</option>
         </select>
         <button class="btn btn-primary">Reserve</button>
+        <button class="btn btn-warning" ng-click="stationData=null">Cancel</button>
       </div>
     </div>
     <div class="right">
-      <calendar data="stationInFocus"></calendar>
+      <calendar data="stationData"></calendar>
     </div>
   </div>
 </div>

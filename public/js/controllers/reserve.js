@@ -4,13 +4,14 @@ angular.module('lrs').controller('reserveController', ['$scope', 'Global', funct
   $scope.d3Data = labjson
 
   $scope.d3OnClick = function(item) {
-      
+        $scope.stationData = item;
+        $scope.$apply();
+        $scope.stationData.events = [
+            {start:800, end: 900},
+            {start: 1400, end: 1600}
+        ];
   };
 
   $scope.today = new Date();
 
-  $scope.stationInFocus = [
-    {start: 30, end: 200, user: 'lanesawyer'},
-    {start: 550, end: 900, user: 'howards4'}
-  ];
 }]);

@@ -58,8 +58,6 @@ angular.module('lrs').directive('calendar', function () {
 
         render: function () {
             this.renderCalendar();
-            this.layOutDay(this.scope.data);
-
         },
 
         renderCalendar: function () {
@@ -239,14 +237,10 @@ angular.module('lrs').directive('calendar', function () {
 
     };
 
-
-
-
     return {
         scope: {
             user: '=?',
-            data: '=',
-            onClick: '&' // bi directional binding
+            data: '='
         },
 
         restrict: 'E',
@@ -254,7 +248,6 @@ angular.module('lrs').directive('calendar', function () {
         link: function (scope, el, attrs) {
             // Browser onresize event
             var calendar = new Calendar(scope, el, attrs);
-           
         }
     };
 
