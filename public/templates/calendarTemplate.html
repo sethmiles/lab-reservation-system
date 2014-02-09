@@ -1,0 +1,13 @@
+<div class="axis">
+    <div class="increment" ng-repeat="segment in calendar.axis.segments" style="height:{{ calendar.incrementHeight }}px">
+        <div class="hour">
+            <span>{{ segment.hour }}</span><span>{{ segment.meridiem }}</span>
+        </div>
+        <div class="mid-hour">
+            <span>{{ segment.midHour }}</span>
+        </div>
+    </div>
+</div>
+<div class="calendar-container">
+    <div class="paintable" data-start-time="{{ startTime }}" ng-repeat="hour in calendar.hours"></div>
+</div>
