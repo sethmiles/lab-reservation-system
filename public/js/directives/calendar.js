@@ -79,7 +79,7 @@ angular.module('lrs').directive('calendar', function () {
 
         },
 
-        renderPaintableElements: function () {
+        setPaintableElements: function () {
             var segments = [],
                 startTime = this.options.startTime;
 

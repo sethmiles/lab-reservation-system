@@ -1,7 +1,8 @@
-angular.module('lrs').controller('reserveController', ['$scope', 'Global', function ($scope, Global) {
+angular.module('lrs').controller('reserveController', ['$scope', 'Global', 'Restangular', function ($scope, Global, Restangular) {
+  
   $scope.global = Global;
 
-  $scope.d3Data = labjson
+  $scope.d3Data = Restangular.all("stations").getList().$object;
 
   $scope.d3OnClick = function(item) {
         $scope.stationData = item;
