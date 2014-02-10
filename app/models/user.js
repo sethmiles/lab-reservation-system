@@ -12,9 +12,6 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
-      validate: {
-        isEmail: true
-      }
     },
     role: {
       type: DataTypes.STRING,
