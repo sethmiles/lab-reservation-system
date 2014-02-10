@@ -1,5 +1,4 @@
 var restful = require('sequelize-restful'),
-    admin   = require('sequelize-admin'),
     index   = require('../app/controllers/index'),
     auth    = require('./middlewares/auth'),
     db      = require('./sequelize');
@@ -29,5 +28,4 @@ exports.init = function(app, passport) {
   
   // Automatically add CRUD to models in db
   app.use(restful(db.sequelize, { endpoint: '/api' }));
-  app.use(admin(db.sequelize, { restful: '/api' }));
 };
