@@ -28,6 +28,6 @@ exports.init = function(app, passport) {
   }
   
   // Automatically add CRUD to models in db
-  app.use(restful(db.sequelize, { endpoint: '/admin/api' }));
-  app.use(admin(db.sequelize, { restful: '/admin/api' }));
+  app.use(restful(db.sequelize, { endpoint: '/api' }));
+  app.use(admin(db.sequelize, { restful: '/api' }));
 };
