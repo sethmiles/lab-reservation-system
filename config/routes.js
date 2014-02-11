@@ -12,6 +12,9 @@ exports.init = function(app, passport) {
   app.get('/calendar', index.index);
   app.get('/policies', index.index);
 
+  // Admin Route
+  app.get('/admin', index.index);
+
   // Use LDAP in production, insecure local authentication in development
   if ('production' === app.get('env')) {
     app.post('/login', passport.authenticate('ldapauth', { successRedirect: '/', failureRedirect: '/', failureFlash: true }));

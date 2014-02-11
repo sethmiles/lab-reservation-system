@@ -8,13 +8,17 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
     });
     $routeProvider.when('/reserve', {
       templateUrl: 'views/reserve.html',
-      controller: 'reserveController'
+      controller: 'ReserveController'
     });
     $routeProvider.when('/calendar', {
       templateUrl: 'views/calendar.html',
     });
     $routeProvider.when('/policies', {
       templateUrl: 'views/policies.html',
+    });
+    $routeProvider.when('/admin', {
+      templateUrl: 'views/admin.html',
+      controller: 'AdminController'
     });
 
     $locationProvider.html5Mode(true);

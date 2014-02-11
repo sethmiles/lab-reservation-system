@@ -1,5 +1,5 @@
-exports.auth = function(req, res, next){ 
-  if (!req.isAuthenticated()) {
+exports.auth = function(req, res, next) { 
+  if(!req.isAuthenticated()) {
     res.send(401);
   } else {
     next(); 
