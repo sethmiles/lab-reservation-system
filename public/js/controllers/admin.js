@@ -6,6 +6,7 @@ angular.module('lrs').controller('AdminController', ['$scope', '$http', 'Global'
     $scope.models = data.data;
   });
 
+  // Display all entries in database
   $scope.manageModel = function(model) {
     $http.get('/api/' + model).success(function(data) {
       $scope.modelTitle = model;
@@ -28,9 +29,7 @@ angular.module('lrs').controller('AdminController', ['$scope', '$http', 'Global'
 
   $scope.delete = function(model, item) {
     $http.delete('/api/' + model + '/' + item.id).success(function(data) {
-      console.log($scope.modelData[item]);
-      //$scope.modelData.splice(item, 1);
+      $scope.modelData.splice($.inArray(item, $scope.modelData), 1);
     });
   }
-
 }]);
