@@ -21,11 +21,11 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider', 'Restangula
 
     $locationProvider.html5Mode(true);
 
-    RestangularProvider.setBaseUrl('https://api.mongolab.com/api/1/databases/angularjs/collections');
-      RestangularProvider.setDefaultRequestParams({ apiKey: '4f847ad3e4b08a2eed5f3b54' });
-      RestangularProvider.setRestangularFields({
-        id: '_id.$oid'
-      });
+    RestangularProvider.setBaseUrl('localhost:3000');
+      // RestangularProvider.setDefaultRequestParams({ apiKey: '4f847ad3e4b08a2eed5f3b54' });
+      // RestangularProvider.setRestangularFields({
+      //   id: '_id.$oid'
+      // });
       
       RestangularProvider.setRequestInterceptor(function(elem, operation, what) {
         

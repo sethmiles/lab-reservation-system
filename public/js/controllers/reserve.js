@@ -2,7 +2,7 @@ angular.module('lrs').controller('reserveController', ['$scope', 'Global', 'Rest
   
   $scope.global = Global;
 
-  $scope.d3Data = Restangular.all("stations").getList().$object;
+  $scope.d3Data = Restangular.all("admin/api/Computers").getList().$object;
 
   $scope.d3OnClick = function(item) {
         $scope.stationData = item;

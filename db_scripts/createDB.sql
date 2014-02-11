@@ -18,7 +18,8 @@ isPowered boolean,
 isLoggedIn boolean,
 isReservable boolean,
 memoryUsage integer,
-remoteConnectionCount integer,
+updatedAt timestamp,
+remoteConnectionCount integer
 );
 
 -- Series
@@ -59,7 +60,7 @@ teacher_id integer REFERENCES users
 
 -- Lab User and Class Section
 CREATE TABLE IF NOT EXISTS user_class_sections(
-computer_id integer REFERENCES computer
+computer_id integer REFERENCES computer,
 user_id integer REFERENCES users,
 class_section_id integer REFERENCES class_sections,
 PRIMARY KEY(user_id, class_section_id)
