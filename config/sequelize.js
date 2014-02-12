@@ -8,8 +8,8 @@ var fs        = require('fs'),
 console.log("Initializing Sequelize...");
 
 var sequelize = new Sequelize(config.db.name, config.db.username, config.db.password,{
-    host:'localhost',
-    port: 3306,
+    host:'128.187.61.27',
+    port: 8888,
     dialect: 'mysql'
 });
 
