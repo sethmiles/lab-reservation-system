@@ -1,5 +1,4 @@
 var restful = require('sequelize-restful'),
-    // admin   = require('sequelize-admin'),
     index   = require('../app/controllers/index'),
     auth    = require('./middlewares/auth'),
     db      = require('./sequelize');
@@ -12,6 +11,9 @@ exports.init = function(app, passport) {
   app.get('/reserve', index.index);
   app.get('/calendar', index.index);
   app.get('/policies', index.index);
+
+  // Admin Route
+  app.get('/admin', index.index);
 
   // Use LDAP in production, insecure local authentication in development
   if ('production' === app.get('env')) {
@@ -29,5 +31,4 @@ exports.init = function(app, passport) {
   
   // Automatically add CRUD to models in db
   app.use(restful(db.sequelize, { endpoint: '/api' }));
-  // app.use(admin(db.sequelize, { restful: '/admin/api' }));
 };

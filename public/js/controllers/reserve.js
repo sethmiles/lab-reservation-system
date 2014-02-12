@@ -1,5 +1,4 @@
-angular.module('lrs').controller('reserveController', ['$scope', 'Global', 'Restangular', function ($scope, Global, Restangular) {
-  
+angular.module('lrs').controller('ReserveController', ['$scope', 'Global', 'Restangular', function ($scope, Global, Restangular) {
   $scope.global = Global;
 
   $scope.d3Data = Restangular.all("admin/api/Computers").getList().$object;
