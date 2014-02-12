@@ -61,7 +61,6 @@ angular.module('lrs').directive('labmap', function () {
                 .enter().append('path')
                     .style('opacity', 0)
                     .attr('class', function (d) { return (d.className ? d.className : '') })
-                    .attr('ng-click', 'onStationClick()')
                     .attr('d', this.getRandomD)
                     .on("mouseover", function (d) {
                         if(d.station){
@@ -77,7 +76,7 @@ angular.module('lrs').directive('labmap', function () {
                         }
                     })
                     .on('click', function (d) {
-                        that.scope.onClick({item: d});
+                        that.scope.onClick({ item: d });
                     })
 
             paths.transition().duration(1500)

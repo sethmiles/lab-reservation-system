@@ -1,16 +1,17 @@
-angular.module('lrs').controller('ReserveController', ['$scope', 'Global', function ($scope, Global) {
+angular.module('lrs').controller('ReserveController', ['$scope', 'Global', 'Restangular', function ($scope, Global, Restangular) {
   $scope.global = Global;
 
-  $scope.d3Data = labjson
+  $scope.d3Data = Restangular.all("admin/api/Computers").getList().$object;
 
   $scope.d3OnClick = function(item) {
-      
+        $scope.stationData = item;
+        $scope.$apply();
+        $scope.stationData.events = [
+            {start:800, end: 900},
+            {start: 1400, end: 1600}
+        ];
   };
 
   $scope.today = new Date();
 
-  $scope.stationInFocus = [
-    {start: 30, end: 200, user: 'lanesawyer'},
-    {start: 550, end: 900, user: 'howards4'}
-  ];
 }]);

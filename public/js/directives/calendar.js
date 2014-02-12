@@ -33,21 +33,16 @@ angular.module('lrs').directive('calendar', function () {
         },
 
         calendarIncrementTemplate: _.template(
-            '<div class="increment">' +
-                '<div class="hour">' +
-                    '<span>{{ hour }}</span><span>{{ meridiem }}</span>' +
-                '</div>' +
-                '<div class="mid-hour">' +
-                    '<span>{{ midHour }}</span>' +
-                '</div>' +
-            '</div>'
+            
         ),
 
         // Setup Methods --------------------------------------------
 
         initialize: function() {
-            this.setup();
-            this.render();
+            // this.setup();
+            // this.render();
+            this.axis = {};
+            this.setCalendarHours();
         },
 
         setup: function () {
@@ -58,8 +53,6 @@ angular.module('lrs').directive('calendar', function () {
 
         render: function () {
             this.renderCalendar();
-            this.layOutDay(this.scope.data);
-
         },
 
         renderCalendar: function () {
@@ -69,14 +62,14 @@ angular.module('lrs').directive('calendar', function () {
             }
 
             // Create axis and container, set any needed styles, append to calendar element
-            this.axis = $('<div class="axis"></div>');
-            this.container = $('<div class="calendar-container"></div>')
-                .css({
-                    width: this.options.container.width,
-                    height: this.options.container.height,
-                    paddingLeft: this.options.container.paddingLeft,
-                    paddingRight: this.options.container.paddingRight
-                });
+            // this.axis =
+            // this.container =
+                // .css({
+                //     width: this.options.container.width,
+                //     height: this.options.container.height,
+                //     paddingLeft: this.options.container.paddingLeft,
+                //     paddingRight: this.options.container.paddingRight
+                // });
 
             this.renderPaintableElements();
 
@@ -86,7 +79,7 @@ angular.module('lrs').directive('calendar', function () {
 
         },
 
-        renderPaintableElements: function () {
+        setPaintableElements: function () {
             var segments = [],
                 startTime = this.options.startTime;
 
@@ -111,10 +104,11 @@ angular.module('lrs').directive('calendar', function () {
             this.container.append(paintableSegments);
         },
 
-        renderAxis: function () {
+        setCalendarHours: function () {
             var segments = [],
                 startTime = this.options.startTime,
-                time, increment, incrementHeight;
+                time, increment, incrementHeight,
+                incrementHeight = 0;
 
             while(startTime < this.options.endTime){
                 // Create objects for each hour on the axis
@@ -127,8 +121,6 @@ angular.module('lrs').directive('calendar', function () {
                 startTime += 100;
             }
 
-            incrementHeight = this.options.container.height / segments.length;
-
             // Push the last hour
             segments.push({
                 hour: this.formatHour(this.options.endTime > 1200 ? this.options.endTime - 1200 : this.options.endTime),
@@ -136,14 +128,9 @@ angular.module('lrs').directive('calendar', function () {
                 meridiem: (this.options.endTime >= 1300 ? 'PM' : 'AM')
             });
 
-            // Add the hour increment to axis and set proper spacing
-            for (var i = 0; i < segments.length; i++) {
-                increment = $(this.calendarIncrementTemplate(segments[i]));
+            this.axis.segments = segments;
+            this.incrementHeight = this.options.container.height / segments.length;
 
-                increment.height(incrementHeight);
-                increment.find('.hour').height(incrementHeight / 2);
-                this.axis.append(increment);
-            }
         },
 
         renderEvents: function (events) {
@@ -214,11 +201,7 @@ angular.module('lrs').directive('calendar', function () {
         className: 'event',
 
         eventTemplate: _.template(
-            '<div class="bar"></div>' +
-            '<div class="event-content">' +
-                '<div class="title">Reserved</div>' +
-                '<div class="description">{{ user }}</div>' +
-            '</div>'
+            
         ),
 
         initialize: function () {
@@ -239,22 +222,19 @@ angular.module('lrs').directive('calendar', function () {
 
     };
 
-
-
-
     return {
         scope: {
             user: '=?',
-            data: '=',
-            onClick: '&' // bi directional binding
+            data: '='
         },
+
+        templateUrl: 'templates/calendarTemplate.html',
 
         restrict: 'E',
 
         link: function (scope, el, attrs) {
             // Browser onresize event
-            var calendar = new Calendar(scope, el, attrs);
-           
+            scope.calendar = new Calendar(scope, el, attrs);
         }
     };
 
