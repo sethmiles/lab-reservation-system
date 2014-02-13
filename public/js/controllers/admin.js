@@ -30,7 +30,6 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
   };
 
   $scope.newModel = function() {
-    console.log($scope.currentModel);
     $http.post('/api/' + $scope.currentModel + '/', $scope.currentItem).success(function(data) {
       window.location.reload();
     });
@@ -53,9 +52,12 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
   };
 
   $scope.delete = function(model, item) {
-    $http.delete('/api/' + model + '/' + item.id).success(function(data) {
-      $scope.modelData.splice($.inArray(item, $scope.modelData), 1);
-    });
+    var confirmDelete = confirm('This will delete a ' + model + '.');
+    if(confirmDelete) {
+      $http.delete('/api/' + model + '/' + item.id).success(function(data) {
+        $scope.modelData.splice($.inArray(item, $scope.modelData), 1);
+      });
+    }
   }
 
   // Run manageModel if we come from an 'admin/:model' URL
@@ -69,9 +71,6 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
 
     $http.get('/api/' + $scope.currentModel).success(function(data) {
       var headers = [];
-
-      // Put ID first
-      headers.push('id');
 
       for(var header in data.data[0]) {
         // Remove createdAt

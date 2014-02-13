@@ -1,5 +1,5 @@
 <div class="page-header">
-  <h1>Admin</h1>
+  <h1>Admin <small>{{currentModel}}</small></h1>
 </div>
 
 <div class="col-md-2">
@@ -7,12 +7,11 @@
     <li class="list-group-item" ng-repeat="model in models">
       <a href="admin/{{model.tableName}}">{{model.tableName}}</a>
     </li>
-  <ul>
+  </ul>
+  <a href="admin/new/{{currentModel}}"class="btn btn-success">New {{currentModel}}</a>
 </div>
 
-<div class="col-md-10">
-  <h2>{{currentModel}}</h2>
-  <a href="admin/new/{{currentModel}}"class="btn btn-success">New {{currentModel}}</a>
+<div class="col-md-10" data-ng-show="currentModel">
   <table class="table table-striped">
     <tr>
       <th ng-repeat="header in modelHeaders">{{header}}</th>

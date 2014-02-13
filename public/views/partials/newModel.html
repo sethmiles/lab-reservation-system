@@ -1,11 +1,11 @@
 <div class="page-header">
-  <h1>New {{currentModel}}</h1>
+  <h1>New <small>{{currentModel}}</small></h1>
 </div>
-<a href="/admin/{{currentModel}}" class="btn btn-default">Back</a>
-<form name="editModelForm" ng-submit="newModel()">
+<form ng-submit="newModel()">
   <div class="form-group" ng-repeat="header in modelHeaders">
     <label for="field">{{header}}</label>
     <input type="text" ng-model="currentItem[header]" class="form-control">
   </div>
+  <a href="/admin/{{currentModel}}" class="btn btn-default">Back</a>
   <button type="submit" class="btn btn-primary">Create</button>
 </form>

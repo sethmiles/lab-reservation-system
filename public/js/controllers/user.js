@@ -1,21 +1,6 @@
 angular.module('lrs').controller('UserController', ['$scope', '$http', '$modal', 'Global', function ($scope, $http, $modal, Global) {
   $scope.global = Global;
 
-  $scope.login = function() {
-    $http.post('login', {
-      username: this.username, 
-      password: this.password
-    }).success(function(data, status, headers, config) {
-      window.location.reload()
-    });
-  };
-
-  $scope.logout = function() {
-    $http.post('logout').success(function(data, status, headers, config) {
-      window.location.reload()
-    });
-  };
-
   $scope.getEmail = function() {
     var modalInstance = $modal.open({
       templateUrl: 'views/partials/addEmail.html',
@@ -33,5 +18,20 @@ angular.module('lrs').controller('UserController', ['$scope', '$http', '$modal',
         $modalInstance.close();
       });
     };
+  };
+
+  $scope.login = function() {
+    $http.post('login', {
+      username: this.username, 
+      password: this.password
+    }).success(function(data, status, headers, config) {
+      window.location.reload()
+    });
+  };
+
+  $scope.logout = function() {
+    $http.post('logout').success(function(data, status, headers, config) {
+      window.location.reload()
+    });
   };
 }]);
