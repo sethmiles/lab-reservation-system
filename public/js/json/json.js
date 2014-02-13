@@ -110,7 +110,7 @@ var labjson = {
 
     stations: [
         {
-            name:'Station 01',
+            name:'Station01',
             className: 'station',
             station: true,
             edges: [
@@ -122,7 +122,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 02',
+            name:'Station02',
             className: 'station',
             station: true,
             edges: [
@@ -134,7 +134,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 03',
+            name:'Station03',
             className: 'station',
             station: true,
             edges: [
@@ -153,7 +153,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 04',
+            name:'Station04',
             className: 'station',
             station: true,
             edges: [
@@ -172,7 +172,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 05',
+            name:'Station05',
             className: 'station',
             station: true,
             edges: [
@@ -184,7 +184,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 06',
+            name:'Station06',
             className: 'station',
             station: true,
             edges: [
@@ -196,7 +196,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 07',
+            name:'Station07',
             className: 'station',
             station: true,
             edges: [
@@ -208,7 +208,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 08',
+            name:'Station08',
             className: 'station',
             station: true,
             edges: [
@@ -220,7 +220,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 09',
+            name:'Station09',
             className: 'station',
             station: true,
             edges: [
@@ -232,7 +232,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 10',
+            name:'Station10',
             className: 'station',
             station: true,
             edges: [
@@ -244,7 +244,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 11',
+            name:'Station11',
             className: 'station',
             station: true,
             edges: [
@@ -256,7 +256,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 12',
+            name:'Station12',
             className: 'station',
             station: true,
             edges: [
@@ -268,7 +268,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 13',
+            name:'Station13',
             className: 'station',
             station: true,
             edges: [
@@ -280,7 +280,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 14',
+            name:'Station14',
             className: 'station',
             station: true,
             edges: [
@@ -292,7 +292,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 15',
+            name:'Station15',
             className: 'station',
             station: true,
             edges: [
@@ -304,7 +304,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 16',
+            name:'Station16',
             className: 'station',
             station: true,
             edges: [
@@ -316,7 +316,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 17',
+            name:'Station17',
             className: 'station',
             station: true,
             edges: [
@@ -328,7 +328,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 18',
+            name:'Station18',
             className: 'station',
             station: true,
             edges: [
@@ -340,7 +340,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 19',
+            name:'Station19',
             className: 'station',
             station: true,
             edges: [
@@ -352,7 +352,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 20',
+            name:'Station20',
             className: 'station',
             station: true,
             edges: [
@@ -364,7 +364,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 21',
+            name:'Station21',
             className: 'station',
             station: true,
             edges: [
@@ -376,7 +376,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 22',
+            name:'Station22',
             className: 'station',
             station: true,
             edges: [
@@ -388,7 +388,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 23',
+            name:'Station23',
             className: 'station',
             station: true,
             edges: [
@@ -400,7 +400,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 24',
+            name:'Station24',
             className: 'station',
             station: true,
             edges: [
@@ -412,7 +412,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 25',
+            name:'Station25',
             className: 'station',
             station: true,
             edges: [
@@ -424,7 +424,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 26',
+            name:'Station26',
             className: 'station',
             station: true,
             edges: [
@@ -436,7 +436,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 27',
+            name:'Station27',
             className: 'station',
             station: true,
             edges: [
@@ -448,7 +448,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 28',
+            name:'Station28',
             station: true,
             className: 'station',
             edges: [
@@ -460,7 +460,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 29',
+            name:'Station29',
             className: 'station',
             station: true,
             edges: [
@@ -472,7 +472,7 @@ var labjson = {
             ]
         },
         {
-            name:'Station 30',
+            name:'Station30',
             className: 'station',
             station: true,
             edges: [
