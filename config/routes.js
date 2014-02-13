@@ -14,8 +14,8 @@ exports.init = function(app, passport) {
   app.get('/policies', index.index);
 
   // Admin Route
-  app.get('/admin', index.index);
-  app.get('/admin/*', index.index);
+  app.get('/admin', auth.isAuthenticated, auth.isAdmin, index.index);
+  app.get('/admin/*', auth.isAuthenticated, auth.isAdmin, index.index);
 
   // Use LDAP in production, insecure local authentication in development
   if ('production' === app.get('env')) {
@@ -28,7 +28,7 @@ exports.init = function(app, passport) {
   
   // Secure REST API
   if ('production' === app.get('env')) {
-    app.all('/api/*', auth.auth);
+    app.all('/api/*', auth.isAuthenticated);
   }
   
   // Automatically add CRUD to models in db
