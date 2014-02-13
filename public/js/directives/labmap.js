@@ -14,28 +14,34 @@ angular.module('lrs').directive('labmap', function () {
             this.attrs = attrs;
             this.data = scope.data;
 
-            this.landscape = true;
-
-            if(this.landscape){
-                this.width = 1000;
-                this.height = 600;    
-            } else {
-                this.width = 300;
-                this.height = 500;    
-            }
-
-            $(this.el).width(this.width);
-            $(this.el).height(this.height);
-
             this.svg = d3.select(el[0]).append('svg')
-                .attr('width', this.width)
-                .attr('height', this.height);
 
+            this.setWidthAndHeight();
+                
             this.stations = this.svg.append('g').attr('class','stations');
             this.furniture = this.svg.append('g').attr('class','furniture');
             this.borders = this.svg.append('g').attr('class','borders');
             this.setBindings();
-            this.render();
+        },
+
+        setWidthAndHeight: function () {
+
+            this.height = $(window).height() - 100;
+            this.width = $('.container').width();
+            
+            this.svg
+                .attr('width', this.width)
+                .attr('height', this.height);
+
+            $(this.el).width(this.width);
+            $(this.el).height(this.height);
+
+            if(this.width < 600) {
+                this.landscape = false;
+            } else {
+                this.landscape = true;
+            }
+
         },
 
         setBindings: function () {
@@ -57,32 +63,50 @@ angular.module('lrs').directive('labmap', function () {
             var that = this;
 
             var paths = d3handle.selectAll("path")
-                    .data(data)
-                .enter().append('path')
-                    .style('opacity', 0)
-                    .attr('class', function (d) { return (d.className ? d.className : '') })
-                    .attr('d', this.getRandomD)
-                    .on("mouseover", function (d) {
-                        if(d.station){
-                            d3.select(this).moveToFront().transition().duration(200)
-                                .attr('d', that.lineFn(that.extendEdges(d)));    
-                        }
-                        
+                    .data(data, function (d) { 
+                        return d.name; 
                     })
-                    .on("mouseout", function (d) {
-                        if(d.station){
-                            d3.select(this).transition().duration(200)
-                                .attr('d', that.lineFn(d.edges));
-                        }
-                    })
-                    .on('click', function (d) {
-                        that.scope.onClick({ item: d });
-                    })
+
+            paths.enter().append('path')
+                .style('opacity', 0)
+                .attr('d', this.getRandomD)
+                .on("mouseover", function (d) {
+                    if(d.station){
+                        d3.select(this).moveToFront().transition().duration(200)
+                            .attr('d', that.lineFn(that.extendEdges(d)));    
+                    }
+                    
+                })
+                .on("mouseout", function (d) {
+                    if(d.station){
+                        d3.select(this).transition().duration(200)
+                            .attr('d', that.lineFn(d.edges));
+                    }
+                })
+                .on('click', function (d) {
+                    that.scope.onClick({ item: d });
+                })
 
             paths.transition().duration(1500)
                 .style('opacity', 1)
                 .attr('d', function (d) { 
                     return that.lineFn(d.edges);
+                })
+                .attr('class', function (d) { 
+                    if(d.station){
+                        if(d.isPowered){
+                            if(d.isLoggedIn){
+                                return d.className + ' in-use';
+                            } else {
+                                return d.className + ' free';
+                            }
+                        } else {
+                            return d.className + ' off';
+                        }
+                        return d.className ? d.className : '';
+                    } else {
+                        return d.className ? d.className : '';    
+                    }
                 });
 
         },
@@ -127,6 +151,15 @@ angular.module('lrs').directive('labmap', function () {
                 });
         },
 
+        setData: function (data) {
+            if(this.lineFn){
+                this.renderPaths(this.stations, data);
+            } else {
+                this.render();
+            }
+            
+        },
+
         setScales: function () {
             var xDomain, yDomain, xRange, yRange;
             if(this.landscape){
@@ -152,7 +185,8 @@ angular.module('lrs').directive('labmap', function () {
         },
 
         onWindowResize: function () {
-            console.log(arguments);
+            this.setWidthAndHeight();
+            this.render();
         }
     }
 
@@ -175,12 +209,21 @@ angular.module('lrs').directive('labmap', function () {
             scope.$watch(function() {
                 return angular.element(window)[0].innerWidth;
             }, function() {
-                map.onWindowResize(scope.data);
+                map.onWindowResize();
             });
 
             // watch for data changes and re-render
-            scope.$watch('data', function(newVals, oldVals) {
-                console.log(arguments);
+            scope.$watch(function() {
+                return scope.$parent.d3Data;
+            }, function(newVals, oldVals) {
+                if(newVals){
+                    _.each(labjson.stations, function (station) {
+                        var serverData = _.find(newVals, function (serverStation) { return serverStation.name == station.name; });
+                        _.extend(station, serverData);
+                    })
+                    map.data = labjson;
+                    map.render();
+                }
             }, true);
 
             map.init(scope, el, attrs);

@@ -4,9 +4,14 @@ angular.module('lrs').controller('ReserveController', ['$scope', 'Global', '$htt
 
   // Display all entries in database
    
-    $http.get('/api/computers').success(function(data) {
-      $scope.d3Data = data.data;
-    });
+    function getComputerData () {   
+        $http.get('/api/Computers').success(function(data) {
+          $scope.d3Data = data.data;     
+        });
+        setTimeout(getComputerData, 5000);
+    }
+
+    getComputerData();
 
     $scope.d3OnClick = function(item) {
         $scope.stationData = item;

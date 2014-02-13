@@ -4,25 +4,33 @@
 labmap {
   margin: 0 auto;
   display: block;
-  margin-top:50px;
 }
 
 .station {
   fill: steelblue;
   stroke: 1px;
   stroke: #ffffff;
+  -webkit-transition: 1s fill;
 }
 
 .station.free {
   fill: #7cbb00;
+  -webkit-transition: 1s fill;
 }
 
 .station.in-use {
   fill: #ffbb00;
+  -webkit-transition: 1s fill;
 }
 
 .station.reserved {
   fill: #f65414;
+  -webkit-transition: 1s fill;
+}
+
+.station.off {
+    fill: black;
+    -webkit-transition: 1s fill;
 }
 
 .desk, .main-desk, .cabinet, .side-desk {
@@ -46,11 +54,6 @@ labmap {
 .reservation-pane .left, .reservation-pane .right {
   display: inline-block;
   vertical-align: top;
-}
-
-calendar {
-  
-  
 }
 
 .calendar {

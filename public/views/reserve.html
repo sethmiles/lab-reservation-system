@@ -1,5 +1,5 @@
 <div data-ng-show="global.authenticated">
-  <labmap class="calendar" data="d3Data" on-click="d3OnClick(item)"></labmap>
+  <labmap class="calendar" ng-model="d3Data" data="d3Data" on-click="d3OnClick(item)"></labmap>
   <div class="reservation-pane" ng-show="stationData">
     <div class="left" ng-model="dt">
       <h1>{{ stationData.name || 'Hello' }}</h1>
