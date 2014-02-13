@@ -1,5 +1,6 @@
 var restful = require('sequelize-restful'),
     index   = require('../app/controllers/index'),
+    api     = require('../app/controllers/api'),
     auth    = require('./middlewares/auth'),
     db      = require('./sequelize');
 

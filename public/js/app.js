@@ -26,6 +26,14 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
       templateUrl: 'views/admin.html',
       controller: 'AdminController'
     });
+    $routeProvider.when('/admin/new/:newModel/', {
+      templateUrl: 'views/partials/newModel.html',
+      controller: 'AdminController'
+    });
+    $routeProvider.when('/admin/edit/:editModel/:id', {
+      templateUrl: 'views/partials/editModel.html',
+      controller: 'AdminController'
+    });
 
     $locationProvider.html5Mode(true);
   }
