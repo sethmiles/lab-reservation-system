@@ -35,5 +35,3 @@ nosetests.xml
 .pydevproject
 
 node_modules/
-
-config/env/development.js

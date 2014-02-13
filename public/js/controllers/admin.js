@@ -1,5 +1,6 @@
-angular.module('lrs').controller('AdminController', ['$scope', '$http', 'Global', function ($scope, $http, Global) {
+angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '$http', 'Global', function ($scope, $routeParams, $http, Global) {
   $scope.global = Global;
+
 
   // Get list of models
   $http.get('/api').success(function (data) {
@@ -13,8 +14,14 @@ angular.module('lrs').controller('AdminController', ['$scope', '$http', 'Global'
 
       var headers = [];
 
+      // Put ID first
+      headers.push('id');
+
       for(var header in data.data[0]) {
-        headers.push(header);
+        // Remove createdAt
+        if(header != 'id' && header != 'createdAt' && header != 'updatedAt') {
+          headers.push(header);
+        }
       }
 
       $scope.currentModel = model;
@@ -23,9 +30,10 @@ angular.module('lrs').controller('AdminController', ['$scope', '$http', 'Global'
     });
   };
 
-  $scope.edit = function(model, item) {
-    console.log('edit');
-  };
+  // Run manageModel if we come from an 'admin/:model' URL
+  if($routeParams.model) {
+    $scope.manageModel($routeParams.model);
+  }
 
   $scope.delete = function(model, item) {
     $http.delete('/api/' + model + '/' + item.id).success(function(data) {
