@@ -7,7 +7,11 @@ var fs        = require('fs'),
 
 console.log("Initializing Sequelize...");
 
-var sequelize = new Sequelize(config.db.name, config.db.username, config.db.password);
+var sequelize = new Sequelize(config.db.name, config.db.username, config.db.password,{
+    host:'128.187.61.27',
+    port: 8888,
+    dialect: 'mysql'
+});
 
 // Get all database models
 fs
