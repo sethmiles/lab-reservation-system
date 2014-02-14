@@ -1,4 +1,4 @@
-angular.module('lrs').controller('ReserveController', ['$scope', 'Global', '$http', function ($scope, Global, $http) {
+angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'Global', function ($scope, $http, Global) {
   $scope.global = Global;
 
   // Display all entries in database
@@ -27,7 +27,9 @@ angular.module('lrs').controller('ReserveController', ['$scope', 'Global', '$htt
     return $scope.reservationDate;
   }, function(reservationDate) {
     if(reservationDate) {
-      alert(reservationDate);
+      $http.get('/getReservations/' + $scope.stationData.id + '/' + reservationDate).success(function(data) {
+        console.log(data);
+      });
     }
   });
 

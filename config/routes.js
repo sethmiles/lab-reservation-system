@@ -34,7 +34,7 @@ exports.init = function(app, passport) {
   
   // Automatically add CRUD to models in db
   app.use(restful(db.sequelize, { endpoint: '/api' }));
-  app.get('/getReservation/:computerId/:date', reservations.getReservation);
+  app.get('/getReservations/:computerId/:date', reservations.getReservation);
 
   // Finish with setting up the computerID param
   // Note: the computer.computer function will be called everytime then it will call the next function. 

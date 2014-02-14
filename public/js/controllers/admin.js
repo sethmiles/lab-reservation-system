@@ -30,7 +30,6 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
   };
 
   $scope.newModel = function() {
-    console.log('posting to ' + '/api/' + $scope.currentModel + '/', $scope.currentItem)
     $http.post('/api/' + $scope.currentModel + '/', $scope.currentItem).success(function(data) {
       window.location.reload();
     });
