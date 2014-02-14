@@ -20,8 +20,8 @@
     <tr ng-repeat="item in modelData">
       <td ng-repeat="key in modelHeaders">{{item[key]}}</td>
       <td>
-        <a href="admin/edit/{{currentModel}}/{{item.id}}" class="btn btn-default">Edit</a>
-        <button class="btn btn-danger" ng-click="delete(currentModel, item)">Delete</button>
+        <a href="admin/edit/{{currentModel}}/{{item.id}}" class="btn btn-xs btn-default">Edit</a>
+        <button class="btn btn-xs btn-danger" ng-click="delete(currentModel, item)">Delete</button>
       </td>
     <tr>
   <table>

@@ -21,11 +21,11 @@
         <li><a href="http://ais.byu.edu/" target="_blank">AIS</a></li>
       </ul>
       <div class="navbar-right" data-ng-hide="global.authenticated">
-        <a href="reserve" class="btn btn-default navbar-btn">Login</a>
+        <a href="reserve" class="btn btn-primary navbar-btn">Login</a>
       </div>
       <div class="navbar-right" data-ng-show="global.authenticated">
         <p class="navbar-text">{{global.user.name}}</p>
-        <a href="admin" class="btn btn-default navbar-btn" data-ng-show="global.isAdmin">Admin</a>
+        <a href="admin" class="btn btn-warning navbar-btn" data-ng-show="global.isAdmin">Admin</a>
         <button type="button" class="btn btn-default navbar-btn" ng-click="logout()">Logout</button>
       </div>
     </div>

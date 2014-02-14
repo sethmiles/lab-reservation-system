@@ -32,5 +32,4 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'Globa
       });
     }
   });
-
 }]);
