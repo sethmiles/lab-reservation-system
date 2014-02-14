@@ -28,7 +28,7 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'Globa
   }, function(reservationDate) {
     if(reservationDate) {
       $http.get('/getReservations/' + $scope.stationData.id + '/' + reservationDate).success(function(data) {
-        console.log(data);
+        $scope.reservations = data;
       });
     }
   });
