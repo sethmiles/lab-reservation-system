@@ -22,11 +22,13 @@ angular.module('lrs').controller('ReserveController', ['$scope', 'Global', '$htt
 
   $scope.today = new Date();
 
-  $scope.getReservations = function(day) {
-    console.log(day);
-    $http.get('/api/getReservation/').success(function(data) {
-      alert(JSON.stringify(data));
-    });
-  };
+  // Watch for date click event
+  $scope.$watch(function() {
+    return $scope.reservationDate;
+  }, function(reservationDate) {
+    if(reservationDate) {
+      alert(reservationDate);
+    }
+  });
 
 }]);

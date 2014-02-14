@@ -1,8 +1,9 @@
-var restful = require('sequelize-restful'),
-    index   = require('../app/controllers/index'),
-    api     = require('../app/controllers/api'),
-    auth    = require('./middlewares/auth'),
-    db      = require('./sequelize');
+var restful      = require('sequelize-restful'),
+    index        = require('../app/controllers/index'),
+    computers    = require('../app/controllers/computers'),
+    reservations = require('../app/controllers/reservations'),
+    auth         = require('./middlewares/auth'),
+    db           = require('./sequelize');
 
 exports.init = function(app, passport) {
   console.log('Initializing Routes...');
@@ -33,4 +34,9 @@ exports.init = function(app, passport) {
   
   // Automatically add CRUD to models in db
   app.use(restful(db.sequelize, { endpoint: '/api' }));
+  app.get('/getReservation/:computerId', reservations.getReservation);
+
+  // Finish with setting up the computerID param
+  // Note: the computer.computer function will be called everytime then it will call the next function. 
+  app.param('computerId', computers.computer);
 };
