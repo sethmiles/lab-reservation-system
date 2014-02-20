@@ -29,3 +29,7 @@ INSERT INTO computers (name, isPowered, isLoggedIn, isReservable, memoryUsage, r
 INSERT INTO computers (name, isPowered, isLoggedIn, isReservable, memoryUsage, remoteConnectionCount) VALUES ('Station28', true, true, true, 10, 1);
 INSERT INTO computers (name, isPowered, isLoggedIn, isReservable, memoryUsage, remoteConnectionCount) VALUES ('Station29', true, true, true, 10, 1);
 INSERT INTO computers (name, isPowered, isLoggedIn, isReservable, memoryUsage, remoteConnectionCount) VALUES ('Station30', true, true, true, 10, 1);
+
+
+INSERT INTO reservations (start_time, end_time, note, ComputerId, UserId)
+VALUES (1392883200, 1392890400, 'Some note here', 1, 17)
