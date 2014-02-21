@@ -1,5 +1,6 @@
 angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'Global', function ($scope, $http, Global) {
   $scope.global = Global;
+    $scope.reservations = [];
 
   // Display all entries in database
   function getComputerData () {   
@@ -14,10 +15,6 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'Globa
   $scope.d3OnClick = function(item) {
     $scope.stationData = item;
     $scope.$apply();
-    $scope.stationData.events = [
-      {start:800, end: 900},
-      {start: 1400, end: 1600}
-    ];
   };
 
   $scope.today = new Date();

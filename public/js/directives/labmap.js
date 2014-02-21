@@ -49,6 +49,9 @@ angular.module('lrs').directive('labmap', function () {
         },
 
         render: function () {
+            if(!this.data){
+                return;
+            }
             var that = this;
             this.setScales();
             this.setLine();
