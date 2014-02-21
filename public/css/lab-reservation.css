@@ -126,6 +126,7 @@ labmap {
   height: 100%;
   overflow: hidden;
   width: 175px;
+  margin-left:-4px;
 }
 
 .event .title {

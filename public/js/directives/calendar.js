@@ -43,6 +43,8 @@ angular.module('lrs').directive('calendar', function () {
             // this.render();
             this.axis = {};
             this.setCalendarHours();
+            this.container = this.$el.find('.calendar-container');
+            this.renderContainer();
         },
 
         setup: function () {
@@ -55,27 +57,18 @@ angular.module('lrs').directive('calendar', function () {
             this.renderCalendar();
         },
 
-        renderCalendar: function () {
-            // Return if the calendar is already rendered (since there is no need for dynamic calendar updating)
-            if(this.calendar){
-                return;
-            }
+        renderContainer: function () {
 
-            // Create axis and container, set any needed styles, append to calendar element
-            // this.axis =
-            // this.container =
-                // .css({
-                //     width: this.options.container.width,
-                //     height: this.options.container.height,
-                //     paddingLeft: this.options.container.paddingLeft,
-                //     paddingRight: this.options.container.paddingRight
-                // });
+            this.container
+                .css({
+                    width: this.options.container.width,
+                    height: this.options.container.height,
+                    paddingLeft: this.options.container.paddingLeft,
+                    paddingRight: this.options.container.paddingRight
+                });
 
-            this.renderPaintableElements();
+            // this.renderPaintableElements();
 
-            this.renderAxis();
-            this.$el.append(this.axis);
-            this.$el.append(this.container);
 
         },
 
@@ -129,7 +122,7 @@ angular.module('lrs').directive('calendar', function () {
             });
 
             this.axis.segments = segments;
-            this.incrementHeight = this.options.container.height / segments.length;
+            this.incrementHeight = this.options.container.height / (segments.length - 1);
 
         },
 
@@ -156,12 +149,12 @@ angular.module('lrs').directive('calendar', function () {
         },
 
         layOutDay: function (events) {
-            if(!events){
+            if(!events || !events.length){
                 return;
             }
             this.analyzeEvents(events);
-
-            this.renderEvents(events);
+            // this.events = events;
+            // this.renderEvents(events);
         },
 
         analyzeEvents: function (events) {
@@ -170,10 +163,13 @@ angular.module('lrs').directive('calendar', function () {
             var width = this.options.container.width;
             var timeFrame = this.options.endTime - this.options.startTime;
             var pixelPerMinute = height / timeFrame;
+            var fromTime = moment(events[0].end_time.split('T')[0] + 'T08:00:00.000Z');
             _.each(events, function (event) {
                 // figure out top, height
-                event.top = pixelPerMinute * (event.start);
-                event.height = pixelPerMinute * (event.end - event.start);
+                event.start = moment(event.start_time).diff(fromTime)/1000/60;
+                event.end = moment(event.end_time).diff(moment(event.start_time))/1000/60;
+                event.top = pixelPerMinute * ((event.start/60)*100);
+                event.height = pixelPerMinute * ((event.end/60)*100);
             });
 
         },
@@ -236,15 +232,16 @@ angular.module('lrs').directive('calendar', function () {
             // Browser onresize event
             scope.calendar = new Calendar(scope, el, attrs);
 
+
+
             scope.$watch(function() {
                 return scope.$parent.reservations;
             }, function(newVals, oldVals) {
-                scope.calendar.analyzeEvents(newVals);
+                scope.calendar.layOutDay(newVals);
+                scope.calendar.events = newVals;
             });
 
         }
     };
-
-
 
 });
