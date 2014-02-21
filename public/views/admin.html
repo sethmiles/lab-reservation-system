@@ -8,7 +8,7 @@
       <a href="admin/{{model.tableName}}">{{model.tableName}}</a>
     </li>
   </ul>
-  <a href="admin/new/{{currentModel}}"class="btn btn-success" data-ng-show="currentModel">New {{currentModel}}</a>
+  <a href="admin/{{currentModel}}/new"class="btn btn-success" data-ng-show="currentModel">New {{currentModel}}</a>
 </div>
 
 <div class="col-md-10" data-ng-show="currentModel">
@@ -20,7 +20,7 @@
     <tr ng-repeat="item in modelData">
       <td ng-repeat="key in modelHeaders">{{item[key]}}</td>
       <td>
-        <a href="admin/edit/{{currentModel}}/{{item.id}}" class="btn btn-xs btn-default">Edit</a>
+        <a href="admin/{{currentModel}}/edit/{{item.id}}" class="btn btn-xs btn-default">Edit</a>
         <button class="btn btn-xs btn-danger" ng-click="delete(currentModel, item)">Delete</button>
       </td>
     <tr>

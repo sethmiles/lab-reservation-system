@@ -1,4 +1,4 @@
-angular.module('lrs').controller('UserController', ['$scope', '$http', '$modal', 'globalService', function ($scope, $http, $modal, globalService) {
+angular.module('lrs').controller('UserController', ['$scope', '$http', '$modal', 'globalService', function($scope, $http, $modal, globalService) {
   $scope.global = globalService;
 
   $scope.getEmail = function() {
@@ -10,7 +10,7 @@ angular.module('lrs').controller('UserController', ['$scope', '$http', '$modal',
     });
   };
 
-  var EmailController = function ($scope, $modalInstance) {
+  var EmailController = function($scope, $modalInstance) {
     $scope.addEmail = function(email) {
       $http.put('api/Users/' + globalService.user.id, {
         email: email

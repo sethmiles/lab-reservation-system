@@ -1,42 +1,38 @@
-angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '$http', 'globalService', 'alertService', 
-  function ($scope, $routeParams, $http, globalService, alertService) {
+angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '$http', '$location', 'globalService', 'alertService', 'modalService',
+  function ($scope, $routeParams, $http, $location, globalService, alertService, modalService) {
     $scope.global = globalService;
 
-    // Get list of models
+    // Get list of models for sidebar
     $http.get('/api').success(function(data) {
       $scope.models = data.data;
     });
 
     // Display all entries in database
-    $scope.manageModel = function(model) {
+    var getItems = function(model, action) {
       $http.get('/api/' + model).success(function(data) {
-        $scope.modelTitle = model;
-
         var headers = [];
 
-        // Put ID first
-        headers.push('id');
+        // Put ID first, or leave it off if we're creating or editing a model
+        if(!action) {
+          headers.push('id');
+        }
 
+        // Get field names out of first item (data[0])
         for(var header in data.data[0]) {
-          // Remove createdAt
+          // Remove fields we don't care about
           if(header != 'id' && header != 'createdAt' && header != 'updatedAt') {
             headers.push(header);
           }
         }
 
+        $scope.currentItem = {};
         $scope.currentModel = model;
         $scope.modelHeaders = headers;
         $scope.modelData = data.data;
       });
     };
 
-    $scope.newModel = function() {
-      $http.post('/api/' + $scope.currentModel + '/', $scope.currentItem).success(function(data) {
-        window.location.reload();
-      });
-    }
-
-    $scope.editModel = function(model, id) {
+    var getItem = function(model, id) {
       $http.get('/api/' + model + '/' + id).success(function(data) {
         $scope.currentId = id;
         $scope.currentModel = model;
@@ -44,16 +40,31 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
       });
     };
 
-    $scope.updateModel = function() {
-      console.log($scope.editModelForm);
-      $http.put('/api/' + $scope.currentModel + '/' + $scope.currentId, $scope.currentItem)
-        .success(function(data, status, headers, config) {
-          console.log(data.status);
-          alertService.add('success', data.status);
+    $scope.newModel = function() {
+      $http.post('/api/' + $scope.currentModel + '/', $scope.currentItem).success(function(data) {
+        if(data.status === 'success') {
+          alertService.add('success', $scope.currentModel + ' created successfully!');
+          $location.path('/admin/' + $scope.currentModel + '/edit/' + data.data.id)
+        } else if(data.status === 'error') {
+          alertService.add('danger', 'ERROR: ' + JSON.stringify(data.message));
+        }
       });
     };
 
+    $scope.updateModel = function() {
+      $http.put('/api/' + $scope.currentModel + '/' + $scope.currentId, $scope.currentItem)
+        .success(function(data, status, headers, config) {
+          if(data.status === 'success') {
+            alertService.add('success', $scope.currentModel + ' updated successfully!');
+          } else if(data.status === 'error') {
+            alertService.add('danger', 'ERROR: ' + JSON.stringify(data.message));
+          }
+        }
+      );
+    };
+
     $scope.delete = function(model, item) {
+      modalService.openModal('delete');
       var confirmDelete = confirm('This will delete a ' + model + '.');
       if(confirmDelete) {
         $http.delete('/api/' + model + '/' + item.id).success(function(data) {
@@ -62,33 +73,14 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
       }
     }
 
-    // Run manageModel if we come from an 'admin/:model' URL
+    // Get items for main admin page or fill headers for new page
     if($routeParams.model) {
-      $scope.manageModel($routeParams.model);
-    }
-
-    if($routeParams.newModel) {
-      $scope.currentModel = $routeParams.newModel;
-      $scope.currentItem = {};
-
-      $http.get('/api/' + $scope.currentModel).success(function(data) {
-        var headers = [];
-
-        for(var header in data.data[0]) {
-          // Remove createdAt
-          if(header != 'id' && header != 'createdAt' && header != 'updatedAt') {
-            headers.push(header);
-          }
-        }
-
-        $scope.modelHeaders = headers;
-        $scope.modelData = data.data;
-      });
+      getItems($routeParams.model, $routeParams.action);
     }
 
     // Edit model
-    if($routeParams.editModel && $routeParams.id) {
-      $scope.editModel($routeParams.editModel, $routeParams.id);
+    if($routeParams.action === 'edit' && $routeParams.id) {
+      getItem($routeParams.model, $routeParams.id);
     }
   }
 ]);

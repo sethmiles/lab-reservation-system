@@ -29,12 +29,14 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
       templateUrl: 'views/admin.html',
       controller: 'AdminController'
     });
-    $routeProvider.when('/admin/new/:newModel/', {
-      templateUrl: 'views/partials/newModel.html',
+
+    // Why do we need both of these? 1st for New and 2nd for Edit
+    $routeProvider.when('/admin/:model/:action/', {
+      templateUrl: 'views/partials/model.html',
       controller: 'AdminController'
     });
-    $routeProvider.when('/admin/edit/:editModel/:id', {
-      templateUrl: 'views/partials/editModel.html',
+    $routeProvider.when('/admin/:model/:action/:id', {
+      templateUrl: 'views/partials/model.html',
       controller: 'AdminController'
     });
 
