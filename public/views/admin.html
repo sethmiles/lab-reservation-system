@@ -8,7 +8,7 @@
       <a href="admin/{{model.tableName}}">{{model.tableName}}</a>
     </li>
   </ul>
-  <a href="admin/new/{{currentModel}}"class="btn btn-success">New {{currentModel}}</a>
+  <a href="admin/new/{{currentModel}}"class="btn btn-success" data-ng-show="currentModel">New {{currentModel}}</a>
 </div>
 
 <div class="col-md-10" data-ng-show="currentModel">

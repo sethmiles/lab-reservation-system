@@ -2,7 +2,7 @@
   <labmap class="calendar" ng-model="d3Data" data="d3Data" on-click="d3OnClick(item)"></labmap>
   <div class="reservation-pane" ng-show="stationData">
     <div class="left" ng-model="reservationDate">
-      <h1>{{ stationData.name || 'Hello' }}</h1>
+      <h1>{{ stationData.name || 'Hello' }} <span class="label label-success">On</span></h1>
       <datepicker min="today" show-weeks="false"></datepicker>
       <div class="controls">
         <h3>Reservation from {{ startTime }} to {{ endTime }}</h3>

@@ -9,6 +9,7 @@
     "jquery": "latest",
     "jquery-ui": "latest",
     "lodash": "latest",
-    "d3": "latest"
+    "d3": "latest",
+    "momentjs": "latest"
   }
 }

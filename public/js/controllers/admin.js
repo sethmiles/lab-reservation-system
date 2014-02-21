@@ -37,8 +37,8 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
 
   $scope.editModel = function(model, id) {
     $http.get('/api/' + model + '/' + id).success(function(data) {
-      $scope.currentModel = model;
       $scope.currentId = id;
+      $scope.currentModel = model;
       $scope.currentItem = data.data;
     });
   };
@@ -47,7 +47,8 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
     console.log($scope.editModelForm);
     $http.put('/api/' + $scope.currentModel + '/' + $scope.currentId, $scope.currentItem)
       .success(function(data, status, headers, config) {
-      window.location.reload();
+        console.log(data.status);
+        $scope.global.alerts.push({msg: data.status, type: 'success'});
     });
   };
 
