@@ -1,4 +1,7 @@
-angular.module('lrs', ['ngRoute', 'ui.bootstrap']);
+angular.module('lrs', ['lrs.services', 'ngRoute', 'ui.bootstrap']);
+
+// Set up services
+angular.module('lrs.services', []);
 
 //Setting up route
 angular.module('lrs').config(['$routeProvider', '$locationProvider',

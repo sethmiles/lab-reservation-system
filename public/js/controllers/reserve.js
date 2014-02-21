@@ -1,5 +1,5 @@
-angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'Global', function ($scope, $http, Global) {
-  $scope.global = Global;
+angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globalService', function ($scope, $http, globalService) {
+  $scope.global = globalService;
 
   // Display all entries in database
   function getComputerData () {   

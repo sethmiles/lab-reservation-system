@@ -14,7 +14,8 @@ exports.getReservation = function(req, res){
       start_time: {
         between: [day_start, day_end]
       }
-    }
+    },
+    include: [db.User]
   })
   .complete(function(err, reservations) {
     return res.jsonp(reservations);

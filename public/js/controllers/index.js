@@ -1,5 +1,5 @@
-angular.module('lrs').controller('IndexController', ['$scope', 'Global', 'alertService', function ($scope, Global, alertService) {
-  $scope.global = Global;
+angular.module('lrs').controller('IndexController', ['$scope', 'globalService', 'alertService', function ($scope, globalService, alertService) {
+  $scope.global = globalService;
 
   $scope.closeAlert = alertService.closeAlert; 
 }]);
