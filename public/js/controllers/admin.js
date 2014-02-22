@@ -64,7 +64,7 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
     };
 
     $scope.delete = function(model, item) {
-      modalService.openModal('delete');
+      modalService.openModal('deleteModel');
       var confirmDelete = confirm('This will delete a ' + model + '.');
       if(confirmDelete) {
         $http.delete('/api/' + model + '/' + item.id).success(function(data) {

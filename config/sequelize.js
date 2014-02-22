@@ -8,9 +8,9 @@ var fs        = require('fs'),
 console.log("Initializing Sequelize...");
 
 var sequelize = new Sequelize(config.db.name, config.db.username, config.db.password, {
-  host:'128.187.61.27',
-  port: 8888,
-  dialect: 'mysql'
+  host: config.db.host,
+  port: config.db.port,
+  dialect: config.db.dialect
 });
 
 // Get all database models
