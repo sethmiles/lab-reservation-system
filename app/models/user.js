@@ -16,6 +16,9 @@ module.exports = function(sequelize, DataTypes) {
     role: {
       type: DataTypes.STRING,
       defaultValue: 'student'
+    },
+    gravatarHash: {
+      type: DataTypes.STRING,
     }
   }, {
     associate: function(models) {
