@@ -57,6 +57,8 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
 
         console.log(message);
 
+        // If it's confirmed, create the reservation in the db
+
   }
 
   $scope.reservationDate = new Date();
