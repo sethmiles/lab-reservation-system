@@ -19,10 +19,17 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
             headers.push('id');
           }
 
+          // Fields we don't want the user to be able to edit or we don't care that they see
+          var removeFields = [
+            'id', 
+            'createdAt', 
+            'updatedAt', 
+            'gravatarHash',
+          ];
+
           // Get field names out of first item (data[0])
           for(var header in data.data[0]) {
-            // Remove fields we don't care about
-            if(header != 'id' && header != 'createdAt' && header != 'updatedAt' && header != 'gravatarHash') {
+            if($.inArray(header, removeFields) === -1) {
               headers.push(header);
             }
           }
@@ -71,14 +78,8 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
 
     // Delete an item
     $scope.deleteItem = function(model, item) {
-      modalService.openModal('deleteModel');
-      var confirmDelete = confirm('This will delete a ' + model + '.');
-      if(confirmDelete) {
-        $http.delete('/api/' + model + '/' + item.id).success(function(data) {
-          $scope.modelData.splice($.inArray(item, $scope.modelData), 1);
-        });
-      }
-    }
+      modalService.openModal('deleteModel', [model, item, $scope.modelData]);
+    };
 
     // Get items for main admin page or fill headers for new page
     if($routeParams.model) {
