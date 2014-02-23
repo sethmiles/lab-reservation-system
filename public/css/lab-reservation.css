@@ -42,18 +42,21 @@ labmap {
 .reservation-pane {
   position: absolute;
   left: 50%;
-  margin-left: -300px;
+  margin-left: -325px;
   top: 100px;
   padding: 20px;
-  width: 600px;
+  width: 650px;
   border: 1px solid steelblue;
   background-color: white;
   border-radius: 3px;
 }
 
+
+
 .reservation-pane .left, .reservation-pane .right {
   display: inline-block;
   vertical-align: top;
+  width: 300px;
 }
 
 .calendar {
@@ -91,6 +94,10 @@ labmap {
 
 .calendar-container .paintable {
   box-shadow:inset 0px 1px 0px 0px #CCC;
+}
+
+.calendar-container .paintable:first-child {
+    box-shadow:none;
 }
 
 .calendar-container .paintable.ui-selecting { background: steelblue; }

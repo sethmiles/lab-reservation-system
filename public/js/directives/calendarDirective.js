@@ -43,6 +43,7 @@ angular.module('lrs').directive('calendar', function () {
             // this.render();
             this.axis = {};
             this.setCalendarHours();
+            this.setPaintableElements();
             this.container = this.$el.find('.calendar-container');
             this.renderContainer();
         },
@@ -78,23 +79,19 @@ angular.module('lrs').directive('calendar', function () {
 
             while(startTime < this.options.endTime){
                 // Create objects for each hour on the axis
-                segments.push('<div class="paintable" data-start-time="' + startTime + '"></div>');
-                startTime += 30;
-                segments.push('<div class="paintable" data-start-time="' + startTime + '"></div>');
-                startTime += 70;
+                segments.push({
+                    startTime: startTime,
+                    endTime: startTime += 30
+                });
+                
+                segments.push({
+                    startTime: startTime,
+                    endTime: startTime += 70
+                });
             }
-            
-            this.container.selectable({
-                selected: function () {
-                    console.log(arguments);
-                },
 
-                selecting: function () {
-                    console.log(arguments);
-                }
-            });
-            var paintableSegments = $(segments.join('')).height(this.options.container.height / segments.length);
-            this.container.append(paintableSegments);
+            this.paintableSegments = segments;
+            this.paintableHeight = this.options.container.height / segments.length
         },
 
         setCalendarHours: function () {
@@ -123,7 +120,6 @@ angular.module('lrs').directive('calendar', function () {
 
             this.axis.segments = segments;
             this.incrementHeight = this.options.container.height / (segments.length - 1);
-
         },
 
         renderEvents: function (events) {
