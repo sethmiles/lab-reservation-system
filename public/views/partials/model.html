@@ -8,6 +8,6 @@
     <input type="text" ng-model="currentItem[header]" class="form-control">
   </div>
   <a href="/admin/{{currentModel}}" class="btn btn-default">Back</a>
-  <button class="btn btn-primary" ng-click="newModel()" ng-hide="currentId">Create {{currentModel}}</button>
-  <button class="btn btn-primary" ng-click="updateModel()" ng-show="currentId">Update {{currentModel}}</button>
+  <button class="btn btn-primary" ng-click="newItem()" ng-hide="currentId">Create {{currentModel}}</button>
+  <button class="btn btn-primary" ng-click="updateItem()" ng-show="currentId">Update {{currentModel}}</button>
 </form>

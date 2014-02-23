@@ -8,11 +8,11 @@
       <a href="admin/{{model.tableName}}">{{model.tableName}}</a>
     </li>
   </ul>
-  <a href="admin/{{currentModel}}/new"class="btn btn-success" data-ng-show="currentModel">New {{currentModel}}</a>
+  <a href="admin/{{currentModel}}/new"class="btn btn-success" ng-show="modelHeaders">New {{currentModel}}</a>
 </div>
 
-<div class="col-md-10" data-ng-show="currentModel">
-  <table class="table table-striped">
+<div class="col-md-10" ng-show="currentModel">
+  <table class="table table-striped" ng-show="modelHeaders">
     <tr>
       <th ng-repeat="header in modelHeaders">{{header}}</th>
       <th>Actions</th>
@@ -21,8 +21,17 @@
       <td ng-repeat="key in modelHeaders">{{item[key]}}</td>
       <td>
         <a href="admin/{{currentModel}}/edit/{{item.id}}" class="btn btn-xs btn-default">Edit</a>
-        <button class="btn btn-xs btn-danger" ng-click="delete(currentModel, item)">Delete</button>
+        <button class="btn btn-xs btn-danger" ng-click="deleteItem(currentModel, item)">Delete</button>
       </td>
     <tr>
   <table>
+  <div ng-hide="modelHeaders">
+    <h2>There are no items to display.</h2>
+    <p>
+      Unforunately, as of right now we are unable to create new items when none are in the database due to our generic generation of forms.
+      You'll have to manually insert some data through MySQL Workbench or another similar program.
+    </p>
+    <p>If you have any questions, please email Seth Howard (smiles.seth@gmail.com) or Lane Sawyer (me@lanesawyer.com) for help.</p>
+
+  </div>
 </div>
