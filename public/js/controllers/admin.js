@@ -10,7 +10,7 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
     // Display all entries in database
     var getItems = function(model, action) {
       $http.get('/api/' + model).success(function(data) {
-        console.log(data.data);
+        // Skip generating the headers if there is no data
         if(data.data.length != 0) {
           var headers = [];
 
@@ -35,6 +35,7 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
       });
     };
 
+    // Set a single item
     var getItem = function(model, id) {
       $http.get('/api/' + model + '/' + id).success(function(data) {
         $scope.currentId = id;
@@ -43,7 +44,8 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
       });
     };
 
-    $scope.newModel = function() {
+    // Create a new item
+    $scope.newItem = function() {
       $http.post('/api/' + $scope.currentModel + '/', $scope.currentItem).success(function(data) {
         if(data.status === 'success') {
           alertService.add('success', $scope.currentModel + ' created successfully!');
@@ -54,7 +56,8 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
       });
     };
 
-    $scope.updateModel = function() {
+    // Update an item
+    $scope.updateItem = function() {
       $http.put('/api/' + $scope.currentModel + '/' + $scope.currentId, $scope.currentItem)
         .success(function(data, status, headers, config) {
           if(data.status === 'success') {
@@ -66,7 +69,8 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
       );
     };
 
-    $scope.delete = function(model, item) {
+    // Delete an item
+    $scope.deleteItem = function(model, item) {
       modalService.openModal('deleteModel');
       var confirmDelete = confirm('This will delete a ' + model + '.');
       if(confirmDelete) {
