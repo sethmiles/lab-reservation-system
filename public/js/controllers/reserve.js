@@ -10,8 +10,6 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
   }
   getComputerData();
 
-  $scope.reservationDate = new Date();
-
   $scope.d3OnClick = function(item) {
     $scope.stationData = item;
     $scope.reservations = [];
@@ -61,7 +59,7 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
 
   }
 
-  $scope.today = new Date();
+  $scope.reservationDate = new Date();
 
   function getReservations () {
     $http.get('/getReservations/' + $scope.stationData.id + '/' + $scope.reservationDate).success(function(data) {
