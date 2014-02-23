@@ -56,7 +56,7 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
       $http.post('/api/' + $scope.currentModel + '/', $scope.currentItem).success(function(data) {
         if(data.status === 'success') {
           alertService.add('success', $scope.currentModel + ' created successfully!');
-          $location.path('/admin/' + $scope.currentModel + '/edit/' + data.data.id)
+          $location.path('/admin/' + $scope.currentModel);
         } else if(data.status === 'error') {
           alertService.add('danger', 'ERROR: ' + JSON.stringify(data.message));
         }

@@ -16,13 +16,13 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
     $scope.$apply();
   };
 
-  $scope.today = new Date();
+  $scope.reservationDate = new Date();
 
   // Watch for date click event
   $scope.$watch(function() {
     return $scope.reservationDate;
   }, function(reservationDate) {
-    if(reservationDate) {
+    if(reservationDate && $scope.stationData) {
       $http.get('/getReservations/' + $scope.stationData.id + '/' + reservationDate).success(function(data) {
         $scope.reservations = data;
       });
