@@ -13,7 +13,7 @@ angular.module('lrs').controller('UserController', ['$scope', '$http', '$modal',
 
     $scope.logout = function() {
       $http.post('logout').success(function(data, status, headers, config) {
-        window.location.reload();
+        window.location.assign('/');
       });
     };
 
