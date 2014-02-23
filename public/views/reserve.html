@@ -5,13 +5,12 @@
       <h1>{{ stationData.name || 'Hello' }} <span class="label label-success">On</span></h1>
       <datepicker min="today" show-weeks="false"></datepicker>
       <div class="controls">
-        <h3>Reservation from {{ stationData.reservation.start }} to {{ stationData.reservation.end }}</h3>
+        <h3>Reservation from {{ stationData.reservation.startReadable }} to {{ stationData.reservation.endReadable }}</h3>
         <select class="form-control">
             <option>One-time</option>
-            <option>Daily</option>
             <option>Weekly</option>
         </select>
-        <button class="btn btn-primary">Reserve</button>
+        <button class="btn btn-primary" ng-click="createReservation()" >Reserve</button>
         <button class="btn btn-warning" ng-click="stationData=null">Cancel</button>
       </div>
     </div>

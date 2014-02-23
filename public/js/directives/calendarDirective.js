@@ -228,8 +228,6 @@ angular.module('lrs').directive('calendar', function () {
             // Browser onresize event
             scope.calendar = new Calendar(scope, el, attrs);
 
-
-
             scope.$watch(function() {
                 return scope.$parent.reservations;
             }, function(newVals, oldVals) {
