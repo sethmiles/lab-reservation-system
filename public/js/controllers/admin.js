@@ -10,18 +10,21 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
     // Display all entries in database
     var getItems = function(model, action) {
       $http.get('/api/' + model).success(function(data) {
-        var headers = [];
+        console.log(data.data);
+        if(data.data.length != 0) {
+          var headers = [];
 
-        // Put ID first, or leave it off if we're creating or editing a model
-        if(!action) {
-          headers.push('id');
-        }
+          // Put ID first, or leave it off if we're creating or editing a model
+          if(!action) {
+            headers.push('id');
+          }
 
-        // Get field names out of first item (data[0])
-        for(var header in data.data[0]) {
-          // Remove fields we don't care about
-          if(header != 'id' && header != 'createdAt' && header != 'updatedAt' && header != 'gravatarHash') {
-            headers.push(header);
+          // Get field names out of first item (data[0])
+          for(var header in data.data[0]) {
+            // Remove fields we don't care about
+            if(header != 'id' && header != 'createdAt' && header != 'updatedAt' && header != 'gravatarHash') {
+              headers.push(header);
+            }
           }
         }
 
