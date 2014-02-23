@@ -20,7 +20,7 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
         // Get field names out of first item (data[0])
         for(var header in data.data[0]) {
           // Remove fields we don't care about
-          if(header != 'id' && header != 'createdAt' && header != 'updatedAt') {
+          if(header != 'id' && header != 'createdAt' && header != 'updatedAt' && header != 'gravatarHash') {
             headers.push(header);
           }
         }

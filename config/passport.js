@@ -33,8 +33,7 @@ passport.use(new LdapStrategy({
   },
   function(user, done) {
     var gravatar = crypto.createHash('md5').update(user.mail).digest('hex');
-    console.log(gravatar);
-    db.User.findOrCreate({ netId: user.uid }, { name: user.displayName, email: user.mail, role: 'student' }).success(function(user) {
+    db.User.findOrCreate({ netId: user.uid }, { name: user.displayName, email: user.mail, role: 'student', gravatarHash: gravatar }).success(function(user) {
       if (!user) {
         done(null, false, { message: 'Unknown user' });
       } else {
@@ -50,8 +49,7 @@ passport.use(new LdapStrategy({
 //Local login for development: NOT SECURE!
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    var testEmail = "me@lanesawyer.com";
-    var gravatar = crypto.createHash('md5').update(testEmail).digest('hex');
+    var gravatar = crypto.createHash('md5').update("me@lanesawyer.com").digest('hex');
     db.User.findOrCreate({ netId: username }, { name: 'Tester Test', email: 'test@test.com', role: 'student', gravatarHash: gravatar}).success(function(user) {
       if (!user) {
         done(null, false, { message: 'Unknown user' });
