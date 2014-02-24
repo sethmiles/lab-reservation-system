@@ -159,11 +159,12 @@ angular.module('lrs').directive('calendar', function () {
             var width = this.options.container.width;
             var timeFrame = this.options.endTime - this.options.startTime;
             var pixelPerMinute = height / timeFrame;
-            var fromTime = moment(events[0].end_time.split('T')[0] + 'T08:00:00.000Z');
             _.each(events, function (event) {
                 // figure out top, height
-                event.start = moment(event.start_time).diff(fromTime)/1000/60;
-                event.end = moment(event.end_time).diff(moment(event.start_time))/1000/60;
+                var startDate = moment(event.start_time);
+                var endDate = moment(event.end_time);
+                event.start = (startDate.hours() * 60) + startDate.minutes() - (8 * 60);
+                event.end = (endDate.hours() * 60) + endDate.minutes() - (8 * 60) - event.start;
                 event.top = pixelPerMinute * ((event.start/60)*100);
                 event.height = pixelPerMinute * ((event.end/60)*100);
             });

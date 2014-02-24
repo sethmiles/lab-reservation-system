@@ -13,7 +13,7 @@
     <div class="event" style="top:{{ event.top }}px; height:{{ event.height }}px" ng-repeat="event in calendar.events">
         <div class="bar"></div>
         <div class="event-content">
-            <div class="title">Reserved</div>
+            <div class="title">{{ event.title || 'Reserved' }}</div>
             <div class="description">{{ event.user.name }}</div>
         </div>
     </div>
