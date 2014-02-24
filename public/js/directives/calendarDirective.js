@@ -231,9 +231,10 @@ angular.module('lrs').directive('calendar', function () {
 
             scope.$watch(function() {
                 return scope.$parent.reservations;
-            }, function(newVals, oldVals) {
-                scope.calendar.layOutDay(newVals);
-                scope.calendar.events = newVals;
+            }, function() {
+                $('.ui-selected').removeClass('ui-selected');
+                scope.calendar.layOutDay(scope.$parent.reservations);
+                scope.calendar.events = scope.$parent.reservations;
             });
 
         }

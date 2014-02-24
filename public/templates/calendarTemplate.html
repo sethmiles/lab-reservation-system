@@ -10,7 +10,7 @@
 </div>
 <div class="calendar-container" uiselectable>
     <div class="paintable" style="height:{{ calendar.paintableHeight }}px" data-start-time="{{ segment.startTime }}" data-end-time="{{ segment.endTime }}" ng-repeat="segment in calendar.paintableSegments"></div>
-    <div class="event" style="top:{{ event.top }}px; height:{{ event.height }}px" ng-repeat="event in calendar.events">
+    <div class="event {{ event.className || '' }}" style="top:{{ event.top }}px; height:{{ event.height }}px" ng-repeat="event in calendar.events">
         <div class="bar"></div>
         <div class="event-content">
             <div class="title">{{ event.title || 'Reserved' }}</div>
