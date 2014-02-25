@@ -197,12 +197,12 @@ angular.module('lrs').directive('labmap', function () {
                         d3.select(thisG.find('text')[0]).transition().duration(200)
                             .attr('x', function (d) { 
                                 var x = that.getTextPosition(true, d);
-                                $(this).text(d.name.replace('Station',''))
+                                $(this).text(parseInt(d.name.replace('Station','')))
                                 return x - (this.getBBox().width / 2);
                             })
                             .attr('y', function (d) { 
                                 var y = that.getTextPosition(false, d);
-                                $(this).text(d.name.replace('Station',''))
+                                $(this).text(parseInt(d.name.replace('Station','')))
                                 return y + (this.getBBox().height / 2) - 4;
                             })
 
