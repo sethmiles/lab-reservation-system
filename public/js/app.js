@@ -30,6 +30,16 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
       controller: 'AdminController'
     });
 
+    // Admin Routes 2.0
+    $routeProvider.when('/admin/Users/new', {
+      templateUrl: 'views/admin/user.html',
+      controller: 'AdminController'
+    });
+    $routeProvider.when('/admin/Computers/new', {
+      templateUrl: 'views/admin/computer.html',
+      controller: 'AdminController'
+    });
+
     // Why do we need both of these? 1st for New and 2nd for Edit
     $routeProvider.when('/admin/:model/:action/', {
       templateUrl: 'views/partials/model.html',
