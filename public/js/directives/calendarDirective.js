@@ -171,7 +171,7 @@ angular.module('lrs').directive('calendar', function () {
                 var startDate = moment(event.start_time);
                 var endDate = moment(event.end_time);
                 event.start = (startDate.hours() * 60) + startDate.minutes() - (8 * 60);
-                event.end = (endDate.hours() * 60) + endDate.minutes() - (8 * 60) - event.start;
+                event.end = ((endDate.hours() ? endDate.hours() : 24) * 60) + endDate.minutes() - (8 * 60) - event.start;
                 event.top = pixelPerMinute * ((event.start/60)*100);
                 event.height = pixelPerMinute * ((event.end/60)*100);
 
