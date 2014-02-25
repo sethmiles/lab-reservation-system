@@ -145,6 +145,29 @@ labmap {
   width: 4px;
 }
 
+
+.event.small .event-content div {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.event.small .event-content .title {
+    font-size: 11px;
+}
+
+.event.small .event-content .title:after {
+    content: ' - ';
+}
+
+.event.small .event-content {
+    margin-left: -3px;
+}
+
+
+
 .event .event-content {
   vertical-align: top;
   border: 1px solid #d9d9d9;

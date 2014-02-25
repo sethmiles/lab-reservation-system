@@ -175,6 +175,10 @@ angular.module('lrs').directive('calendar', function () {
                 event.top = pixelPerMinute * ((event.start/60)*100);
                 event.height = pixelPerMinute * ((event.end/60)*100);
 
+                if(event.end <= 60){
+                    event.className += ' small';
+                }
+
                 var startTime = parseInt(startDate.format('Hmm'));
                 var endTime = parseInt(endDate.format('Hmm'));
 
