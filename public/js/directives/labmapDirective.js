@@ -21,6 +21,11 @@ angular.module('lrs').directive('labmap', function () {
             this.stations = this.svg.append('g').attr('class','stations');
             this.furniture = this.svg.append('g').attr('class','furniture');
             this.borders = this.svg.append('g').attr('class','borders');
+            this.text = this.svg.append('g').attr('class', 'text');
+
+            this.stationLeftRightPadding = 5;
+            this.stationTopBottomPadding = 5;
+
             this.setBindings();
         },
 
@@ -46,6 +51,7 @@ angular.module('lrs').directive('labmap', function () {
 
         setBindings: function () {
             this.getRandomD = _.bind(this.getRandomD, this);
+            this.getRandomTranslate = _.bind(this.getRandomTranslate, this);
         },
 
         render: function () {
@@ -57,9 +63,266 @@ angular.module('lrs').directive('labmap', function () {
             this.setLine();
 
             this.renderPaths(this.furniture, this.data.furniture);
-            this.renderPaths(this.stations, this.data.stations);
+            this.renderStations(this.stations, this.data.stations);
             this.renderPaths(this.borders, this.data.room);
-            
+
+            // this.renderText(this.text, this.data.stations);
+        },
+
+        setStatusText: function (d, el) {
+            var text = 'Unknown'
+                if(d.isPowered){
+                    if(d.isLoggedIn){
+                        text = 'Logged On';
+                    } else {
+                        text = 'Free';
+                    }
+                } else {
+                    text = 'Shut Off';
+                }
+                $(el).text(text);
+        },
+
+        setMemoryText: function (d, el) {
+            $(el).text('CPU: ' + d.memoryUsage + '%');
+        },
+
+        setStationName: function (d, el) {
+            $(el).text(d.name);
+        },
+
+        renderStations: function (d3handle, data) {
+            var that = this;
+
+            var g = d3handle.selectAll("g")
+                .data(data, function (d) { return d.name; })
+              .enter().append("g")
+                .attr("transform", this.getRandomTranslate)
+                .style('opacity', 0);
+
+            g.transition()
+                .duration(1500)
+                .attr("transform", "translate(0, 0)")
+                .style('opacity', 1);
+
+            g.append("path")
+                .attr('d', function (d) { 
+                    return that.lineFn(d.edges);
+                })
+                .on("mouseover", function (d) {
+                    if(d.station){
+                        $(this).parent().attr('class', $(this).parent().attr('class') + ' active')
+                        var thisG = $(this).parent();
+                        d3.select(thisG[0]).moveToFront();
+                        d3.select(this).transition().duration(200)
+                            .attr('d', that.lineFn(that.extendEdges(d)));
+
+                        d3.select(thisG.find('text')[0])
+                            .attr('x', function (d) { 
+                                that.setStationName(d, this);
+                                var x = that.getTextPosition(true, d, true);
+                                return x - (this.getBBox().width / 2);
+                            })
+                            .transition()
+                            .duration(200)
+                            .attr('x', function (d) { 
+                                var x = that.getTextPosition(true, d, true);
+                                return x - (this.getBBox().width / 2);
+                            })
+                            .attr('y', function () {
+                                var y = that.getTopTextPosition(false, d); 
+                                return y + this.getBBox().height; + that.stationTopBottomPadding
+                            })
+
+                        d3.select(thisG[0]).append("text")
+                            .attr('x', function (d) { 
+                                that.setStatusText(d, this)
+                                var x = that.getTextPosition(true, d);
+                                return x - (this.getBBox().width / 2);
+                            })
+                            .attr('y', function (d) { 
+                                that.setStatusText(d, this)
+                                var y = that.getTextPosition(false, d);
+                                return y + (this.getBBox().height / 2) - 4;
+                            })
+                            .attr('class', 'status')
+                            .style('opacity', 0)
+                            .transition()
+                            .duration(200)
+                            .attr('x', function (d) {
+                                var x = that.getTextPosition(true, d, true);
+                                return x - (this.getBBox().width / 2);
+                            })
+                            .attr('y', function () {
+                                var y = that.getBottomTextPosition(false, d);
+                                return y - that.stationTopBottomPadding;
+                            })
+                            .style('opacity', 1)
+
+                        d3.select(thisG[0]).append("text")
+                            .attr('x', function (d) { 
+                                that.setMemoryText(d, this);
+                                var x = that.getTextPosition(true, d);
+                                return x - (this.getBBox().width / 2);
+                            })
+                            .attr('y', function (d) { 
+                                that.setMemoryText(d, this);
+                                var y = that.getTextPosition(false, d);
+                                return y + (this.getBBox().height / 2) - 4;
+                            })
+                            .style('opacity', 0)
+                            .attr('class', 'cpu')
+                            .transition()
+                            .duration(200)
+                            .attr('x', function () {
+                                var x = that.getTextPosition(true, d, true);
+                                return x - (this.getBBox().width / 2);
+                            })
+                            .attr('y', function () {
+                                var y = that.getMiddleTextPosition(false, d);
+                                return y + (this.getBBox().height / 2) - 4;
+                            })
+                            .style('opacity', 1)
+                    }
+                    
+                })
+                .on("mouseout", function (d) {
+                    if(d.station){
+                        $(this).parent().attr('class', $(this).parent().attr('class').replace('active',''));
+                        d3.select(this).transition().duration(200)
+                            .attr('d', that.lineFn(d.edges));
+
+                        var thisG = $(this).parent();
+
+                        d3.select(thisG.find('text')[0]).transition().duration(200)
+                            .attr('x', function (d) { 
+                                var x = that.getTextPosition(true, d);
+                                $(this).text(parseInt(d.name.replace('Station','')))
+                                return x - (this.getBBox().width / 2);
+                            })
+                            .attr('y', function (d) { 
+                                var y = that.getTextPosition(false, d);
+                                $(this).text(parseInt(d.name.replace('Station','')))
+                                return y + (this.getBBox().height / 2) - 4;
+                            })
+
+                        d3.selectAll('text.status, text.cpu')
+                            .transition()
+                            .duration(200)
+                            .attr('x', function (d) { 
+                                var x = that.getTextPosition(true, d);
+                                return x - (this.getBBox().width / 2);
+                            })
+                            .attr('y', function (d) { 
+                                var y = that.getTextPosition(false, d);
+                                return y + (this.getBBox().height / 2) - 4;
+                            })
+                            .style('opacity', 0)
+                            .remove();
+                    }
+                })
+                .on('click', function (d) {
+                    that.scope.onClick({ item: d });
+                });
+
+            g.append("text")
+                .attr('x', function (d) { 
+                    return that.getTextPosition(true, d);
+                })
+                .attr('y', function (d) { 
+                    return that.getTextPosition(false, d);
+                })
+                .attr('pointer-events','none')
+                .attr('class', function (d) { 
+                    if(d.station){
+                        if(d.isPowered){
+                            if(d.isLoggedIn){
+                                return d.className + ' in-use';
+                            } else {
+                                return d.className + ' free';
+                            }
+                        } else {
+                            return d.className + ' off';
+                        }
+                        return d.className ? d.className : '';
+                    } else {
+                        return d.className ? d.className : '';    
+                    }
+                })
+                .text(function(d) { return parseInt(d.name.replace('Station','')); });
+
+                // Update Paths
+                d3handle.selectAll('path').transition()
+                    .duration(1500)
+                    .attr('d', function (d) {
+                        if($(this).parent().attr('class')){
+                            if($(this).parent().attr('class').indexOf('active') >= 0){
+                                return $(this).attr('d');
+                            }
+                        }
+                        return that.lineFn(d.edges);
+                    })
+                    .attr('class', function (d) { 
+                        if(d.station){
+                            if(d.isPowered){
+                                if(d.isLoggedIn){
+                                    return d.className + ' in-use';
+                                } else {
+                                    return d.className + ' free';
+                                }
+                            } else {
+                                return d.className + ' off';
+                            }
+                            return d.className ? d.className : '';
+                        } else {
+                            return d.className ? d.className : '';    
+                        }
+                    })
+
+                // Update Text
+                d3handle.selectAll('text')
+                    .transition()
+                    .duration(1500)
+                    .attr('x', function (d) {
+                        if($(this).parent().attr('class')){
+                            if($(this).parent().attr('class').indexOf('active') >= 0){
+                                return $(this).attr('x');
+                            }
+                        }
+                        var x = that.getTextPosition(true, d);
+                        return x - (this.getBBox().width / 2);
+                    })
+                    .attr('y', function (d) { 
+                        if($(this).parent().attr('class')){
+                            if($(this).parent().attr('class').indexOf('active') >= 0){
+                                return $(this).attr('y');
+                            }
+                        }
+                        var y = that.getTextPosition(false, d);
+                        return y + (this.getBBox().height / 2) - 4;
+                    })
+
+                d3handle.selectAll('text.status')
+                    .each(function (d) {
+                        that.setStatusText(d, this)
+                    })
+                    .transition()
+                    .duration(1500)
+                    .attr('x', function (d) {
+                        var x = that.getTextPosition(true, d);
+                        return x - (this.getBBox().width / 2);
+                    })
+
+                d3handle.selectAll('text.cpu')
+                    .each(function (d) {
+                        that.setMemoryText(d, this)
+                    })
+                    .transition()
+                    .duration(1500)
+                    .attr('x', function (d) {
+                        var x = that.getTextPosition(true, d);
+                        return x - (this.getBBox().width / 2);
+                    })
         },
 
         renderPaths: function (d3handle, data) {
@@ -73,22 +336,6 @@ angular.module('lrs').directive('labmap', function () {
             paths.enter().append('path')
                 .style('opacity', 0)
                 .attr('d', this.getRandomD)
-                .on("mouseover", function (d) {
-                    if(d.station){
-                        d3.select(this).moveToFront().transition().duration(200)
-                            .attr('d', that.lineFn(that.extendEdges(d)));    
-                    }
-                    
-                })
-                .on("mouseout", function (d) {
-                    if(d.station){
-                        d3.select(this).transition().duration(200)
-                            .attr('d', that.lineFn(d.edges));
-                    }
-                })
-                .on('click', function (d) {
-                    that.scope.onClick({ item: d });
-                })
 
             paths.transition().duration(1500)
                 .style('opacity', 1)
@@ -114,6 +361,141 @@ angular.module('lrs').directive('labmap', function () {
 
         },
 
+        getTextPosition: function (isX, d, isAugmented) {
+            var edges = d.edges;
+            if(isAugmented){
+                edges = this.extendEdges(d);
+            }
+            if((this.landscape && isX) || (!this.landscape && !isX)){
+                // return d.y
+                var minY = _.min(edges, function (d) {
+                    return d.y;
+                }).y;
+                var maxY = _.max(edges, function (d) {
+                    return d.y;
+                }).y;
+                if(isX){
+                    return this.xScale((minY + maxY) / 2);
+                } else {
+                    return this.yScale((minY + maxY) / 2);
+                }
+                
+            }
+            if((!this.landscape && isX) || (this.landscape && !isX)){
+                // return d.x
+                var minX = _.min(edges, function (d) {
+                    return d.x;
+                }).x;
+                var maxX = _.max(edges, function (d) {
+                    return d.x;
+                }).x;
+                if(isX){
+                    return this.xScale((minX + maxX) / 2);
+                } else {
+                    return this.yScale((minX + maxX) / 2);
+                }
+            }
+        },
+
+        getTopTextPosition: function (isX, d) {
+            var edges = this.extendEdges(d);
+            if((this.landscape && isX) || (!this.landscape && !isX)){
+                // return d.y
+                var minY = _.min(edges, function (d) {
+                    return d.y;
+                }).y;
+                var maxY = _.max(edges, function (d) {
+                    return d.y;
+                }).y;
+                if(isX){
+                    return this.xScale((minY + maxY) / 2);
+                } else {
+                    return this.yScale(maxY);
+                }
+                
+            }
+            if((!this.landscape && isX) || (this.landscape && !isX)){
+                // return d.x
+                var minX = _.min(edges, function (d) {
+                    return d.x;
+                }).x;
+                var maxX = _.max(edges, function (d) {
+                    return d.x;
+                }).x;
+                if(isX){
+                    return this.xScale((minX + maxX) / 2);
+                } else {
+                    return this.yScale(maxX);
+                }
+            }
+        },
+
+        getMiddleTextPosition: function (isX, d) {
+            var edges = this.extendEdges(d);
+            if((this.landscape && isX) || (!this.landscape && !isX)){
+                // return d.y
+                var minY = _.min(edges, function (d) {
+                    return d.y;
+                }).y;
+                var maxY = _.max(edges, function (d) {
+                    return d.y;
+                }).y;
+                if(isX){
+                    return this.xScale((minY + maxY) / 2);
+                } else {
+                    return this.yScale((minY + maxY) / 2);
+                }
+                
+            }
+            if((!this.landscape && isX) || (this.landscape && !isX)){
+                // return d.x
+                var minX = _.min(edges, function (d) {
+                    return d.x;
+                }).x;
+                var maxX = _.max(edges, function (d) {
+                    return d.x;
+                }).x;
+                if(isX){
+                    return this.xScale((minX + maxX) / 2);
+                } else {
+                    return this.yScale((minX + maxX) / 2);
+                }
+            }
+        },
+
+        getBottomTextPosition: function (isX, d) {
+            var edges = this.extendEdges(d);
+            if((this.landscape && isX) || (!this.landscape && !isX)){
+                // return d.y
+                var minY = _.min(edges, function (d) {
+                    return d.y;
+                }).y;
+                var maxY = _.max(edges, function (d) {
+                    return d.y;
+                }).y;
+                if(isX){
+                    return this.xScale((minY + maxY) / 2);
+                } else {
+                    return this.yScale(minY);
+                }
+                
+            }
+            if((!this.landscape && isX) || (this.landscape && !isX)){
+                // return d.x
+                var minX = _.min(edges, function (d) {
+                    return d.x;
+                }).x;
+                var maxX = _.max(edges, function (d) {
+                    return d.x;
+                }).x;
+                if(isX){
+                    return this.xScale((minX + maxX) / 2);
+                } else {
+                    return this.yScale(minX);
+                }
+            }
+        },
+
         getRandomD: function (d) {
             var d = ['M']
             var x = this.getRandomIntBetween(0, this.width);
@@ -123,6 +505,12 @@ angular.module('lrs').directive('labmap', function () {
                 d.push(y);
             }
             return d.join(' ');
+        },
+
+        getRandomTranslate: function (d) {
+            var x = this.getRandomIntBetween(0, this.width);
+            var y = this.getRandomIntBetween(0, this.height);
+            return 'translate('+ x + ','+ y +')';
         },
 
         getRandomIntBetween: function (min, max) {
@@ -160,7 +548,6 @@ angular.module('lrs').directive('labmap', function () {
             } else {
                 this.render();
             }
-            
         },
 
         setScales: function () {
