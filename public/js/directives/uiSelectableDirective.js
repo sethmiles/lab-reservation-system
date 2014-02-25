@@ -4,9 +4,9 @@ angular.module('lrs').directive('uiselectable', function () {
 
         link: function (scope, el, attrs) {
 
-            function setReservationTime (evt) {
+            function setReservationTime (target) {
 
-                var selectedItems = $(evt.target).find('.ui-selected, .ui-selecting');
+                var selectedItems = $(target).find('.ui-selected, .ui-selecting');
                 
                 var selecting = _.map(selectedItems, function (el) {
                     return { 
@@ -58,17 +58,28 @@ angular.module('lrs').directive('uiselectable', function () {
                 return start + ':' + end + ' ' + merideum;
             }
 
+            function validateTime (target) {
+                if($('.ui-selected, .ui-selecting').hasClass('invalid')){
+                    $(el).addClass('invalid');
+                } else {
+                    $(el).removeClass('invalid');
+                }
+            }
+
             $(el[0]).selectable({
                 selected: function (evt) {
-                    setReservationTime(evt);
+                    setReservationTime(evt.target);
+                    validateTime(evt.target);
                 },
 
                 selecting: function (evt) {
-                    setReservationTime(evt);
+                    setReservationTime(evt.target);
+                    validateTime(evt.target);
                 },
 
                 unselecting: function (evt) {
-                    setReservationTime(evt);  
+                    setReservationTime(evt.target);  
+                    validateTime(evt.target);
                 }
             });
 

@@ -18,7 +18,12 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
   };
 
   $scope.createReservation = function () {
-        console.log('creating reservation');
+
+        if($('.calendar-container').hasClass('invalid')){
+            alert('This reservation cannot be made.');
+            return;
+        }
+
         if(!$scope.stationData.reservation){
             alert('You have not selected a time frame');
             return;

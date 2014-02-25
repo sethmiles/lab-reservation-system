@@ -81,12 +81,14 @@ angular.module('lrs').directive('calendar', function () {
                 // Create objects for each hour on the axis
                 segments.push({
                     startTime: startTime,
-                    endTime: startTime += 30
+                    endTime: startTime += 30,
+                    className: 'valid'
                 });
                 
                 segments.push({
                     startTime: startTime,
-                    endTime: startTime += 70
+                    endTime: startTime += 70,
+                    className: 'valid'
                 });
             }
 
@@ -159,6 +161,11 @@ angular.module('lrs').directive('calendar', function () {
             var width = this.options.container.width;
             var timeFrame = this.options.endTime - this.options.startTime;
             var pixelPerMinute = height / timeFrame;
+
+            _.each(that.paintableSegments, function (segment) {
+                segment.className = 'valid';
+            });
+
             _.each(events, function (event) {
                 // figure out top, height
                 var startDate = moment(event.start_time);
@@ -167,7 +174,22 @@ angular.module('lrs').directive('calendar', function () {
                 event.end = (endDate.hours() * 60) + endDate.minutes() - (8 * 60) - event.start;
                 event.top = pixelPerMinute * ((event.start/60)*100);
                 event.height = pixelPerMinute * ((event.end/60)*100);
+
+                var startTime = parseInt(startDate.format('Hmm'));
+                var endTime = parseInt(endDate.format('Hmm'));
+
+                _.each(that.paintableSegments, function (segment) {
+                    if (startTime > segment.startTime && startTime < segment.endTime){
+                        segment.className = 'invalid';
+                    } else if (endTime > segment.startTime && endTime < segment.endTime) {
+                        segment.className = 'invalid';
+                    } else if (segment.startTime >= startTime && segment.endTime <= endTime) {
+                        segment.className = 'invalid';
+                    }
+                });
             });
+
+
 
         },
 

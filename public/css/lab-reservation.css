@@ -113,6 +113,9 @@ labmap {
   margin-top: 11px;
 }
 
+.calendar-container.invalid .paintable.ui-selecting { background: #f83a22; }
+.calendar-container.invalid .paintable.ui-selected { background: #f83a22; }
+
 .calendar-container .paintable {
   box-shadow:inset 0px 1px 0px 0px #CCC;
 }
@@ -122,7 +125,7 @@ labmap {
 }
 
 .calendar-container .paintable.ui-selecting { background: #9fc6e7; }
-.calendar-container .paintable.ui-selected { background: #4986e7; color: white; }
+.calendar-container .paintable.ui-selected { background: #4986e7; }
 
 
 /* Event Styles */
