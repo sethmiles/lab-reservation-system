@@ -51,12 +51,20 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
       });
     };
 
+    if($routeParams.userId) {
+      getItem('Users', $routeParams.userId);
+    }
+
+    if($routeParams.computerId) {
+      getItem('Computers', $routeParams.computerId);
+    }
+
     // Create a new item
-    $scope.newItem = function() {
-      $http.post('/api/' + $scope.currentModel + '/', $scope.currentItem).success(function(data) {
+    $scope.newItem = function(model) {
+      $http.post('/api/' + model + '/', $scope.currentItem).success(function(data) {
         if(data.status === 'success') {
-          alertService.add('success', $scope.currentModel + ' created successfully!');
-          $location.path('/admin/' + $scope.currentModel);
+          alertService.add('success', model + ' created successfully!');
+          $location.path('/admin/' + model);
         } else if(data.status === 'error') {
           alertService.add('danger', 'ERROR: ' + JSON.stringify(data.message));
         }
@@ -64,11 +72,11 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
     };
 
     // Update an item
-    $scope.updateItem = function() {
-      $http.put('/api/' + $scope.currentModel + '/' + $scope.currentId, $scope.currentItem)
+    $scope.updateItem = function(model) {
+      $http.put('/api/' + model + '/' + $scope.currentId, $scope.currentItem)
         .success(function(data, status, headers, config) {
           if(data.status === 'success') {
-            alertService.add('success', $scope.currentModel + ' updated successfully!');
+            alertService.add('success', model + ' updated successfully!');
           } else if(data.status === 'error') {
             alertService.add('danger', 'ERROR: ' + JSON.stringify(data.message));
           }

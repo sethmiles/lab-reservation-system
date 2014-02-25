@@ -1,0 +1,33 @@
+<div class="page-header">
+  <h1 ng-hide="currentId">New <small>Reservation</small></h1>
+  <h1 ng-show="currentId">Edit <small>Reservation {{currentId}}</small></h1>
+</div>
+<form>
+  <div class="form-group">
+    <label for="start_time">Start Time</label>
+    <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" show-weeks="false" show-button-bar="false" close-text="Select" ng-model="currentItem.start_time">
+  </div>
+  <div class="form-group">
+    <label for="end_time">End Time</label>
+    <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" show-weeks="false" show-button-bar="false" close-text="Select" ng-model="currentItem.end_time">
+  </div>
+  <div class="form-group">
+    <label for="note">Note</label>
+    <input type="textarea" ng-model="currentItem.note" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="currentItem">User</label>
+    <input type="text" ng-model="currentItem.user" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="computer">Computer</label>
+    <input type="text" ng-model="currentItem.computer" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="series">Series</label>
+    <input type="text" ng-model="currentItem.series" class="form-control">
+  </div>
+  <a href="/admin/Reservations" class="btn btn-default">Back</a>
+  <button class="btn btn-primary" ng-click="newItem('Reservations')" ng-hide="currentId">Create Reservation</button>
+  <button class="btn btn-primary" ng-click="updateItem('Reservations')" ng-show="currentId">Update Reservation</button>
+</form>

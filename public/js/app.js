@@ -30,13 +30,33 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
       controller: 'AdminController'
     });
 
-    // Admin Routes 2.0
-    $routeProvider.when('/admin/Users/new', {
+    // Users
+    $routeProvider.when('/admin/Users/new/', {
       templateUrl: 'views/admin/user.html',
       controller: 'AdminController'
     });
-    $routeProvider.when('/admin/Computers/new', {
+    $routeProvider.when('/admin/Users/edit/:userId', {
+      templateUrl: 'views/admin/user.html',
+      controller: 'AdminController'
+    });
+
+    // Computers
+    $routeProvider.when('/admin/Computers/new/', {
       templateUrl: 'views/admin/computer.html',
+      controller: 'AdminController'
+    });
+    $routeProvider.when('/admin/Computers/edit/:computerId', {
+      templateUrl: 'views/admin/computer.html',
+      controller: 'AdminController'
+    });
+
+    // Reservations
+    $routeProvider.when('/admin/Reservations/new/', {
+      templateUrl: 'views/admin/reservation.html',
+      controller: 'AdminController'
+    });
+    $routeProvider.when('/admin/Reservations/edit/:reservationId', {
+      templateUrl: 'views/admin/reservation.html',
       controller: 'AdminController'
     });
 
