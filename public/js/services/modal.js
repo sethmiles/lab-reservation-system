@@ -23,7 +23,7 @@ angular.module('lrs.services').factory('modalService', ['$rootScope', '$http', '
 }]);
 
 // All the methods for various modals are put here
-var ModalInstanceController = function ($scope, $http, $modalInstance) {
+var ModalInstanceController = function ($scope, $http, $modalInstance, alertService) {
 
   $scope.cancel = function () {
     $modalInstance.dismiss('cancel');
@@ -33,6 +33,7 @@ var ModalInstanceController = function ($scope, $http, $modalInstance) {
     $http.delete('/api/' + $scope.modalData[0] + '/' + $scope.modalData[1].id).success(function(data) {
       $scope.modalData[2].splice($.inArray($scope.modalData[1], $scope.modalData[2]), 1);
       $modalInstance.close();
+      alertService.add('success', $scope.modalData[0] + ' #' + $scope.modalData[1].id + ' deleted.');
     });
   };
 
