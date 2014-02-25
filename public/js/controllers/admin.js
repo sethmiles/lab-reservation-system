@@ -51,14 +51,6 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
       });
     };
 
-    if($routeParams.userId) {
-      getItem('Users', $routeParams.userId);
-    }
-
-    if($routeParams.computerId) {
-      getItem('Computers', $routeParams.computerId);
-    }
-
     // Create a new item
     $scope.newItem = function(model) {
       $http.post('/api/' + model + '/', $scope.currentItem).success(function(data) {
@@ -122,6 +114,14 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
     // Edit model
     if($routeParams.action === 'edit' && $routeParams.id) {
       getItem($routeParams.model, $routeParams.id);
+    }
+
+    if($routeParams.userId) {
+      getItem('Users', $routeParams.userId);
+    }
+
+    if($routeParams.computerId) {
+      getItem('Computers', $routeParams.computerId);
     }
   }
 ]);

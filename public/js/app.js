@@ -30,43 +30,17 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
       controller: 'AdminController'
     });
 
-    // Users
-    $routeProvider.when('/admin/Users/new/', {
-      templateUrl: 'views/admin/user.html',
-      controller: 'AdminController'
-    });
-    $routeProvider.when('/admin/Users/edit/:userId', {
-      templateUrl: 'views/admin/user.html',
-      controller: 'AdminController'
-    });
-
-    // Computers
-    $routeProvider.when('/admin/Computers/new/', {
-      templateUrl: 'views/admin/computer.html',
-      controller: 'AdminController'
-    });
-    $routeProvider.when('/admin/Computers/edit/:computerId', {
-      templateUrl: 'views/admin/computer.html',
-      controller: 'AdminController'
-    });
-
-    // Reservations
-    $routeProvider.when('/admin/Reservations/new/', {
-      templateUrl: 'views/admin/reservation.html',
-      controller: 'AdminController'
-    });
-    $routeProvider.when('/admin/Reservations/edit/:reservationId', {
-      templateUrl: 'views/admin/reservation.html',
-      controller: 'AdminController'
-    });
-
     // Why do we need both of these? 1st for New and 2nd for Edit
     $routeProvider.when('/admin/:model/:action/', {
-      templateUrl: 'views/partials/model.html',
+      templateUrl: function(params) {
+        return 'views/admin/' + params.model + '.html';
+      },
       controller: 'AdminController'
     });
     $routeProvider.when('/admin/:model/:action/:id', {
-      templateUrl: 'views/partials/model.html',
+      templateUrl: function(params) {
+        return 'views/admin/' + params.model + '.html';
+      },
       controller: 'AdminController'
     });
 
