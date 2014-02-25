@@ -1,5 +1,5 @@
-angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '$http', '$location', 'globalService', 'alertService', 'modalService',
-  function ($scope, $routeParams, $http, $location, globalService, alertService, modalService) {
+angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '$http', '$location', '$modal', 'globalService', 'alertService',
+  function ($scope, $routeParams, $http, $location, $modal, globalService, alertService) {
     $scope.global = globalService;
 
     // Get list of models for sidebar
@@ -78,7 +78,32 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
 
     // Delete an item
     $scope.deleteItem = function(model, item) {
-      modalService.openModal('deleteModel', [model, item, $scope.modelData]);
+      var deleteModal = $modal.open({
+        templateUrl: 'views/modals/deleteModel.html',
+        controller: function($scope) {
+          $scope.confirm = function() {
+            deleteModal.close({
+              model: model,
+              item: item
+            });
+          };
+
+          $scope.cancel = function() {
+            deleteModal.dismiss('cancel');
+          };
+        },
+        backdrop: 'static',
+        keyboard: false
+      });
+
+      deleteModal.result.then(function(data) {
+        var model =  data['model'];
+        var item =  data['item']
+        $http.delete('/api/' + model + '/' + item.id).success(function(data) {
+          $scope.modelData.splice($.inArray(item, $scope.modelData), 1);
+          alertService.add('success', model + ' #' + item.id + ' deleted.');
+        });
+      });
     };
 
     // Get items for main admin page or fill headers for new page
