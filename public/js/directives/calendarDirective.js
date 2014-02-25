@@ -147,9 +147,15 @@ angular.module('lrs').directive('calendar', function () {
         },
 
         layOutDay: function (events) {
+            var that = this;
+            _.each(that.paintableSegments, function (segment) {
+                segment.className = 'valid';
+            });
+
             if(!events || !events.length){
                 return;
             }
+
             this.analyzeEvents(events);
             // this.events = events;
             // this.renderEvents(events);
@@ -161,10 +167,6 @@ angular.module('lrs').directive('calendar', function () {
             var width = this.options.container.width;
             var timeFrame = this.options.endTime - this.options.startTime;
             var pixelPerMinute = height / timeFrame;
-
-            _.each(that.paintableSegments, function (segment) {
-                segment.className = 'valid';
-            });
 
             _.each(events, function (event) {
                 // figure out top, height
