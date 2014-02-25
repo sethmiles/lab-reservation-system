@@ -162,6 +162,10 @@ labmap {
     content: ' - ';
 }
 
+.event.small.islab-event .event-content .title:after, .event.small.priority-access .event-content .title:after {
+    content: '';
+}
+
 .event.small .event-content {
     margin-left: -3px;
 }
@@ -296,4 +300,12 @@ datepicker {
     -webkit-transition:all linear 0.5s;
     transition:all linear 0.5s;
 
+}
+
+
+svg text {
+    pointer-events: none;
+    -webkit-pointer-events: none;
+    fill: white;
+    font-family="Verdana"
 }
