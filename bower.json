@@ -11,5 +11,8 @@
     "lodash": "latest",
     "d3": "latest",
     "momentjs": "latest"
+  },
+  "resolutions": {
+    "angular": "1.2.13"
   }
 }

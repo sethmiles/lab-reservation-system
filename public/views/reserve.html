@@ -1,5 +1,6 @@
 <div data-ng-show="global.authenticated">
   <labmap class="calendar" ng-model="d3Data" data="d3Data" on-click="d3OnClick(item)"></labmap>
+  <div class="reservation-overlay animate-show" ng-show="stationData" ng-click="stationData=null"></div>
   <div class="reservation-pane" ng-show="stationData">
     <div class="left" ng-model="reservationDate">
       <h1 class="center">{{ stationData.name }}</span></h1>
@@ -8,7 +9,7 @@
             <datepicker min="today" show-weeks="false"></datepicker>
         </div>
       <p>Paint the time on the calendar for your desired reservation</p>
-      <div class="controls" data-ng-animate="'fade'" ng-show="stationData.reservation">
+      <div class="controls animate-show" data-ng-animate="'fade'" ng-show="stationData.reservation" ng-animate="{show: 'fadeIn', hide:'fadeOut'}">
         <h4>Reservation Details</h4>
         <table>
             <tr>

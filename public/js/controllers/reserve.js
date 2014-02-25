@@ -57,6 +57,7 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
 
         // If it's confirmed, create the reservation in the db
       $http.post('/api/Reservations/', data).success(function(response) {
+            // $scope.reservations.push(response);
             getReservations();
       });
 
