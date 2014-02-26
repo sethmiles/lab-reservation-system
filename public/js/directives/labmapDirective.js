@@ -188,21 +188,30 @@ angular.module('lrs').directive('labmap', function () {
                 })
                 .on("mouseout", function (d) {
                     if(d.station){
+                        // Removes active class
                         $(this).parent().attr('class', $(this).parent().attr('class').replace('active',''));
+
+                        // Re animates the box to its normal size
                         d3.select(this).transition().duration(200)
                             .attr('d', that.lineFn(d.edges));
 
                         var thisG = $(this).parent();
 
-                        d3.select(thisG.find('text')[0]).transition().duration(200)
+
+                        d3.select(thisG.find('text')[0])
+                            .attr('x', function (d) {
+                                $(this).text(parseInt(d.name.replace('Station','')))
+                                var x = that.getTextPosition(true, d);
+                                return x - (this.getBBox().width / 2);
+                            })
+                            .transition()
+                            .duration(200)
                             .attr('x', function (d) { 
                                 var x = that.getTextPosition(true, d);
-                                $(this).text(parseInt(d.name.replace('Station','')))
                                 return x - (this.getBBox().width / 2);
                             })
                             .attr('y', function (d) { 
                                 var y = that.getTextPosition(false, d);
-                                $(this).text(parseInt(d.name.replace('Station','')))
                                 return y + (this.getBBox().height / 2) - 4;
                             })
 

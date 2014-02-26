@@ -1,7 +1,7 @@
 <div data-ng-show="global.authenticated">
   <labmap class="calendar" ng-model="d3Data" data="d3Data" on-click="d3OnClick(item)"></labmap>
-  <div class="reservation-overlay animate-show" ng-show="stationData" ng-click="stationData=null"></div>
-  <div class="reservation-pane" ng-show="stationData">
+  <div class="reservation-overlay" ng-show="stationData" ng-click="stationData=null"></div>
+  <div class="reservation-pane" ng-class="{ 'animate-show': stationData }">
     <div class="left" ng-model="reservationDate">
       <h1 class="center">{{ stationData.name }}</span></h1>
       <p>Please select a date to view reservations for {{ stationData.name }}.</p>
@@ -9,7 +9,7 @@
             <datepicker min="today" show-weeks="false"></datepicker>
         </div>
       <p>Paint the time on the calendar for your desired reservation</p>
-      <div class="controls animate-show" data-ng-animate="'fade'" ng-show="stationData.reservation" ng-animate="{show: 'fadeIn', hide:'fadeOut'}">
+      <div class="controls" ng-show="stationData.reservation" ng-animate="{show: 'fadeIn', hide:'fadeOut'}">
         <h4>Reservation Details</h4>
         <table>
             <tr>
@@ -21,10 +21,6 @@
                 <td>{{ stationData.reservation.endReadable }}</td>
             </tr>
         </table>
-        <!-- <select class="form-control">
-            <option>One-time</option>
-            <option>Weekly</option>
-        </select> -->
         <button class="btn btn-primary" ng-click="createReservation()" >Reserve</button>
         <button class="btn btn-warning" ng-click="stationData=null">Cancel</button>
       </div>
