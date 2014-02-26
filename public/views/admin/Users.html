@@ -2,27 +2,30 @@
   <h1 ng-hide="currentId">New <small>User</small></h1>
   <h1 ng-show="currentId">Edit <small>User {{currentId}}</small></h1>
 </div>
-<form>
-  <div class="form-group">
+<form name="modelForm" novalidate>
+  <div class="form-group" ng-class="{ 'has-error' : modelForm.netId.$invalid && !modelForm.netId.$pristine }">
     <label for="netId">NetId</label>
-    <input type="text" ng-model="currentItem.netId" class="form-control">
+    <input type="text" name="netId" class="form-control" ng-model="currentItem.netId" ng-minlength="5" ng-maxlength="8" required>
+    <p ng-show="modelForm.netId.$error.minlength" class="help-block">Username is too short.</p>
+    <p ng-show="modelForm.netId.$error.maxlength" class="help-block">Username is too long.</p>
   </div>
-  <div class="form-group">
-    <label for="netId">Name</label>
-    <input type="text" ng-model="currentItem.name" class="form-control">
+  <div class="form-group" ng-class="{ 'has-error' : modelForm.name.$invalid && !modelForm.name.$pristine }">
+    <label for="name">Name</label>
+    <input type="text" name="name" class="form-control" ng-model="currentItem.name" required>
   </div>
-  <div class="form-group">
-    <label for="netId">Email</label>
-    <input type="text" ng-model="currentItem.email" class="form-control">
+  <div class="form-group" ng-class="{ 'has-error' : modelForm.email.$invalid && !modelForm.email.$pristine }">
+    <label for="email">Email</label>
+    <input type="email" name="email" class="form-control" ng-model="currentItem.email" required>
+    <p ng-show="modelForm.email.$invalid && !modelForm.email.$pristine" class="help-block">Enter a valid email.</p>
   </div>
-  <div class="form-group">
-    <label for="netId">Role</label>
-    <select ng-model="currentItem.role" class="form-control">
+  <div class="form-group" ng-class="{ 'has-error' : modelForm.role.$invalid && !modelForm.role.$pristine }">
+    <label for="role">Role</label>
+    <select name="role" class="form-control" ng-model="currentItem.role" required>
       <option value="student">Student</option>
       <option value="admin">Admin</option>
     </select>
   </div>
   <a href="/admin/Users" class="btn btn-default">Back</a>
-  <button class="btn btn-primary" ng-click="newItem('Users')" ng-hide="currentId">Create User</button>
-  <button class="btn btn-primary" ng-click="updateItem('Users')" ng-show="currentId">Update User</button>
+  <button class="btn btn-primary" ng-click="newItem('Users')" ng-hide="currentId" ng-disabled="modelForm.$invalid">Create User</button>
+  <button class="btn btn-primary" ng-click="updateItem('Users')" ng-show="currentId" ng-disabled="modelForm.$invalid">Update User</button>
 </form>

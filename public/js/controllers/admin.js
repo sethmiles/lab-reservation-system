@@ -53,14 +53,16 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
 
     // Create a new item
     $scope.newItem = function(model) {
-      $http.post('/api/' + model + '/', $scope.currentItem).success(function(data) {
-        if(data.status === 'success') {
-          alertService.add('success', model + ' created successfully!');
-          $location.path('/admin/' + model);
-        } else if(data.status === 'error') {
-          alertService.add('danger', 'ERROR: ' + JSON.stringify(data.message));
-        }
-      });
+      if ($scope.modelForm.$valid) {
+        $http.post('/api/' + model + '/', $scope.currentItem).success(function(data) {
+          if(data.status === 'success') {
+            alertService.add('success', model + ' created successfully!');
+            $location.path('/admin/' + model);
+          } else if(data.status === 'error') {
+            alertService.add('danger', 'ERROR: ' + JSON.stringify(data.message));
+          }
+        });
+      }
     };
 
     // Update an item

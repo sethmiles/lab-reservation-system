@@ -39,6 +39,12 @@ module.exports = function(app, passport) {
   app.use(app.router);
 
   if ('production' === app.get('env')) {
+    // Handle 401
+    app.use(function(req, res) {
+      res.status(401);
+      res.render('errors/401.jade', {title: '401: Unauthorized'});
+    });
+
     // Handle 404
     app.use(function(req, res) {
       res.status(404);

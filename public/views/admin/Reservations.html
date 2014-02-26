@@ -2,14 +2,14 @@
   <h1 ng-hide="currentId">New <small>Reservation</small></h1>
   <h1 ng-show="currentId">Edit <small>Reservation {{currentId}}</small></h1>
 </div>
-<form>
+<form name="modelForm">
   <div class="form-group">
     <label for="start_time">Start Time</label>
-    <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" show-weeks="false" show-button-bar="false" close-text="Select" ng-model="currentItem.start_time">
+    <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" show-weeks="false" show-button-bar="false" close-text="Select" ng-model="currentItem.start_time" required>
   </div>
   <div class="form-group">
     <label for="end_time">End Time</label>
-    <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" show-weeks="false" show-button-bar="false" close-text="Select" ng-model="currentItem.end_time">
+    <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" show-weeks="false" show-button-bar="false" close-text="Select" ng-model="currentItem.end_time" required>
   </div>
   <div class="form-group">
     <label for="note">Note</label>
@@ -17,11 +17,11 @@
   </div>
   <div class="form-group">
     <label for="currentItem">User</label>
-    <input type="text" ng-model="currentItem.user" class="form-control">
+    <input type="text" ng-model="currentItem.user" class="form-control" required>
   </div>
   <div class="form-group">
     <label for="computer">Computer</label>
-    <input type="text" ng-model="currentItem.computer" class="form-control">
+    <input type="text" ng-model="currentItem.computer" class="form-control" required>
   </div>
   <div class="form-group">
     <label for="series">Series</label>

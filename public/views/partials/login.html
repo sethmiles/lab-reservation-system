@@ -3,14 +3,17 @@
     <h1>Login</h1>
   </div>
   <div class="col-md-4 col-md-offset-4">
-    <form role="login" ng-submit="login()" data-ng-hide="global.authenticated">
-      <div class="form-group">
-        <input type="text" ng-model="username" class="form-control" placeholder="NetId">
+    <form name="loginForm" role="login" ng-submit="login()" data-ng-hide="global.authenticated">
+      <div class="form-group" ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine }">
+        <input type="text" name="username" ng-model="username" class="form-control" placeholder="NetId" ng-minlength="5" ng-maxlength="8" required>
+        <p ng-show="loginForm.username.$error.minlength" class="help-block">NetId is too short.</p>
+        <p ng-show="loginForm.username.$error.maxlength" class="help-block">NetId is too long.</p>
       </div>
-      <div class="form-group">
-        <input type="password" ng-model="password" class="form-control" placeholder="Password">
+      <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
+        <input type="password" name="password" ng-model="password" class="form-control" placeholder="Password" ng-minlength="10" required>
+        <p ng-show="loginForm.password.$error.minlength" class="help-block">Password is too short.</p>
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Login</button>
     </form>
   </div>
 </div>
