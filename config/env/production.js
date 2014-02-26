@@ -2,9 +2,9 @@ module.exports = {
   db: {
     name: "lab_reservation",
     username: "root",
-    password: "password1",
+    password: "",
     force: false,
-    host: "128.187.61.27",
+    host: "localhost",
     port: 8888,
     dialect: 'mysql'
   },
