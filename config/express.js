@@ -35,26 +35,25 @@ module.exports = function(app, passport) {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  // This stuff is messing up the production server flag
+/*  // Handle 401
+  app.use(function(req, res) {
+    res.status(401);
+    res.render('errors/401.jade', {title: '401: Unauthorized'});
+  });
+
+  // Handle 404
+  app.use(function(req, res) {
+    res.status(404);
+    res.render('errors/404.jade', {title: '404: File Not Found'});
+  });
+  
+  // Handle 500
+  app.use(function(error, req, res, next) {
+    res.status(500);
+    res.render('errors/500.jade', {title:'500: Internal Server Error', error: error});
+  });*/
+
   //routes should be at the last
   app.use(app.router);
-
-  if ('production' === app.get('env')) {
-    // Handle 401
-    app.use(function(req, res) {
-      res.status(401);
-      res.render('errors/401.jade', {title: '401: Unauthorized'});
-    });
-
-    // Handle 404
-    app.use(function(req, res) {
-      res.status(404);
-      res.render('errors/404.jade', {title: '404: File Not Found'});
-    });
-    
-    // Handle 500
-    app.use(function(error, req, res, next) {
-      res.status(500);
-      res.render('errors/500.jade', {title:'500: Internal Server Error', error: error});
-    });
-  }
 };

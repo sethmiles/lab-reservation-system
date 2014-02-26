@@ -32,7 +32,10 @@ passport.use(new LdapStrategy({
     }
   },
   function(user, done) {
-    var gravatar = crypto.createHash('md5').update(user.mail).digest('hex');
+    var gravatar;
+    if(user.mail) {
+      gravatar = crypto.createHash('md5').update(user.mail).digest('hex');
+    }
     db.User.findOrCreate({ netId: user.uid }, { name: user.displayName, email: user.mail, role: 'student', gravatarHash: gravatar }).success(function(user) {
       if (!user) {
         done(null, false, { message: 'Unknown user' });
