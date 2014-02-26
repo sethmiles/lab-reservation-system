@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h1 ng-hide="currentId">New <small>Computer</small></h1>
+  <h1 ng-show="currentId">Edit <small>Computer {{currentId}}</small></h1>
+</div>
+<alert class="alert alert-danger">The majority of the information here is automatically generated. Only edit this if you know what you're doing!</alert>
+<form>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" ng-model="currentItem.name" class="form-control">
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="currentItem.isPowered"> Powered?
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="currentItem.isLoggedIn"> Logged In?
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" ng-model="currentItem.isReservable"> Reservable?
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="memoryUsage">Memory Usage</label>
+    <input type="text" ng-model="currentItem.memoryUsage" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="remoteConnectionCount">Remote Connection Count</label>
+    <input type="text" ng-model="currentItem.remoteConnectionCount" class="form-control">
+  </div>
+  <a href="/admin/Computers" class="btn btn-default">Back</a>
+  <button class="btn btn-primary" ng-click="newItem('Computers')" ng-hide="currentId">Create Computer</button>
+  <button class="btn btn-primary" ng-click="updateItem('Computers')" ng-show="currentId">Update Computer</button>
+</form>

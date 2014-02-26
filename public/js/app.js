@@ -32,11 +32,15 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
 
     // Why do we need both of these? 1st for New and 2nd for Edit
     $routeProvider.when('/admin/:model/:action/', {
-      templateUrl: 'views/partials/model.html',
+      templateUrl: function(params) {
+        return 'views/admin/' + params.model + '.html';
+      },
       controller: 'AdminController'
     });
     $routeProvider.when('/admin/:model/:action/:id', {
-      templateUrl: 'views/partials/model.html',
+      templateUrl: function(params) {
+        return 'views/admin/' + params.model + '.html';
+      },
       controller: 'AdminController'
     });
 

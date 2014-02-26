@@ -1,0 +1,63 @@
+<div class="page-header">
+  <h1 ng-hide="currentId">New <small>ClassSection</small></h1>
+  <h1 ng-show="currentId">Edit <small>ClassSection {{currentId}}</small></h1>
+</div>
+<form>
+  <div class="form-group">
+    <label for="section_num">Section Number</label>
+    <input type="text" ng-model="currentItem.section_num" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="class_num">Class Number</label>
+    <input type="text" ng-model="currentItem.class_num" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" ng-model="currentItem.title" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="timeslot">Timeslot</label>
+    <input type="text" class="form-control" datepicker-popup="dd-MMMM-yyyy" show-weeks="false" show-button-bar="false" close-text="Select" ng-model="currentItem.timeslot">
+  </div>
+  <div class="form-group">
+    <label for="days">Days</label>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="currentItem.sunday"> Sunday
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="currentItem.monday"> Monday
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="currentItem.tuesday"> Tuesday
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="currentItem.wednesday"> Wednesday
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="currentItem.thursday"> Thursday
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="currentItem.friday"> Friday
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" ng-model="currentItem.saturday"> Saturday
+      </label>
+    </div>
+  </div>
+  <a href="/admin/ClassSections" class="btn btn-default">Back</a>
+  <button class="btn btn-primary" ng-click="newItem('ClassSections')" ng-hide="currentId">Create Class Section</button>
+  <button class="btn btn-primary" ng-click="updateItem('ClassSections')" ng-show="currentId">Update Class Section</button>
+</form>

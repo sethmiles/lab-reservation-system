@@ -16,7 +16,8 @@
     "passport-ldapauth": "latest",
     "passport-local": "latest",
     "lodash": "latest",
-    "jade": "latest"
+    "jade": "latest",
+    "forever": "~0.10.11"
   },
   "devDependencies": {
     "grunt": "latest",

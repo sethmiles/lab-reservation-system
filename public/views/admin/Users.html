@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1 ng-hide="currentId">New <small>User</small></h1>
+  <h1 ng-show="currentId">Edit <small>User {{currentId}}</small></h1>
+</div>
+<form>
+  <div class="form-group">
+    <label for="netId">NetId</label>
+    <input type="text" ng-model="currentItem.netId" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="netId">Name</label>
+    <input type="text" ng-model="currentItem.name" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="netId">Email</label>
+    <input type="text" ng-model="currentItem.email" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="netId">Role</label>
+    <select ng-model="currentItem.role" class="form-control">
+      <option value="student">Student</option>
+      <option value="admin">Admin</option>
+    </select>
+  </div>
+  <a href="/admin/Users" class="btn btn-default">Back</a>
+  <button class="btn btn-primary" ng-click="newItem('Users')" ng-hide="currentId">Create User</button>
+  <button class="btn btn-primary" ng-click="updateItem('Users')" ng-show="currentId">Update User</button>
+</form>
