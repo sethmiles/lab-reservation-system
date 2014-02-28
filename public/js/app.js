@@ -25,10 +25,6 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
       templateUrl: 'views/admin/index.html',
       controller: 'AdminController'
     });
-    $routeProvider.when('/admin/settings', {
-      templateUrl: 'views/admin/settings.html',
-      controller: 'AdminController'
-    });
     $routeProvider.when('/admin/:model/', {
       templateUrl: 'views/admin/index.html',
       controller: 'AdminController'

@@ -12,17 +12,33 @@
   <a href="admin/{{currentModel}}/new" class="btn btn-success" ng-show="currentModel">New {{currentModel}}</a>
 </div>
 
+<!-- App Settings -->
 <div class="col-md-10" ng-hide="currentModel">
-  Settings
-
-  Max hours to reserve at a time
-  max reservations per day (maybe week)
-  Buffer time to make a reservation from right NOW
-  start of day
-  GET RID OF SERIES!
-
+  <div class="row">
+    <div class="col-md-4 well" ng-model="settings.start">
+      <label for="name">Start of Day</label>
+      <timepicker></timepicker>
+    </div>
+    <div class="col-md-4 col-md-offset-1 well" ng-model="settings.maxPerDay">
+      <label for="name">Maxiumum Reservations per Day</label>
+      <input type="text" ng-model="currentItem.name" class="form-control">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4 well"  ng-model="settings.buffer">
+      <label for="name">Buffer from right now</label>
+      <timepicker show-meridian="false"></timepicker>
+    </div>
+    <div class="col-md-4 col-md-offset-1 well" ng-model="settings.maxLength">
+      <label for="name">Maximum Reservation Length</label>
+      <timepicker show-meridian="false"></timepicker>
+    </div>
+  </div>
+  <a href="/admin" class="btn btn-default">Cancel</a>
+  <button class="btn btn-primary" ng-click="saveSettings()" ng-hide="currentId">Save</button>
 </div>
 
+<!-- Items List ;-->
 <div class="col-md-10" ng-show="currentModel">
   <table class="table table-striped" ng-show="modelHeaders">
     <tr>
