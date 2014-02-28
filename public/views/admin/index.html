@@ -1,14 +1,23 @@
 <div class="page-header">
-  <h1>Admin <small>{{currentModel}}</small></h1>
+  <h1>Admin <small>{{currentModel}} || Settings</small></h1>
 </div>
 
 <div class="col-md-2">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <a href="admin/">Lab Settings</a>
+    </li>
+  </ul>
   <ul class="list-group">
     <li class="list-group-item" ng-repeat="model in models">
       <a href="admin/{{model.tableName}}">{{model.tableName}}</a>
     </li>
   </ul>
   <a href="admin/{{currentModel}}/new" class="btn btn-success" ng-show="currentModel">New {{currentModel}}</a>
+</div>
+
+<div class="col-md-10" ng-hide="currentModel">
+  Settings
 </div>
 
 <div class="col-md-10" ng-show="currentModel">

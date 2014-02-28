@@ -1,4 +1,4 @@
-<div data-ng-show="global.authenticated">
+<div data-ng-if="global.authenticated">
   <labmap class="calendar" ng-model="d3Data" data="d3Data" on-click="d3OnClick(item)"></labmap>
   <div class="reservation-overlay" ng-show="stationData" ng-click="stationData=null"></div>
   <div class="reservation-pane" ng-class="{ 'animate-show': stationData }">
@@ -21,7 +21,7 @@
                 <td>{{ stationData.reservation.endReadable }}</td>
             </tr>
         </table>
-        <button class="btn btn-primary" ng-click="createReservation()" >Reserve</button>
+        <button class="btn btn-primary" ng-click="createReservation()">Reserve</button>
         <button class="btn btn-warning" ng-click="stationData=null">Cancel</button>
       </div>
     </div>
@@ -32,4 +32,4 @@
 </div>
 
 <!-- Display the login page when not authenticated -->
-<ng-include src='"views/partials/login.html"'></ng-include>
+<div ng-include='"views/partials/login.html"' ng-if="!global.authenticated"></div>

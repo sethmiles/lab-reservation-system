@@ -28,11 +28,11 @@ exports.init = function(app, passport) {
   app.get('/loggedin', function(req, res) { res.send(req.isAuthenticated() ? req.user : '0'); });
 
   // Secure REST API
-  //app.all('/api/*', auth.isAuthenticated);
+  app.all('/api/*', auth.isAuthenticated);
   
   // Automatically add CRUD to models in db
   app.use(restful(db.sequelize, { endpoint: '/api' }));
-  app.get('/getReservations/:computerId/:date', reservations.getReservation); 
+  app.get('/getReservations/:computerId/:date', reservations.getReservation);
 
   // Finish with setting up the computerID param
   // Note: the computer.computer function will be called everytime then it will call the next function. 
