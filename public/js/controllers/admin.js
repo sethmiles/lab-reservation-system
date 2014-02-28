@@ -2,6 +2,11 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
   function ($scope, $routeParams, $http, $location, $modal, globalService, alertService) {
     $scope.global = globalService;
 
+    $scope.isActive = function(viewLocation) {
+      console.log($location.path());
+      return viewLocation === $location.path();
+    };
+
     // Get list of models for sidebar
     $http.get('/api').success(function(data) {
       $scope.models = data.data;

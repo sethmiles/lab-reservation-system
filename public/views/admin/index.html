@@ -4,16 +4,23 @@
 
 <div class="col-md-2">
   <div class="list-group">
-    <a href="admin/" class="list-group-item">Lab Settings</a>
+    <a href="admin/" class="list-group-item" ng-class="{active: isActive('/admin')}">Lab Settings</a>
   </div>
   <div class="list-group">
-    <a href="admin/{{model.tableName}}" class="list-group-item" ng-repeat="model in models">{{model.tableName}}</a>
+    <a href="admin/{{model.tableName}}" class="list-group-item" ng-repeat="model in models" ng-class="{active: isActive('/admin/{{model.tableName}}/')}">{{model.tableName}}</a>
   </div>
   <a href="admin/{{currentModel}}/new" class="btn btn-success" ng-show="currentModel">New {{currentModel}}</a>
 </div>
 
 <div class="col-md-10" ng-hide="currentModel">
   Settings
+
+  Max hours to reserve at a time
+  max reservations per day (maybe week)
+  Buffer time to make a reservation from right NOW
+  start of day
+  GET RID OF SERIES!
+
 </div>
 
 <div class="col-md-10" ng-show="currentModel">

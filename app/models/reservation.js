@@ -17,7 +17,6 @@ module.exports = function(sequelize, DataTypes) {
     associate: function(models) {
       Reservation.belongsTo(models.User);
       Reservation.belongsTo(models.Computer);
-      Reservation.belongsTo(models.Series);
     }
   });
  

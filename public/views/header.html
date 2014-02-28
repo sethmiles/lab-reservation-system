@@ -20,10 +20,10 @@
         <li><a href="http://msdnaa.byu.edu/" target="_blank">MSDNAA</a></li>
         <li><a href="http://ais.byu.edu/" target="_blank">AIS</a></li>
       </ul>
-      <div class="navbar-right" data-ng-hide="global.authenticated">
+      <div class="navbar-right" ng-if="!global.authenticated">
         <a href="reserve" class="btn btn-primary navbar-btn">Login</a>
       </div>
-      <div class="navbar-right" data-ng-show="global.authenticated">
+      <div class="navbar-right" ng-if="global.authenticated">
         <p class="navbar-text">{{global.user.name}}</p>
         <a href="http://www.gravatar.com"><img src="https://secure.gravatar.com/avatar/{{global.user.gravatarHash}}?s=32" class="img-rounded"></a>
         <a href="admin" class="btn btn-warning navbar-btn" data-ng-show="global.isAdmin">Admin</a>

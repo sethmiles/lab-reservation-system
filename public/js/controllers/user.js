@@ -7,8 +7,7 @@ angular.module('lrs').controller('UserController', ['$scope', '$http', '$modal',
         username: this.username, 
         password: this.password
       }).success(function(data, status, headers, config) {
-        console.log(data);
-        //window.location.reload();
+        window.location.reload();
       });
     };
 
