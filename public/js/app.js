@@ -30,7 +30,7 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
       controller: 'AdminController'
     });
     $routeProvider.when('/admin/:model/', {
-      templateUrl: 'views/admin.html',
+      templateUrl: 'views/admin/index.html',
       controller: 'AdminController'
     });
 
