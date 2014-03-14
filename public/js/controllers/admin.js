@@ -3,7 +3,6 @@ angular.module('lrs').controller('AdminController', ['$scope', '$routeParams', '
     $scope.global = globalService;
 
     $scope.isActive = function(viewLocation) {
-      console.log($location.path());
       return viewLocation === $location.path();
     };
 

@@ -1,7 +1,10 @@
+var config = require('../../config/config');
+
 exports.index = function(req, res){
-  console.log(req.flash('error'));
+  console.log(config.settings);
   res.render('index', { 
     user: req.user ? JSON.stringify(req.user) : "null",
-    message: req.flash('error')
+    settings: JSON.stringify(config.settings),
+    message: req.flash('error'),
   });
 };
