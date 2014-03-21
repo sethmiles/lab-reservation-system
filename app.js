@@ -1,23 +1,23 @@
-//Set up the Node environment
+// Set up the Node environment
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-//Pull in needed modules
+// Pull in needed modules
 var express  = require('express'),
     config   = require('./config/config'),
     passport = require('./config/passport');
 
 var app = express();
  
-//Initialize Express
+// Initialize Express
 require('./config/express')(app, passport);
 
-//Initialize Routes
+// Initialize routes
 require('./config/routes').init(app, passport);
 
-//Start the app
+// Start the app
 var port = process.env.PORT || config.port;
 app.listen(port);
 console.log('Initializing Express on port ' + port + '...');
 
-//expose app
+// Expose app
 exports = module.exports = app;

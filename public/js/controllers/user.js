@@ -32,8 +32,13 @@ angular.module('lrs').controller('UserController', ['$scope', '$http', '$modal',
               email: email,
               gravatarHash: gravatarHash
             }).success(function(data, status, headers, config) {
-              emailModal.close();
-              window.location.reload();
+              $http.post('sendWelcomeEmail', {
+                name: globalService.user.name,
+                email: email
+              }).success(function(data, status, headers, config) {
+                emailModal.close();
+                window.location.reload();
+              });
             });
           };
         },

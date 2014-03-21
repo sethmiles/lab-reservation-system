@@ -17,6 +17,7 @@
     "passport-local": "latest",
     "lodash": "latest",
     "jade": "latest",
+    "nodemailer": "latest",
     "forever": "~0.10.11"
   },
   "devDependencies": {

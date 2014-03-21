@@ -34,6 +34,9 @@ exports.init = function(app, passport) {
   app.use(restful(db.sequelize, { endpoint: '/api' }));
   app.get('/getReservations/:computerId/:date', reservations.getReservation);
 
+  // Send welcome email
+  app.post('/sendWelcomeEmail', index.sendWelcomeEmail);
+
   // Finish with setting up the computerID param
   // Note: the computer.computer function will be called everytime then it will call the next function. 
   app.param('computerId', computers.computer);

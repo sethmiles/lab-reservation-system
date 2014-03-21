@@ -35,6 +35,9 @@ module.exports = function(app, passport) {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  // have settings
+  app.set('settings', config.settings);
+
   // This stuff is messing up the production server flag
 /*  // Handle 401
   app.use(function(req, res) {

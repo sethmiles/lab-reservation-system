@@ -2,6 +2,7 @@ var passport      = require('passport'),
     LdapStrategy  = require('passport-ldapauth').Strategy,
     LocalStrategy = require('passport-local').Strategy,
     crypto        = require('crypto'),
+    email         = require('./email'),
     db            = require('./sequelize');
 
 console.log('Initializing Passport...');
@@ -36,11 +37,14 @@ passport.use(new LdapStrategy({
     if(user.mail) {
       gravatar = crypto.createHash('md5').update(user.mail).digest('hex');
     }
-    db.User.findOrCreate({ netId: user.uid }, { name: user.displayName, email: user.mail, role: 'student', gravatarHash: gravatar }).success(function(user) {
+    db.User.findOrCreate({ netId: user.uid }, { name: user.displayName, email: user.mail, role: 'student', gravatarHash: gravatar }).success(function(user, created) {
       if (!user) {
         done(null, false, { message: 'Unknown user' });
       } else {
         console.log('Login (ldap) : { id: ' + user.id + ', netId: ' + user.netId + ' }');
+        if(created && user.mail) {
+          email.sendEmail(user.mail, 'Welcome to the Lab Reservation System', user.displayName + ', \nWelcome to the Lab Reservation System!');
+        }
         done(null, user);
       }
     }).error(function(err){
@@ -52,8 +56,8 @@ passport.use(new LdapStrategy({
 //Local login for development: NOT SECURE!
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    var gravatar = crypto.createHash('md5').update("me@lanesawyer.com").digest('hex');
-    db.User.findOrCreate({ netId: username }, { name: 'Tester Test', email: 'test@test.com', role: 'student', gravatarHash: gravatar}).success(function(user) {
+    var gravatar; //= crypto.createHash('md5').update("me@lanesawyer.com").digest('hex');
+    db.User.findOrCreate({ netId: username }, { name: 'Tester Test', email: null, role: 'student', gravatarHash: gravatar}).success(function(user) {
       if (!user) {
         done(null, false, { message: 'Unknown user' });
       } else {
