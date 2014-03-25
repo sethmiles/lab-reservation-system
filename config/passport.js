@@ -43,7 +43,7 @@ passport.use(new LdapStrategy({
       } else {
         console.log('Login (ldap) : { id: ' + user.id + ', netId: ' + user.netId + ' }');
         if(created && user.mail) {
-          email.sendEmail(user.mail, 'Welcome to the Lab Reservation System', user.displayName + ', \nWelcome to the Lab Reservation System!');
+          email.sendEmail(user.mail, 'Welcome to the Lab Reservation System', user.displayName + ', \n\nWelcome to the Lab Reservation System!');
         }
         done(null, user);
       }

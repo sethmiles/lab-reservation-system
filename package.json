@@ -18,7 +18,8 @@
     "lodash": "latest",
     "jade": "latest",
     "nodemailer": "latest",
-    "forever": "~0.10.11"
+    "forever": "~0.10.11",
+    "cron": "~1.0.4"
   },
   "devDependencies": {
     "grunt": "latest",
