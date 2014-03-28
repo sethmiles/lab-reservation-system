@@ -28,7 +28,7 @@ angular.module('lrs').directive('calendar', function () {
             eventHorizontalBorder: 5,
             eventVerticalBorder: 2,
 
-            startTime: settings.dayStart,
+            startTime: 800,
             endTime: 2400
         },
 
