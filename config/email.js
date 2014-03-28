@@ -1,5 +1,4 @@
 var nodemailer = require('nodemailer'),
-    time       = require('time')(Date),
     db         = require('./sequelize');
 
 exports.sendEmail = function(to, subject, text) {
