@@ -4,7 +4,7 @@
 
 <div class="col-md-2">
   <div class="list-group">
-    <a href="admin/" class="list-group-item" ng-class="{active: isActive('/admin')}">Lab Settings</a>
+    <a href="admin/" class="list-group-item" ng-class="{active: isActive('/admin')}">Settings</a>
   </div>
   <div class="list-group">
     <a href="admin/{{model.tableName}}" class="list-group-item" ng-repeat="model in models" ng-class="{active: isActive('/admin/{{model.tableName}}/')}">{{model.tableName}}</a>
@@ -26,7 +26,7 @@
   </div>
   <div class="row">
     <div class="col-md-4 well"  ng-model="settings.buffer">
-      <label for="name">Buffer from right now</label>
+      <label for="name">Minimum Lead Time</label>
       <timepicker show-meridian="false"></timepicker>
     </div>
     <div class="col-md-4 col-md-offset-1 well" ng-model="settings.maxLength">

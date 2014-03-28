@@ -6,7 +6,7 @@ exports.init = function() {
   var CronJob = require('cron').CronJob;
   // Send out reminder emails every 30 minutes, from 9 to 8
   var job = new CronJob({
-    cronTime: '0,30 * * * *',
+    cronTime: '0,30 * * * * *',
     onTick: function() {
       var beginning = new Date();
       beginning.setTime(beginning.getTime() + 1000 * 60 * 30);
@@ -23,7 +23,9 @@ exports.init = function() {
         },
         include: [db.User]
       }).success(function(reservations) {
+        console.log('stupid');
         for(var i = 0; i < reservations.length; i++) {
+          console.log('dumbo');
           var user = reservations[i].user;
           sendEmail(user.email, 'Reservation Reminder', 'Just wanted to remind you of your lab reservation at ' + reservations[i].start_time + ' until ' + reservations[i].end_time);
         }
