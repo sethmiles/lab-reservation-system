@@ -1,23 +1,24 @@
 var nodemailer = require('nodemailer'),
+    time       = require('time')(Date),
     db         = require('./sequelize');
 
 exports.init = function() {
   var CronJob = require('cron').CronJob;
   // Send out reminder emails every 30 minutes, from 9 to 8
-  //'0,30 09-20 * * *'
   var job = new CronJob({
-    cronTime: '* * * * *',
+    cronTime: '0,30 * * * *',
     onTick: function() {
       var beginning = new Date();
-      beginning.setMinutes(beginning.getMinutes() + 30);
+      beginning.setTime(beginning.getTime() + 1000 * 60 * 30);
+      beginning.setTimezone('America/Denver');
       var ending = new Date();
-      ending.setMinutes(beginning.getMinutes() + 30);
+      ending.setTime(beginning.getTime() + 1000 * 60 * 30);
+      ending.setTimezone('America/Denver');
       // Get all reservations starting in an hour
       db.Reservation.findAll({
         where: {
           start_time: {
-            gt: beginning,
-            lt: ending
+            between: [beginning, ending]
           }
         },
         include: [db.User]
@@ -28,7 +29,8 @@ exports.init = function() {
         }
       });
     },
-    start: true
+    start: true,
+    timeZone: 'America/Denver'
   });
 };
 
@@ -37,8 +39,8 @@ var sendEmail = function(to, subject, text) {
   var smtpTransport = nodemailer.createTransport('SMTP', {
     service: 'Gmail',
     auth: {
-      user: 'me@lanesawyer.com',
-      pass: 'secret...'
+      user: 'byu.lab.reservation.system',
+      pass: 'TheLabReservationSystem!'
     }
   });
 

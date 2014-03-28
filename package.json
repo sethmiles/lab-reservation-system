@@ -19,7 +19,8 @@
     "jade": "latest",
     "nodemailer": "latest",
     "forever": "~0.10.11",
-    "cron": "~1.0.4"
+    "cron": "~1.0.4",
+    "time": "~0.10.0"
   },
   "devDependencies": {
     "grunt": "latest",

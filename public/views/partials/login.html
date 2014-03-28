@@ -5,13 +5,10 @@
   <div class="col-md-4 col-md-offset-4">
     <form name="loginForm" role="login" ng-submit="login()" data-ng-hide="global.authenticated">
       <div class="form-group" ng-class="{ 'has-error' : loginForm.username.$invalid && !loginForm.username.$pristine }">
-        <input type="text" name="username" ng-model="username" class="form-control" placeholder="NetId" ng-minlength="5" ng-maxlength="8" required>
-        <p ng-show="loginForm.username.$error.minlength" class="help-block">NetId is too short.</p>
-        <p ng-show="loginForm.username.$error.maxlength" class="help-block">NetId is too long.</p>
+        <input type="text" name="username" ng-model="username" class="form-control" placeholder="NetId" required>
       </div>
       <div class="form-group" ng-class="{ 'has-error' : loginForm.password.$invalid && !loginForm.password.$pristine }">
-        <input type="password" name="password" ng-model="password" class="form-control" placeholder="Password" ng-minlength="8" required>
-        <p ng-show="loginForm.password.$error.minlength" class="help-block">Password is too short.</p>
+        <input type="password" name="password" ng-model="password" class="form-control" placeholder="Password" required>
       </div>
       <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Login</button>
     </form>
