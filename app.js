@@ -14,9 +14,6 @@ require('./config/express')(app, passport);
 // Initialize routes
 require('./config/routes').init(app, passport);
 
-// Start email cron job
-require('./config/email').init();
-
 // Start the app
 var port = process.env.PORT || config.port;
 app.listen(port);
