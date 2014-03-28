@@ -3,9 +3,9 @@
 </div>
 
 <div class="col-md-2">
-  <div class="list-group">
+<!--   <div class="list-group">
     <a href="admin/" class="list-group-item" ng-class="{active: isActive('/admin')}">Settings</a>
-  </div>
+  </div> -->
   <div class="list-group">
     <a href="admin/{{model.tableName}}" class="list-group-item" ng-repeat="model in models" ng-class="{active: isActive('/admin/{{model.tableName}}/')}">{{model.tableName}}</a>
   </div>
@@ -13,7 +13,7 @@
 </div>
 
 <!-- App Settings -->
-<div class="col-md-10" ng-hide="currentModel">
+<!-- <div class="col-md-10" ng-hide="currentModel">
   <div class="row">
     <div class="col-md-4 well" ng-model="settings.start">
       <label for="name">Start of Day</label>
@@ -36,7 +36,7 @@
   </div>
   <a href="/admin" class="btn btn-default">Cancel</a>
   <button class="btn btn-primary" ng-click="saveSettings()" ng-hide="currentId">Save</button>
-</div>
+</div> -->
 
 <!-- Items List ;-->
 <div class="col-md-10" ng-show="currentModel">
