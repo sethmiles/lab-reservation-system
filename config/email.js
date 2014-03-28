@@ -34,6 +34,8 @@ exports.init = function() {
     start: true,
     timeZone: 'America/Denver'
   });
+
+  console.log("AHDHAH");
 };
 
 var sendEmail = function(to, subject, text) {
