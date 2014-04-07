@@ -36,6 +36,7 @@ angular.module('lrs').controller('UserController', ['$scope', '$http', '$modal',
                 name: globalService.user.name,
                 email: email
               }).success(function(data, status, headers, config) {
+                console.log('Email sent.');
                 emailModal.close();
                 window.location.reload();
               });
