@@ -3,9 +3,7 @@ angular.module('lrs.services').factory('globalService', function() {
   _this._data = {
     user: window.user,
     authenticated: !!window.user,
-    isAdmin: (window.user && window.user.role === 'admin'),
-    settings: window.settings,
-    message: window.message
+    isAdmin: (window.user && window.user.role === 'admin')
   };
 
   return _this._data;

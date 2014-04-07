@@ -12,7 +12,7 @@ exports.sendEmail = function(to, subject, text) {
   });
 
   var mailOptions = {
-    from: 'lrs@byu.edu',
+    from: 'byu.lab.reservation.system@gmail.com',
     to: to,
     subject: subject,
     text: text
