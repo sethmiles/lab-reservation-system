@@ -5,13 +5,13 @@ exports.sendEmail = function(to, subject, text) {
   var smtpTransport = nodemailer.createTransport('SMTP', {
     service: 'Gmail',
     auth: {
-      user: 'me@lanesawyer.com',
-      pass: 'secret...'
+      user: 'byu.lab.reservation.system',
+      pass: 'TheLabReservationSystem!'
     }
   });
 
   var mailOptions = {
-    from: 'lrs@byu.edu',
+    from: 'byu.lab.reservation.system@gmail.com',
     to: to,
     subject: subject,
     text: text
