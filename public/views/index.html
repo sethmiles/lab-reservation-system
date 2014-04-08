@@ -1,3 +1,45 @@
-<div class="page-header">
-  <h1>News</h1>
+<div class="landing-page">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="article-container">
+                <article ng-repeat="article in articles">
+                    <div class="article-header">
+                        <div class="article-image">
+                            <a href="{{ article.link[0].$text }}" target="_blank">
+                                <img src="{{ article.thumbnail.large.$text || 'http://a2.mzstatic.com/us/r30/Purple4/v4/89/5f/fc/895ffcca-471c-2485-20ce-8c5f8df2eeb2/mzl.zqhaqzuw.175x175-75.jpg' }}" />
+                            </a>
+                        </div>
+                        <div class="article-details">
+                            <a href="{{ article.link[0].$text }}" target="_blank">
+                                <h2>{{ article.title.$text }}</h2>
+                            </a>
+                            <div class="date">{{ article.storyDate.$text }}</div>
+                        </div>
+                    </div>
+                    <p>{{ article.teaser.$text }}</p>
+                </article>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="weather {{ timeframe }}" ng-show="currentWeather">
+                <div class="title">{{ currentWeather.current_observation.display_location.city }} Weather</div>
+                <div class="current {{ currentWeather.current_observation.className }}"></div>
+                <div class="temp">
+                    {{ currentWeather.current_observation.temp_f }}˚F
+                </div>
+                <div class="forecast" ng-repeat="forecast in currentWeather.forecast.simpleforecast.forecastday">
+                    <div class="icon day-{{ forecast.icon }}"></div>
+                    <div>{{ forecast.date.weekday }} - {{ forecast.high.fahrenheit }}/{{ forecast.low.fahrenheit }}</div>
+                </div>
+            </div>
+            <div class="faculty">
+                <h2>Faculty</h2>
+                <table>
+                    <tr ng-repeat="professor in faculty">
+                        <td>{{ professor.name }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
