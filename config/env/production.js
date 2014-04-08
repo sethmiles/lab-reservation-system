@@ -10,6 +10,5 @@ module.exports = {
   },
   app: {
     name: "Lab Reservation System"
-  },
-  port: 80
+  }
 };
