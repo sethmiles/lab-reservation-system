@@ -47,6 +47,7 @@
     height: 350px;
     background-image: url('img/data-center.jpg');
     background-size: cover;
+    top: 0;
     background-position: center center;
     z-index: -1;
 }

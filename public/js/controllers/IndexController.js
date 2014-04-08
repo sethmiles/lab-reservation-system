@@ -28,10 +28,6 @@ angular.module('lrs').controller('IndexController', ['$scope', '$http', 'globalS
 
         $scope.myVar = true;
 
-        if(!$('.jumbo').length){
-            $('body').prepend('<div class="jumbo"></div>');
-        }
-
         var diff = moment().diff(moment().startOf('day'));
 
         if(diff < 25200000){

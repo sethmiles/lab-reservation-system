@@ -1,6 +1,5 @@
 angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globalService', function ($scope, $http, globalService) {
   $scope.global = globalService;
-  $('.jumbo').remove();
 
   // Display all entries in database
   function getComputerData () {   
@@ -17,6 +16,10 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
     getReservations();
     $scope.$apply();
   };
+
+  $scope.nullifyStationData = function () {
+    $scope.stationData = null;
+  }
 
   $scope.createReservation = function () {
 
