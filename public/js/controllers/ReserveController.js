@@ -13,6 +13,7 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
   $scope.d3OnClick = function(item) {
     $scope.stationData = item;
     $scope.reservations = [];
+    $scope.reservationDate = new Date();
     getReservations();
     $scope.$apply();
   };
@@ -73,8 +74,6 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
 
   }
 
-  $scope.reservationDate = new Date();
-
   function parseItems (items, className) {
     var events = [];
     for(var i = 0; i < items.length; i++){
@@ -118,7 +117,7 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
 
   // Watch for date click event
   $scope.$watch(function() {
-    return $scope.reservationDate;
+    return $scope.$$childHead.reservationDate
   }, function(reservationDate) {
     if(reservationDate) {
         $scope.reservationDate = reservationDate;
