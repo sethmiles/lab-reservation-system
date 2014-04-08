@@ -29,15 +29,17 @@ angular.module('lrs').controller('UserController', ['$scope', '$http', '$modal',
 
           $scope.addEmail = function(email) {
             var gravatarHash = CryptoJS.MD5(email).toString(CryptoJS.enc.Base64);
+            
             $http.put('api/Users/' + globalService.user.id, {
               email: email,
               gravatarHash: gravatarHash
-            }).success(function(data, status, headers, config) {
-              $http.post('sendWelcomeEmail', {
-                name: globalService.user.name,
-                email: email
-              });
             });
+
+            $http.post('sendWelcomeEmail', {
+              name: globalService.user.name,
+              email: email
+            });
+
             emailModal.close();
             window.location.reload();
           };
