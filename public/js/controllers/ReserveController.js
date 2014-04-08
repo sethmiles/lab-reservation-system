@@ -12,6 +12,7 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
 
   $scope.d3OnClick = function(item) {
     $scope.stationData = item;
+    $scope.today = new Date();
     $scope.reservations = [];
     getReservations();
     $scope.$apply();
