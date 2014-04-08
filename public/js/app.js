@@ -16,9 +16,11 @@ angular.module('lrs').config(['$routeProvider', '$locationProvider',
     });
     $routeProvider.when('/calendar', {
       templateUrl: 'views/calendar.html',
+      controller: 'CalendarController'
     });
     $routeProvider.when('/policies', {
       templateUrl: 'views/policies.html',
+      controller: 'PoliciesController'
     });
 
     // Admin routes

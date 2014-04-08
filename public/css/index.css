@@ -62,7 +62,7 @@
     padding: 15px;
 }
 
-.container {
+.jumbo ~ .container {
     padding: 0px;
     width: 100%;
 }
