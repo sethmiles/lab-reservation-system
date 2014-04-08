@@ -47,8 +47,8 @@ angular.module('lrs').controller('ReserveController', ['$scope', '$http', 'globa
             }
         }
 
-        var startTime = moment($scope.reservationDate).startOf('day').add(convertTime($scope.stationData.reservation.start)).utc();
-        var endTime = moment($scope.reservationDate).startOf('day').add(convertTime($scope.stationData.reservation.end)).utc();
+        var startTime = moment($scope.reservationDate).startOf('day').add(convertTime($scope.stationData.reservation.start));
+        var endTime = moment($scope.reservationDate).startOf('day').add(convertTime($scope.stationData.reservation.end));
 
         var data = {
             ComputerId: $scope.stationData.id,
